@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class NaturalWorldManager : MonoBehaviour
 {
+    [SerializeField]
+    private List<Gatherable> _gatherables;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,15 @@ public class NaturalWorldManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void AddGatherable(Gatherable gatherable)
+    {
+        _gatherables.Add(gatherable);
+    }
+
+    public void RemoveGatherable(Gatherable gatherable)
+    {
+        _gatherables.Remove(gatherable);
     }
 }
