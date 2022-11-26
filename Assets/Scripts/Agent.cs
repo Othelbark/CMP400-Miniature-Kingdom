@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour
 {
+    public Dictionary<ResourceType, float> inventory;
+
     // Start is called before the first frame update
     void Start()
     {
