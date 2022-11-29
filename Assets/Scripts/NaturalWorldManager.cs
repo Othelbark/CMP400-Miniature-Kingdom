@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NaturalWorldManager : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField] //Temporalily Serialized for testing
     private List<Gatherable> _gatherables;
 
     // Start is called before the first frame update

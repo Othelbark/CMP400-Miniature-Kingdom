@@ -4,10 +4,21 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    private KingdomManager _kingdomManager;
+
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
-        
+        try
+        {
+            _kingdomManager = GameObject.FindGameObjectWithTag("KingdomManager").GetComponent<KingdomManager>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find kingdom manager.");
+        }
+
+        _kingdomManager.AddBuilding(this);
     }
 
     // Update is called once per frame

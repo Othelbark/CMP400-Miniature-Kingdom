@@ -12,10 +12,11 @@ public class SingleResourceStore : Building
     [SerializeField]
     private float _capacity = 100.0f;
 
+
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
-        
+        base.Start();
     }
 
     // Update is called once per frame
@@ -32,6 +33,7 @@ public class SingleResourceStore : Building
             _currentResources = _capacity;
     }
 
+    // Returns leftover resoucres if capacity is reached
     public float AddResources(float r)
     {
         if ((_capacity - _currentResources) >= r)
