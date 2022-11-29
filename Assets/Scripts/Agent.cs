@@ -8,7 +8,7 @@ public class Agent : MonoBehaviour
     private InventoryDictionary _inventory;
 
     [SerializeField] //Temporalily Serialized for testing
-    private float _totalInventory = 0.0f;
+    private float _totalInventory = 0.0f; //TODO: add checks to avoid floating point errors desyncing this with _inventory
 
     [SerializeField]
     private float _capacity = 100.0f;
@@ -74,6 +74,68 @@ public class Agent : MonoBehaviour
         {
             _guild.RemoveAgent(this);
             _guild = null;
+        }
+    }
+
+    public float CheckInventoryFor(ResourceType type)
+    {
+        if (_inventory.ContainsKey(type))
+        {
+            return _inventory[type];
+        }
+
+        return 0;
+    }
+
+    // Returns leftover resoucres if capacity is reached
+    public float AddToInventory(ResourceType type, float amount)
+    {
+        if (!_inventory.ContainsKey(type))
+        {
+            _inventory.Add(type, 0);
+        }
+
+        if (amount < _capacity - _totalInventory)
+        {
+            _inventory[type] += amount;
+            _totalInventory += amount;
+
+            return 0;
+        }
+        else
+        {
+            float storeableResources = Mathf.Max(_capacity - _totalInventory, 0.0f);
+
+            _inventory[type] += storeableResources;
+            _totalInventory += storeableResources;
+
+            return amount - storeableResources;
+        }
+    }
+
+    //Returns amount actually removed
+    public float RemoveFromInventory(ResourceType type, float amount)
+    {
+        if (!_inventory.ContainsKey(type))
+        {
+            return 0;
+        }
+
+        if (amount < _inventory[type])
+        {
+            _inventory[type] -= amount;
+            _totalInventory -= amount;
+
+            return amount;
+        }
+        else
+        {
+            float leftoverResources = _inventory[type];
+
+            _inventory[type] = 0.0f;
+            _totalInventory -= leftoverResources;
+
+            return leftoverResources;
         }
     }
 

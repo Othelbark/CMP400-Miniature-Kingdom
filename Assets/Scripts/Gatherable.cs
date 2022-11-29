@@ -44,6 +44,7 @@ public class Gatherable : MonoBehaviour
         _currentResources += r;
     }
 
+    //Returns amount actually harvested
     public float HarvestResources(float r)
     {
         if (_currentResources > r)

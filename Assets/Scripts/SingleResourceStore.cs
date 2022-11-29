@@ -49,6 +49,7 @@ public class SingleResourceStore : Building
         }
     }
 
+    //Returns amount actually taken
     public float TakeResources(float r)
     {
         if (_currentResources > r)
