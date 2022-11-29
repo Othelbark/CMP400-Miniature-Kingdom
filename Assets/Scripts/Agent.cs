@@ -77,6 +77,18 @@ public class Agent : MonoBehaviour
         }
     }
 
+    public float GetInventorySpace()
+    {
+        return Mathf.Max(_capacity - _totalInventory, 0.0f);
+    }
+
+    public void ClearInventory()
+    {
+        _totalInventory = 0.0f;
+
+        _inventory.Clear();
+    }
+
     public float CheckInventoryFor(ResourceType type)
     {
         if (_inventory.ContainsKey(type))

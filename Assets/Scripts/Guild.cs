@@ -10,7 +10,7 @@ public class Guild : MonoBehaviour
     private KingdomManager _kingdomManager;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         try
         {
