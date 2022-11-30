@@ -2,21 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Agent : MonoBehaviour
 {
-    [SerializeField]
-    private InventoryDictionary _inventory;
+    public AgentState state = AgentState.WAITING;
 
+    [SerializeField]
+    protected InventoryDictionary _inventory;
     [SerializeField] //Temporalily Serialized for testing
-    private float _totalInventory = 0.0f; //TODO: add checks to avoid floating point errors desyncing this with _inventory
-
+    protected float _totalInventory = 0.0f; //TODO: add checks to avoid floating point errors desyncing this with _inventory
     [SerializeField]
-    private float _capacity = 100.0f;
+    protected float _capacity = 100.0f;
 
-    private KingdomManager _kingdomManager;
-
+    protected KingdomManager _kingdomManager;
     [SerializeField]
-    private Guild _guild = null;
+    protected Guild _guild = null;
+
+    protected Vector3 _targetPosition;
+    [SerializeField]
+    protected float _speed = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +41,10 @@ public class Agent : MonoBehaviour
         {
             _guild.AddAgent(this);
         }
+        else
+        {
+            gameObject.tag = "Guildless";
+        }
 
         //Update total inventory if inital inventory set
         _totalInventory = 0.0f;
@@ -49,7 +57,31 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (state == AgentState.MOVING)
+        {
+            Move();
+        }
+    }
+
+    protected void Move()
+    {
+        if ((_targetPosition - gameObject.transform.position).magnitude < Mathf.Max(_speed * Time.deltaTime, 0.001f))
+        {
+            state = AgentState.WAITING;
+            gameObject.transform.position = _targetPosition;
+        }
+
+        //TODO: pathfinding
+        Vector3 towardsTarget = _targetPosition - gameObject.transform.position;
+        towardsTarget.Normalize();
+
+        gameObject.transform.Translate(towardsTarget * _speed * Time.deltaTime);
+    }
+
+    public void SetMovingTowards(Vector3 pos)
+    {
+        _targetPosition = pos;
+        state = AgentState.MOVING;
     }
 
     public void SetGuild (Guild guild)
@@ -58,22 +90,27 @@ public class Agent : MonoBehaviour
         {
             RemoveFromGuild();
         }
+        else
+        {
+            gameObject.tag = "Untagged";
+        }
 
         _guild = guild;
         _guild.AddAgent(this);
     }
-
     public Guild GetGuild ()
     {
         return _guild;
     }
-
     public void RemoveFromGuild ()
     {
         if (_guild != null)
         {
             _guild.RemoveAgent(this);
             _guild = null;
+            state = AgentState.WAITING;
+
+            gameObject.tag = "Guildless";
         }
     }
 
@@ -81,14 +118,22 @@ public class Agent : MonoBehaviour
     {
         return Mathf.Max(_capacity - _totalInventory, 0.0f);
     }
+    public float GetCurrentTotalInventory()
+    {
+        if (_totalInventory < 0.05f && _totalInventory != 0)
+        {
+            Debug.LogWarning("Very low inventory, potential floating point error on _totalInventory tracking.");
+            return 0;
+        }
 
+        return _totalInventory;
+    }
     public void ClearInventory()
     {
         _totalInventory = 0.0f;
 
         _inventory.Clear();
     }
-
     public float CheckInventoryFor(ResourceType type)
     {
         if (_inventory.ContainsKey(type))
@@ -98,7 +143,6 @@ public class Agent : MonoBehaviour
 
         return 0;
     }
-
     // Returns leftover resoucres if capacity is reached
     public float AddToInventory(ResourceType type, float amount)
     {
@@ -124,7 +168,6 @@ public class Agent : MonoBehaviour
             return amount - storeableResources;
         }
     }
-
     //Returns amount actually removed
     public float RemoveFromInventory(ResourceType type, float amount)
     {
@@ -149,6 +192,16 @@ public class Agent : MonoBehaviour
 
             return leftoverResources;
         }
+    }
+    //Removes all of a type and returns the amount removed
+    public float RemoveFromInventory(ResourceType type)
+    {
+        float currentResorces = _inventory[type];
+
+        _inventory[type] = 0.0f;
+        _totalInventory -= currentResorces;
+
+        return currentResorces;
     }
 
 }

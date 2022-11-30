@@ -7,16 +7,18 @@ public class SingleResourceStore : Building
     public ResourceType resourceType = ResourceType.NONE;
 
     [SerializeField]
-    private float _currentResources = 0.0f;
+    protected float _currentResources = 0.0f;
 
     [SerializeField]
-    private float _capacity = 100.0f;
+    protected float _capacity = 100.0f;
 
 
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
+
+        _kingdomManager.AddSingleResourceStore(this);
     }
 
     // Update is called once per frame
@@ -25,7 +27,12 @@ public class SingleResourceStore : Building
 
     }
 
-   public void SetCurrentResources(float r)
+    public float GetSpace()
+    {
+        return Mathf.Max(_capacity - _currentResources, 0.0f);
+    }
+
+    public void SetCurrentResources(float r)
     {
         _currentResources = r;
 

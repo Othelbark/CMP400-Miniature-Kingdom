@@ -28,4 +28,39 @@ public class NaturalWorldManager : MonoBehaviour
     {
         _gatherables.Remove(gatherable);
     }
+
+    public Gatherable NearestGatherableOfType(ResourceType type, Vector3 position)
+    {
+        float shortestDistance = float.MaxValue;
+        Gatherable nearestGatherable = null;
+
+        //TODO: optimise
+        foreach (Gatherable g in _gatherables)
+        {
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f)
+            {
+                float distance = (g.gameObject.transform.position - position).magnitude;
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestGatherable = g;
+                }
+            }
+        }
+
+        return nearestGatherable;
+    }
+
+    public Gatherable FirstGatherableOfType(ResourceType type)
+    {
+        foreach (Gatherable g in _gatherables)
+        {
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f)
+            {
+                return g;
+            }
+        }
+
+        return null;
+    }
 }

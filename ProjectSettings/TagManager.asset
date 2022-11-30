@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NaturalWorldManager
   - KingdomManager
+  - Guildless
   layers:
   - Default
   - TransparentFX

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
-    private KingdomManager _kingdomManager;
+    protected KingdomManager _kingdomManager;
 
     // Start is called before the first frame update
     public void Start()

@@ -95,6 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfa9083da6b65c41898ba247466f0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
+  _inventory:
+    m_keys: 
+    m_values: []
   _totalInventory: 0
   _capacity: 100
   _guild: {fileID: 0}
+  _speed: 5

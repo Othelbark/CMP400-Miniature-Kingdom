@@ -8,10 +8,10 @@ public class Gatherable : MonoBehaviour
     public ResourceType resourceType = ResourceType.NONE;
 
     [SerializeField]
-    private float _currentResources = 0.0f;
+    protected float _currentResources = 0.0f;
 
     // Reference to the Natural World Manager
-    private NaturalWorldManager _naturalWorldManager;
+    protected NaturalWorldManager _naturalWorldManager;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +32,11 @@ public class Gatherable : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public float GetCurrentResources()
+    {
+        return _currentResources;
     }
 
     public void SetCurrentResources(float r)
