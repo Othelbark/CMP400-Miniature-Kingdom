@@ -9,6 +9,8 @@ public class Gatherable : MonoBehaviour
 
     [SerializeField]
     protected float _currentResources = 0.0f;
+    [SerializeField]
+    protected bool _infiniteResorces = false;
 
     // Reference to the Natural World Manager
     protected NaturalWorldManager _naturalWorldManager;
@@ -52,6 +54,11 @@ public class Gatherable : MonoBehaviour
     //Returns amount actually harvested
     public float HarvestResources(float r)
     {
+        if (_infiniteResorces)
+        {
+            return r;
+        }
+
         if (_currentResources > r)
         {
             _currentResources -= r;

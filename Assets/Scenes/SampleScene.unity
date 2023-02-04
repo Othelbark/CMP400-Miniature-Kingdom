@@ -327,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: _infiniteResorces
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -771,6 +775,10 @@ PrefabInstance:
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_Name
       value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: _infiniteResorces
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
