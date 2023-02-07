@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Gatherable : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public GatherableState state = GatherableState.GATHERABLE_READY;
     public ResourceType resourceType = ResourceType.NONE;
 

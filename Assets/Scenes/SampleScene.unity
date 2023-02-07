@@ -138,6 +138,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: state
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: _currentResources
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -333,7 +341,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: state
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _infiniteResorces
@@ -628,7 +640,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: state
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
@@ -730,6 +746,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gatherables: []
+--- !u!1 &1637797240 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+  m_PrefabInstance: {fileID: 361397388309325306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1637797243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637797240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 015ece4177d064545804b784703461d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 2
+  resourceType: 1
+  _currentResources: 0
+  _infiniteResorces: 0
+  _growthRate: 30
+  _maxGrowth: 300
+  _infiniteGrowth: 0
+  _minGrowth: 100
+  _stopGrowthOnHarvest: 1
 --- !u!1 &1940998427
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,7 +781,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1940998429}
-  - component: {fileID: 1940998428}
+  - component: {fileID: 1940998430}
   m_Layer: 0
   m_Name: ForestersGuild
   m_TagString: Untagged
@@ -747,22 +789,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1940998428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1940998427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e4eb5e5a739479419f1b3a9756c057b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 1
-  targetAgentCount: 1
-  _agents: []
-  woodGatherSpeed: 50
 --- !u!4 &1940998429
 Transform:
   m_ObjectHideFlags: 0
@@ -777,6 +803,28 @@ Transform:
   m_Father: {fileID: 642292507}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1940998430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1940998427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0988174a36e4ad4ea11a6a62d50ee0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  targetAgentCount: 1
+  _agents: []
+  indicator: 0
+  resourceType: 1
+  _gatherSpeed: 50
+  _minGatherDistance: 0.2
+  _minStoreDistance: 0
+  _prioritiseReadyGatherablesWithin: 5
+  _onlyGatherFromReadyGatherables: 0
 --- !u!1001 &361397388309325306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -787,6 +835,10 @@ PrefabInstance:
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_Name
       value: Tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _infiniteResorces

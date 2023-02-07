@@ -7,11 +7,17 @@ public class GatherersGuild : Guild
     public ResourceType resourceType = ResourceType.NONE;
 
     [SerializeField]
-    protected float gatherSpeed = 10.0f;
+    protected float _gatherSpeed = 10.0f;
     [SerializeField]
-    protected float minGatherDistance = 1.0f;
+    protected float _minGatherDistance = 0.2f;
     [SerializeField]
-    protected float minStoreDistance = 1.0f;
+    protected float _minStoreDistance = 0.0f;
+
+    [SerializeField]
+    protected float _prioritiseReadyGatherablesWithin = 5.0f;
+
+    [SerializeField]
+    protected bool _onlyGatherFromReadyGatherables = false;
 
 
     // Start is called before the first frame update
@@ -41,7 +47,24 @@ public class GatherersGuild : Guild
 
                 if (agent.state == AgentState.GATHERING)
                 {
-                    Gatherable nearestGatherable = _naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position);
+                    float distanceToNearestGatherable;
+                    Gatherable nearestGatherable;
+                    if (_onlyGatherFromReadyGatherables)
+                    {
+                        nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
+                    }
+                    else
+                    {
+                        nearestGatherable = _naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
+
+                        _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out float distanceToNearestReadyGatherable);
+
+                        if (distanceToNearestReadyGatherable - distanceToNearestGatherable < _prioritiseReadyGatherablesWithin)
+                        {
+                            // If nearest ready gatherable is not too much further away
+                            nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
+                        }
+                    }
 
                     if (nearestGatherable == null)
                     {
@@ -50,10 +73,10 @@ public class GatherersGuild : Guild
                         break;
                     }
 
-                    if ((nearestGatherable.transform.position - agent.transform.position).magnitude <= minGatherDistance)
+                    if (distanceToNearestGatherable <= _minGatherDistance)
                     {
                         //near a source
-                        float maxGathered = gatherSpeed * Time.deltaTime;
+                        float maxGathered = _gatherSpeed * Time.deltaTime;
 
                         float gathered = nearestGatherable.HarvestResources(maxGathered);
 
@@ -66,7 +89,7 @@ public class GatherersGuild : Guild
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestGatherable.transform.position, minGatherDistance);
+                        agent.SetMovingTowards(nearestGatherable.transform.position, _minGatherDistance);
                     }
 
                     if (agent.GetInventorySpace() == 0)
@@ -86,7 +109,7 @@ public class GatherersGuild : Guild
                         break;
                     }
 
-                    if ((nearestStore.transform.position - agent.transform.position).magnitude <= minStoreDistance)
+                    if ((nearestStore.transform.position - agent.transform.position).magnitude <= _minStoreDistance)
                     {
                         //near a store
                         float woodFromInventory = agent.RemoveFromInventory(resourceType);
@@ -100,7 +123,7 @@ public class GatherersGuild : Guild
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestStore.transform.position, minStoreDistance);
+                        agent.SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
                     }
 
                     if (agent.CheckInventoryFor(resourceType) == 0)
