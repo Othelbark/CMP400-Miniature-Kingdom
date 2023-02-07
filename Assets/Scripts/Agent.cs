@@ -19,6 +19,7 @@ public class Agent : MonoBehaviour
     protected Guild _guild = null;
 
     protected Vector3 _targetPosition;
+    protected float _targetDistance;
     [SerializeField]
     protected float _speed = 1;
 
@@ -65,22 +66,27 @@ public class Agent : MonoBehaviour
 
     protected void Move()
     {
-        if ((_targetPosition - gameObject.transform.position).magnitude < Mathf.Max(_speed * Time.deltaTime, 0.001f))
-        {
-            state = AgentState.WAITING;
-            gameObject.transform.position = _targetPosition;
-        }
-
         //TODO: pathfinding
+
         Vector3 towardsTarget = _targetPosition - gameObject.transform.position;
         towardsTarget.Normalize();
 
-        gameObject.transform.Translate(towardsTarget * _speed * Time.deltaTime);
+        if ((_targetPosition - gameObject.transform.position).magnitude <= Mathf.Max(_speed * Time.deltaTime, _targetDistance))
+        {
+            state = AgentState.WAITING;
+
+            gameObject.transform.position = _targetPosition - (towardsTarget * _targetDistance);
+        }
+        else
+        {
+            gameObject.transform.Translate(towardsTarget * _speed * Time.deltaTime);
+        }
     }
 
-    public void SetMovingTowards(Vector3 pos)
+    public void SetMovingTowards(Vector3 pos, float dist)
     {
         _targetPosition = pos;
+        _targetDistance = dist;
         state = AgentState.MOVING;
     }
 

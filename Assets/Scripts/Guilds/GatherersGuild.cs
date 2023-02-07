@@ -2,9 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForestersGuild : Guild
+public class GatherersGuild : Guild
 {
-    public float woodGatherSpeed = 10.0f;
+    public ResourceType resourceType = ResourceType.NONE;
+
+    [SerializeField]
+    protected float gatherSpeed = 10.0f;
+    [SerializeField]
+    protected float minGatherDistance = 1.0f;
+    [SerializeField]
+    protected float minStoreDistance = 1.0f;
+
 
     // Start is called before the first frame update
     new void Start()
@@ -23,7 +31,7 @@ public class ForestersGuild : Guild
                 {
                     if (agent.GetInventorySpace() > 0)
                     {
-                        agent.state = AgentState.WOODCUTTING;
+                        agent.state = AgentState.GATHERING;
                     }
                     else
                     {
@@ -31,34 +39,34 @@ public class ForestersGuild : Guild
                     }
                 }
 
-                if (agent.state == AgentState.WOODCUTTING)
+                if (agent.state == AgentState.GATHERING)
                 {
-                    Gatherable nearestTree = _naturalWorldManager.NearestGatherableOfType(ResourceType.WOOD, agent.transform.position);
+                    Gatherable nearestGatherable = _naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position);
 
-                    if (nearestTree == null)
+                    if (nearestGatherable == null)
                     {
-                        //No wood sources
+                        //No resource sources
                         state = GuildState.INACTIVE;
                         break;
                     }
 
-                    if ((nearestTree.transform.position - agent.transform.position).magnitude <= 1.0f)
+                    if ((nearestGatherable.transform.position - agent.transform.position).magnitude <= minGatherDistance)
                     {
-                        //near a tree
-                        float maxWoodGathered = woodGatherSpeed * Time.deltaTime;
+                        //near a source
+                        float maxGathered = gatherSpeed * Time.deltaTime;
 
-                        float woodFromTree = nearestTree.HarvestResources(maxWoodGathered);
+                        float gathered = nearestGatherable.HarvestResources(maxGathered);
 
-                        float leftover = agent.AddToInventory(ResourceType.WOOD, woodFromTree);
+                        float leftover = agent.AddToInventory(resourceType, gathered);
 
                         if (leftover > 0)
                         {
-                            nearestTree.AddResources(leftover);
+                            nearestGatherable.AddResources(leftover);
                         }
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestTree.transform.position);
+                        agent.SetMovingTowards(nearestGatherable.transform.position, minGatherDistance);
                     }
 
                     if (agent.GetInventorySpace() == 0)
@@ -69,7 +77,7 @@ public class ForestersGuild : Guild
                 else if (agent.state == AgentState.STORING)
                 {
 
-                    SingleResourceStore nearestStore = _kingdomManager.NearestSingleResourceStoreOfType(ResourceType.WOOD, agent.transform.position);
+                    SingleResourceStore nearestStore = _kingdomManager.NearestSingleResourceStoreOfType(resourceType, agent.transform.position);
 
                     if (nearestStore == null)
                     {
@@ -78,26 +86,26 @@ public class ForestersGuild : Guild
                         break;
                     }
 
-                    if ((nearestStore.transform.position - agent.transform.position).magnitude <= 1.0f)
+                    if ((nearestStore.transform.position - agent.transform.position).magnitude <= minStoreDistance)
                     {
                         //near a store
-                        float woodFromInventory = agent.RemoveFromInventory(ResourceType.WOOD);
+                        float woodFromInventory = agent.RemoveFromInventory(resourceType);
 
                         float leftover = nearestStore.AddResources(woodFromInventory);
 
                         if (leftover > 0)
                         {
-                            agent.AddToInventory(ResourceType.WOOD, leftover);
+                            agent.AddToInventory(resourceType, leftover);
                         }
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestStore.transform.position);
+                        agent.SetMovingTowards(nearestStore.transform.position, minStoreDistance);
                     }
 
-                    if (agent.CheckInventoryFor(ResourceType.WOOD) == 0)
+                    if (agent.CheckInventoryFor(resourceType) == 0)
                     {
-                        agent.state = AgentState.WOODCUTTING;
+                        agent.state = AgentState.GATHERING;
                     }
                 }
 
@@ -106,7 +114,7 @@ public class ForestersGuild : Guild
 
         if (state == GuildState.INACTIVE)
         {
-            if (_kingdomManager.FirstSingleResourceStoreOfType(ResourceType.WOOD) != null && _naturalWorldManager.FirstGatherableOfType(ResourceType.WOOD) != null)
+            if (_kingdomManager.FirstSingleResourceStoreOfType(resourceType) != null && _naturalWorldManager.FirstGatherableOfType(resourceType) != null)
             {
                 state = GuildState.ACTIVE;
             }
