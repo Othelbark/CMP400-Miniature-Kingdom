@@ -37,7 +37,28 @@ public class NaturalWorldManager : MonoBehaviour
         //TODO: optimise
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE)
+            {
+                float distance = (g.gameObject.transform.position - position).magnitude;
+                if (distance < shortestDistance)
+                {
+                    shortestDistance = distance;
+                    nearestGatherable = g;
+                }
+            }
+        }
+
+        return nearestGatherable;
+    }
+    public Gatherable NearestReadyGatherableOfType(ResourceType type, Vector3 position)
+    {
+        float shortestDistance = float.MaxValue;
+        Gatherable nearestGatherable = null;
+
+        //TODO: optimise
+        foreach (Gatherable g in _gatherables)
+        {
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state == GatherableState.GATHERABLE_READY)
             {
                 float distance = (g.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -55,7 +76,7 @@ public class NaturalWorldManager : MonoBehaviour
     {
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE)
             {
                 return g;
             }

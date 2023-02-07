@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class Gatherable : MonoBehaviour
 {
+    [HideInInspector]
+    public GatherableState state = GatherableState.GATHERABLE_READY;
     public ResourceType resourceType = ResourceType.NONE;
 
     [SerializeField]
@@ -16,7 +19,7 @@ public class Gatherable : MonoBehaviour
     protected NaturalWorldManager _naturalWorldManager;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         try
         {
@@ -31,7 +34,7 @@ public class Gatherable : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         
     }
@@ -52,8 +55,13 @@ public class Gatherable : MonoBehaviour
     }
 
     //Returns amount actually harvested
-    public float HarvestResources(float r)
+    public virtual float HarvestResources(float r)
     {
+        if (state == GatherableState.NON_GATHERABLE)
+        {
+            return 0;
+        }
+
         if (_infiniteResorces)
         {
             return r;
