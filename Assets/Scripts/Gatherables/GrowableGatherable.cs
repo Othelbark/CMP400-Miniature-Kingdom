@@ -28,11 +28,13 @@ public class GrowableGatherable : Gatherable
     {
         base.Start();
 
+        _totalGrowth = _currentResources;
+
         if (_totalGrowth < _minGrowth)
         {
             state = GatherableState.NON_GATHERABLE;
         }
-        else if (_stopGrowthOnHarvest)
+        else if (_stopGrowthOnHarvest && _totalGrowth < _maxGrowth)
         {
             state = GatherableState.GATHERABLE_NOT_READY;
         }

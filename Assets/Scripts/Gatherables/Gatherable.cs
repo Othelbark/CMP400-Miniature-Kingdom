@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Gatherable : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public GatherableState state = GatherableState.GATHERABLE_READY;
     public ResourceType resourceType = ResourceType.NONE;
 
@@ -31,6 +31,8 @@ public class Gatherable : MonoBehaviour
         }
 
         _naturalWorldManager.AddGatherable(this);
+
+        state = GatherableState.GATHERABLE_READY;
     }
 
     // Update is called once per frame
