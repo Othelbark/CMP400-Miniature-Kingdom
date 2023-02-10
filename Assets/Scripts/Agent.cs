@@ -75,7 +75,7 @@ public class Agent : MonoBehaviour
         {
             state = AgentState.WAITING;
 
-            gameObject.transform.position = _targetPosition - (towardsTarget * _targetDistance * 0.9f); //10% closer that target to make sure within range even with floating point errors
+            gameObject.transform.position = _targetPosition - (towardsTarget * (_targetDistance * 0.9f)); //10% closer that target to make sure within range even with floating point errors
         }
         else
         {
@@ -96,12 +96,10 @@ public class Agent : MonoBehaviour
         {
             RemoveFromGuild();
         }
-        else
-        {
-            gameObject.tag = "Untagged";
-        }
+        gameObject.tag = "Untagged";
 
         _guild = guild;
+
         _guild.AddAgent(this);
     }
     public Guild GetGuild ()

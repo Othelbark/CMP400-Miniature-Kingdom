@@ -66,12 +66,18 @@ public class ResourceProcessor : Building
     }
 
     //TODO: make this not work if called more than once in a frame (generally make multiple agents per guild work better)
-    public void Process(float dt)
+    //Returns false when needs are not met
+    public bool Process(float dt)
     {
         if (!HasNeeds())
         {
             _processing = true;
             _timeThisProcess += dt;
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
