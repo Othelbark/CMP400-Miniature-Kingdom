@@ -313,6 +313,7 @@ MonoBehaviour:
   _agents: []
   _buildings: []
   _singleResourceStores: []
+  _resourceStores: []
 --- !u!4 &642292507
 Transform:
   m_ObjectHideFlags: 0
@@ -341,7 +342,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: state
@@ -451,6 +452,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148460, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304142780662148461, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
@@ -640,7 +645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: state
@@ -746,32 +751,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gatherables: []
---- !u!1 &1637797240 stripped
+--- !u!1 &1733223011 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-  m_PrefabInstance: {fileID: 361397388309325306}
+  m_CorrespondingSourceObject: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
+  m_PrefabInstance: {fileID: 753661656}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1637797243
+--- !u!114 &1733223012
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1637797240}
+  m_GameObject: {fileID: 1733223011}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 015ece4177d064545804b784703461d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  state: 2
-  resourceType: 1
-  _currentResources: 0
-  _infiniteResorces: 0
-  _growthRate: 30
-  _maxGrowth: 300
-  _infiniteGrowth: 0
-  _minGrowth: 100
-  _stopGrowthOnHarvest: 1
+  _currentResorces:
+    m_keys: 01000000
+    m_values:
+    - 0
+  _currentResourcesTotal: 0
+  _capacity: 400
 --- !u!1 &1940998427
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +820,6 @@ MonoBehaviour:
   state: 1
   targetAgentCount: 1
   _agents: []
-  indicator: 0
   resourceType: 1
   _gatherSpeed: 50
   _minGatherDistance: 0.2
@@ -838,7 +839,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _infiniteResorces
@@ -909,6 +910,26 @@ PrefabInstance:
     - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: _speed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _inventory.m_keys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _inventory.m_values.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _inventory.m_keys.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _inventory.m_keys.Array.data[1]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _inventory.m_keys.Array.data[2]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5078929437771182544, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_Name
@@ -1014,6 +1035,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148460, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4304142780662148461, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}

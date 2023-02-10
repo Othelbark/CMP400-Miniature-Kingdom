@@ -14,7 +14,7 @@ public class KingdomManager : MonoBehaviour
     private List<Building> _buildings;
 
     [SerializeField] //Temporalily Serialized for testing
-    private List<SingleResourceStore> _singleResourceStores;
+    private List<ResourceStore> _resourceStores;
 
     // Start is called before the first frame update
     void Start()
@@ -67,42 +67,42 @@ public class KingdomManager : MonoBehaviour
     {
         _buildings.Remove(building);
     }
-
-    public void AddSingleResourceStore(SingleResourceStore resourceStore)
+   
+    public void AddResourceStore(ResourceStore resourceStore)
     {
-        _singleResourceStores.Add(resourceStore);
+        _resourceStores.Add(resourceStore);
     }
-    public void RemoveSingleResourceStore(SingleResourceStore resourceStore)
+    public void RemoveResourceStore(ResourceStore resourceStore)
     {
-        _singleResourceStores.Remove(resourceStore);
+        _resourceStores.Remove(resourceStore);
     }
 
-    public SingleResourceStore NearestSingleResourceStoreOfType(ResourceType type, Vector3 position)
+    public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position)
     {
         float shortestDistance = float.MaxValue;
-        SingleResourceStore nearestGatherable = null;
+        ResourceStore nearestStore = null;
 
         //TODO: optimise
-        foreach (SingleResourceStore s in _singleResourceStores)
+        foreach (ResourceStore s in _resourceStores)
         {
-            if (s.resourceType == type && s.GetSpace() > 0.0f)
+            if (s.HasType(type) && s.GetSpace() > 0.0f)
             {
                 float distance = (s.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
                 {
                     shortestDistance = distance;
-                    nearestGatherable = s;
+                    nearestStore = s;
                 }
             }
         }
 
-        return nearestGatherable;
+        return nearestStore;
     }
-    public SingleResourceStore FirstSingleResourceStoreOfType(ResourceType type)
+    public ResourceStore FirstResourceStoreOfType(ResourceType type)
     {
-        foreach (SingleResourceStore s in _singleResourceStores)
+        foreach (ResourceStore s in _resourceStores)
         {
-            if (s.resourceType == type && s.GetSpace() > 0.0f)
+            if (s.HasType(type) && s.GetSpace() > 0.0f)
             {
                 return s;
             }

@@ -95,5 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e649d55df20e484593934b010c4cfb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 2
   resourceType: 1
   _currentResources: 300
+  _infiniteResorces: 0

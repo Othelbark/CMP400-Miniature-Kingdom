@@ -100,7 +100,7 @@ public class GatherersGuild : Guild
                 else if (agent.state == AgentState.STORING)
                 {
 
-                    SingleResourceStore nearestStore = _kingdomManager.NearestSingleResourceStoreOfType(resourceType, agent.transform.position);
+                    ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(resourceType, agent.transform.position);
 
                     if (nearestStore == null)
                     {
@@ -112,9 +112,9 @@ public class GatherersGuild : Guild
                     if ((nearestStore.transform.position - agent.transform.position).magnitude <= _minStoreDistance)
                     {
                         //near a store
-                        float woodFromInventory = agent.RemoveFromInventory(resourceType);
+                        float fromInventory = agent.RemoveFromInventory(resourceType);
 
-                        float leftover = nearestStore.AddResources(woodFromInventory);
+                        float leftover = nearestStore.AddResources(resourceType, fromInventory);
 
                         if (leftover > 0)
                         {
@@ -137,7 +137,7 @@ public class GatherersGuild : Guild
 
         if (state == GuildState.INACTIVE)
         {
-            if (_kingdomManager.FirstSingleResourceStoreOfType(resourceType) != null && _naturalWorldManager.FirstGatherableOfType(resourceType) != null)
+            if (_kingdomManager.FirstResourceStoreOfType(resourceType) != null && _naturalWorldManager.FirstGatherableOfType(resourceType) != null)
             {
                 state = GuildState.ACTIVE;
             }

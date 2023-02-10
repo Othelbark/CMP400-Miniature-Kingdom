@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4304142780662148460}
   - component: {fileID: 4304142780662148462}
-  - component: {fileID: 4304142780662148461}
+  - component: {fileID: 1728888848}
   m_Layer: 0
   m_Name: Wood Store
   m_TagString: Untagged
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4304142780662148461
+--- !u!114 &1728888848
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,9 +92,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4304142780662148467}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5439aa26c4460154d947e26b7c0c90cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceType: 1
-  _currentResources: 0
-  _capacity: 500
+  _currentResorces:
+    m_keys: 01000000
+    m_values:
+    - 0
+  _currentResourcesTotal: 0
+  _capacity: 400
