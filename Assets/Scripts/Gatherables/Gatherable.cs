@@ -43,6 +43,10 @@ public class Gatherable : MonoBehaviour
 
     public float GetCurrentResources()
     {
+        if (_infiniteResorces)
+        {
+            return float.MaxValue;
+        }
         return _currentResources;
     }
 
