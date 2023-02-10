@@ -77,7 +77,7 @@ public class ResourceStore : Building
         if (!_currentResorces.ContainsKey(type))
         {
             //never has resources of this type
-            Debug.LogWarning("Trying to take resources to a store that doesn't store that type.");
+            Debug.LogWarning("Trying to take resources from a store that doesn't store that type.");
             return 0;
         }
 
