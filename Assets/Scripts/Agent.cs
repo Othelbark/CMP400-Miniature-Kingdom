@@ -75,7 +75,7 @@ public class Agent : MonoBehaviour
         {
             state = AgentState.WAITING;
 
-            gameObject.transform.position = _targetPosition - (towardsTarget * _targetDistance);
+            gameObject.transform.position = _targetPosition - (towardsTarget * _targetDistance * 0.9f); //10% closer that target to make sure within range even with floating point errors
         }
         else
         {

@@ -312,7 +312,6 @@ MonoBehaviour:
   _guilds: []
   _agents: []
   _buildings: []
-  _singleResourceStores: []
   _resourceStores: []
 --- !u!4 &642292507
 Transform:
@@ -347,6 +346,10 @@ PrefabInstance:
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: state
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: _currentResources
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _infiniteResorces
@@ -454,10 +457,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4304142780662148461, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
       propertyPath: m_Name
       value: Wood Store (1)
@@ -493,6 +492,7 @@ Transform:
   m_Children:
   - {fileID: 1522177200}
   - {fileID: 1392369993}
+  - {fileID: 2046450641}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -651,6 +651,10 @@ PrefabInstance:
       propertyPath: state
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: _currentResources
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -751,29 +755,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gatherables: []
---- !u!1 &1733223011 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
-  m_PrefabInstance: {fileID: 753661656}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1733223012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733223011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentResorces:
-    m_keys: 01000000
-    m_values:
-    - 0
-  _currentResourcesTotal: 0
-  _capacity: 400
 --- !u!1 &1940998427
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +807,109 @@ MonoBehaviour:
   _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
   _onlyGatherFromReadyGatherables: 0
+--- !u!1 &2046450640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2046450641}
+  - component: {fileID: 2046450643}
+  - component: {fileID: 2046450642}
+  m_Layer: 0
+  m_Name: Stockpile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2046450641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046450640}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.651, y: -1.634, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 871654240}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2046450642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046450640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentResorces:
+    m_keys: 010000000200000003000000
+    m_values:
+    - 0
+    - 0
+    - 0
+  _currentResourcesTotal: 0
+  _capacity: 1000
+--- !u!212 &2046450643
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046450640}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1001 &361397388309325306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -840,6 +924,10 @@ PrefabInstance:
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: _currentResources
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _infiniteResorces
@@ -1035,10 +1123,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148460, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4304142780662148461, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
