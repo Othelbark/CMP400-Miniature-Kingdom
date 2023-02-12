@@ -37,7 +37,7 @@ public class GatherersGuild : Guild
                 {
                     if (agent.GetInventorySpace() > 0)
                     {
-                        agent.state = AgentState.GATHERING;
+                        agent.state = AgentState.COLLECTING;
                     }
                     else
                     {
@@ -45,7 +45,7 @@ public class GatherersGuild : Guild
                     }
                 }
 
-                if (agent.state == AgentState.GATHERING)
+                if (agent.state == AgentState.COLLECTING)
                 {
                     float distanceToNearestGatherable;
                     Gatherable nearestGatherable;
@@ -70,29 +70,30 @@ public class GatherersGuild : Guild
                     {
                         //No resource sources
                         state = GuildState.INACTIVE;
-                        break;
-                    }
-
-                    if (distanceToNearestGatherable <= _minGatherDistance)
-                    {
-                        //near a source
-                        float maxGathered = _gatherSpeed * Time.deltaTime;
-
-                        float gathered = nearestGatherable.HarvestResources(maxGathered);
-
-                        float leftover = agent.AddToInventory(resourceType, gathered);
-
-                        if (leftover > 0)
-                        {
-                            nearestGatherable.AddResources(leftover);
-                        }
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestGatherable.transform.position, _minGatherDistance);
+                        if (distanceToNearestGatherable <= _minGatherDistance)
+                        {
+                            //near a source
+                            float maxGathered = _gatherSpeed * Time.deltaTime;
+
+                            float gathered = nearestGatherable.HarvestResources(maxGathered);
+
+                            float leftover = agent.AddToInventory(resourceType, gathered);
+
+                            if (leftover > 0)
+                            {
+                                nearestGatherable.AddResources(leftover);
+                            }
+                        }
+                        else
+                        {
+                            agent.SetMovingTowards(nearestGatherable.transform.position, _minGatherDistance);
+                        }
                     }
 
-                    if (agent.GetInventorySpace() == 0)
+                    if (agent.GetInventorySpace() <= 0)
                     {
                         agent.state = AgentState.STORING;
                     }
@@ -126,9 +127,17 @@ public class GatherersGuild : Guild
                         agent.SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
                     }
 
-                    if (agent.CheckInventoryFor(resourceType) == 0)
+                    if (agent.CheckInventoryFor(resourceType) <= 0)
                     {
-                        agent.state = AgentState.GATHERING;
+                        if (agent.GetCurrentTotalInventory() > 0)
+                        {
+                            //Inventory has other items in it
+                            agent.state = AgentState.CLEAR_INVENTORY;
+                        }
+                        else
+                        {
+                            agent.state = AgentState.WAITING;
+                        }
                     }
                 }
 
@@ -142,5 +151,7 @@ public class GatherersGuild : Guild
                 state = GuildState.ACTIVE;
             }
         }
+
+        base.Update();
     }
 }

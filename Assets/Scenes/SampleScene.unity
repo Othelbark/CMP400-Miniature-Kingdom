@@ -1053,6 +1053,9 @@ MonoBehaviour:
   targetAgentCount: 1
   _agents: []
   _processor: {fileID: 1164071938}
+  _minProcessingDistance: 0.2
+  _minPickupDistance: 0
+  _fillInventory: 0
 --- !u!4 &1164071937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
@@ -2031,6 +2034,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 871654240}
     m_Modifications:
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processInput.m_values.Array.data[0]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131286, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: m_Name
       value: Lumber Yard

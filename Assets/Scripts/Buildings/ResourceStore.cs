@@ -44,6 +44,18 @@ public class ResourceStore : Building
 
     public bool HasType(ResourceType type) { return _currentResorces.ContainsKey(type); }
 
+    public float GetAmount(ResourceType type) 
+    {
+        if (HasType(type))
+        {
+            return _currentResorces[type];
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     // Returns leftover resoucres if capacity is reached
     public float AddResources(ResourceType type, float amount)
     {

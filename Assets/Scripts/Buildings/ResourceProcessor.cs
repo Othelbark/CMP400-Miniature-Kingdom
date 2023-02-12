@@ -110,7 +110,13 @@ public class ResourceProcessor : Building
         return needs;
     }
 
-    protected bool HasNeeds()
+    public InventoryDictionary GetInputs()
+    {
+        InventoryDictionary inputs = _processInput;
+        return inputs;
+    }
+
+    public bool HasNeeds()
     {
         foreach (KeyValuePair<ResourceType, float> potentialNeed in _processInput)
         {

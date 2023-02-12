@@ -58,6 +58,7 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Guild-Independent state logic (MOVING, CLEAR_INVENTORY, DUMP_INVENTORY, etc)
         if (state == AgentState.MOVING)
         {
             Move();
