@@ -26,8 +26,6 @@ public class ProcessorGuild : Guild
         base.Start();
 
         targetAgentCount = 1;
-
-        _currentProcessorNeeds = _processor.GetNeeds();
     }
 
     // Update is called once per frame
@@ -43,11 +41,12 @@ public class ProcessorGuild : Guild
             Debug.LogError("No processor assigned to processor Guild");
         }
 
+        _currentProcessorNeeds = _processor.GetNeeds();
+
         if (state == GuildState.ACTIVE && _agents.Count > 0)
         {
             if (_agents[0].state == AgentState.WAITING)
             {
-                _currentProcessorNeeds = _processor.GetNeeds();
 
                 if (_currentProcessorNeeds.Count == 0)
                 {
