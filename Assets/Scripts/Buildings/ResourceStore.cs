@@ -56,6 +56,11 @@ public class ResourceStore : Building
         }
     }
 
+    public InventoryDictionary GetResources()
+    {
+        return _currentResorces;
+    }
+
     // Returns leftover resoucres if capacity is reached
     public float AddResources(ResourceType type, float amount)
     {

@@ -16,6 +16,10 @@ public class KingdomManager : MonoBehaviour
     [SerializeField] //Temporalily Serialized for testing
     private List<ResourceStore> _resourceStores;
 
+    [SerializeField] //Temporalily Serialized for testing
+    protected InventoryDictionary _totalStoredResources;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,23 @@ public class KingdomManager : MonoBehaviour
                 {
                     guildlessAgents[0].GetComponent<Agent>().SetGuild(guild);
                     break;
+                }
+            }
+        }
+
+        //Total up all stored resources
+        _totalStoredResources.Clear();
+        foreach(ResourceStore store in _resourceStores)
+        {
+            foreach (KeyValuePair<ResourceType, float> item in store.GetResources())
+            {
+                if (!_totalStoredResources.ContainsKey(item.Key))
+                {
+                    _totalStoredResources.Add(item.Key, item.Value);
+                }
+                else
+                {
+                    _totalStoredResources[item.Key] += item.Value;
                 }
             }
         }
@@ -130,5 +151,16 @@ public class KingdomManager : MonoBehaviour
         }
 
         return null;
+    }
+    
+    public float GetTotalResources(ResourceType type)
+    {
+
+        if (_totalStoredResources.ContainsKey(type))
+        {
+            return _totalStoredResources[type];
+        }
+
+        return 0;
     }
 }

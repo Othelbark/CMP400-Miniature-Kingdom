@@ -2025,6 +2025,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stockpile
       objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[2]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[3]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[4]
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3374df173f447d438ba28aa95e75540, type: 3}
 --- !u!1001 &8386973924879156950
@@ -2035,8 +2055,36 @@ PrefabInstance:
     m_TransformParent: {fileID: 871654240}
     m_Modifications:
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processInput.m_keys.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processInput.m_values.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _currentResorces.m_keys.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processInput.m_keys.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _currentResorces.m_values.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _processInput.m_values.Array.data[0]
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processInput.m_values.Array.data[1]
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[0]
