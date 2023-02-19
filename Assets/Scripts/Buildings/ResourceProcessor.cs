@@ -10,6 +10,8 @@ public class ResourceProcessor : Building
     [SerializeField]
     protected InventoryDictionary _processOutput;
 
+    protected List<ResourceType> _outputTypes = null;
+
     [SerializeField] //Temporalily Serialized for testing
     protected InventoryDictionary _currentResorces;
 
@@ -114,6 +116,31 @@ public class ResourceProcessor : Building
     {
         InventoryDictionary inputs = _processInput;
         return inputs;
+    }
+    public List<ResourceType> GetOutputTypes()
+    {
+        if (_outputTypes == null)
+        {
+            _outputTypes = new List<ResourceType>();
+            foreach (KeyValuePair<ResourceType, float> output in _processOutput)
+            {
+                _outputTypes.Add(output.Key);
+            }
+        }
+
+        return _outputTypes;
+    }
+
+    public bool HasFinishedGoods()
+    {
+        foreach (ResourceType type in GetOutputTypes())
+        {
+            if (_currentResorces[type] > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool HasNeeds()
