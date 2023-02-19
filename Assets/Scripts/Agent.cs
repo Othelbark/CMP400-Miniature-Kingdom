@@ -6,6 +6,7 @@ using UnityEngine;
 public class Agent : MonoBehaviour
 {
     public AgentState state = AgentState.WAITING;
+    protected AgentState _preMovementState = AgentState.WAITING;
 
     [SerializeField]
     protected InventoryDictionary _inventory;
@@ -74,7 +75,7 @@ public class Agent : MonoBehaviour
 
         if ((_targetPosition - gameObject.transform.position).magnitude <= Mathf.Max(_speed * Time.deltaTime, _targetDistance))
         {
-            state = AgentState.WAITING;
+            state = _preMovementState;
 
             gameObject.transform.position = _targetPosition - (towardsTarget * (_targetDistance * 0.9f)); //10% closer that target to make sure within range even with floating point errors
         }
@@ -88,6 +89,7 @@ public class Agent : MonoBehaviour
     {
         _targetPosition = pos;
         _targetDistance = dist;
+        _preMovementState = state;
         state = AgentState.MOVING;
     }
 
