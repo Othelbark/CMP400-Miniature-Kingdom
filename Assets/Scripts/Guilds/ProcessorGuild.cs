@@ -100,7 +100,9 @@ public class ProcessorGuild : Guild
                     }
                 }
 
-                #region If _fillInventory collected additional input sets till inventory is full
+                bool processorNeedsAlreadyMeetable = !needSelected;
+
+                #region If _fillInventory collect additional input sets till inventory is full
                 if (!needSelected && _fillInventory)
                 {
                     InventoryDictionary processorInputs = _processor.GetInputs();
@@ -129,7 +131,10 @@ public class ProcessorGuild : Guild
                     if (nearestStore == null)
                     {
                         //No sources for needed resource
-                        state = GuildState.INACTIVE;
+                        if (!processorNeedsAlreadyMeetable)
+                            state = GuildState.INACTIVE;
+                        else
+                            _agents[0].state = AgentState.STORING;
                     }
                     else
                     {
