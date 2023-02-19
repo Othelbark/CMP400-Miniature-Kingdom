@@ -206,6 +206,19 @@ public class ProcessorGuild : Guild
             else
             {
                 //TODO: determine when there are enough resources to reactivate
+                bool enough = true;
+                foreach (KeyValuePair<ResourceType, float> need in _currentProcessorNeeds)
+                {
+                    if (need.Value > _kingdomManager.GetTotalResources(need.Key))
+                    {
+                        enough = false;
+                        break;
+                    }
+                }
+                if (enough)
+                {
+                    state = GuildState.ACTIVE;
+                }
             }
         }
 
