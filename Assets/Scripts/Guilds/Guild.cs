@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Guild : MonoBehaviour
 {
+    public string guildName = "";
     public GuildState state = GuildState.ACTIVE;
 
     public int targetAgentCount = 1;
@@ -64,5 +65,10 @@ public class Guild : MonoBehaviour
     public void RemoveAgent(Agent agent)
     {
         _agents.Remove(agent);
+    }
+
+    public int GetAgentCount()
+    {
+        return _agents.Count;
     }
 }

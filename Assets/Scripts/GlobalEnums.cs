@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ResourceType { NONE, WOOD, STONE, PLANKS, STONE_BLOCKS, FOOD }
+public enum ResourceType { NONE = 0, WOOD, STONE, PLANKS, STONE_BLOCKS, FOOD }
 public enum AgentState { WAITING, MOVING, COLLECTING, STORING, WORKING, PICK_UP, DROP_OFF, CLEAR_INVENTORY, DUMP_INVENTORY }
 public enum GuildState { INACTIVE, ACTIVE }
 

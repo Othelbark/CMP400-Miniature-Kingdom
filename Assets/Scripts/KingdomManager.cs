@@ -5,16 +5,16 @@ using UnityEngine;
 public class KingdomManager : MonoBehaviour
 {
     [SerializeField] //Temporalily Serialized for testing
-    private List<Guild> _guilds;
+    protected List<Guild> _guilds;
 
     [SerializeField] //Temporalily Serialized for testing
-    private List<Agent> _agents;
+    protected List<Agent> _agents;
 
     [SerializeField] //Temporalily Serialized for testing
-    private List<Building> _buildings;
+    protected List<Building> _buildings;
 
     [SerializeField] //Temporalily Serialized for testing
-    private List<ResourceStore> _resourceStores;
+    protected List<ResourceStore> _resourceStores;
 
     [SerializeField] //Temporalily Serialized for testing
     protected InventoryDictionary _totalStoredResources;
@@ -71,6 +71,12 @@ public class KingdomManager : MonoBehaviour
         _guilds.Remove(guild);
     }
 
+    public List<Guild> GetGuilds()
+    {
+        List<Guild> guilds = _guilds;
+        return guilds;
+    }
+
     public void AddAgent(Agent agent)
     {
         _agents.Add(agent);
@@ -78,6 +84,11 @@ public class KingdomManager : MonoBehaviour
     public void RemoveAgent(Agent agent)
     {
         _agents.Remove(agent);
+    }
+
+    public int GetAgentCount()
+    {
+        return _agents.Count;
     }
 
     public void AddBuilding(Building building)
