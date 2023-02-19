@@ -20,6 +20,10 @@ public class ProcessorGuild : Guild
     [Tooltip("If true agents will always try to fill their invetory when collecting even if total needs are less than the agents capacity.")]
     protected bool _fillInventory = false;
 
+    //Temp TODO: create better system for dealing with multiple casues of inactivity
+    protected bool _inactiveForSpace = false;
+    protected ResourceType _spaceNeededFor;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -128,7 +132,8 @@ public class ProcessorGuild : Guild
 
                     if (nearestStore == null)
                     {
-                        //TODO: will currently break as not considered when reactivating.
+                        _inactiveForSpace = true;
+                        _spaceNeededFor = typeToStore;
                         state = GuildState.INACTIVE;
                     }
                     else if (distanceToNearestStore <= _minStoreDistance)
@@ -276,6 +281,14 @@ public class ProcessorGuild : Guild
             if (!_processor.HasNeeds())
             {
                 state = GuildState.ACTIVE;
+            }
+            else if (_inactiveForSpace)
+            {
+                if (_kingdomManager.FirstResourceStoreOfType(_spaceNeededFor) != null)
+                {
+                    _inactiveForSpace = false;
+                    state = GuildState.ACTIVE;
+                }
             }
             else
             {
