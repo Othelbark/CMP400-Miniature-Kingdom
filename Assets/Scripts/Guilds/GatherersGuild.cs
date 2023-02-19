@@ -69,7 +69,8 @@ public class GatherersGuild : Guild
                     if (nearestGatherable == null)
                     {
                         //No resource sources
-                        state = GuildState.INACTIVE;
+                        if (agent.GetInventorySpace() > 0)
+                            state = GuildState.INACTIVE;
                     }
                     else
                     {
