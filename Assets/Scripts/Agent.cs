@@ -62,11 +62,19 @@ public class Agent : MonoBehaviour
         // Guild-Independent state logic (MOVING, CLEAR_INVENTORY, DUMP_INVENTORY, etc)
         if (state == AgentState.MOVING)
         {
-            Move();
+            MoveState();
+        }
+        else if (state == AgentState.CLEAR_INVENTORY)
+        {
+            ClearInventoryState();
+        }
+        else if (state == AgentState.DUMP_INVENTORY)
+        {
+            DumpInvetoryState();
         }
     }
 
-    protected void Move()
+    protected void MoveState()
     {
         //TODO: pathfinding
 
@@ -83,6 +91,55 @@ public class Agent : MonoBehaviour
         {
             gameObject.transform.Translate(towardsTarget * _speed * Time.deltaTime);
         }
+    }
+    protected void ClearInventoryState()
+    {
+        ResourceType typeToStore = ResourceType.NONE;
+
+        foreach (KeyValuePair<ResourceType, float> item in _inventory)
+        {
+            if (item.Value > 0)
+            {
+                typeToStore = item.Key;
+                break;
+            }
+        }
+
+
+        if (typeToStore != ResourceType.NONE)
+        {
+            float distanceToNearestStore;
+            ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(typeToStore, gameObject.transform.position, out distanceToNearestStore);
+
+            if (nearestStore == null)
+            {
+                RemoveFromInventory(typeToStore);
+            }
+            else if (distanceToNearestStore <= 0)
+            {
+                float fromInventory = RemoveFromInventory(typeToStore);
+
+                float leftover = nearestStore.AddResources(typeToStore, fromInventory);
+
+                if (leftover > 0)
+                {
+                    AddToInventory(typeToStore, leftover);
+                }
+            }
+            else
+            {
+                SetMovingTowards(nearestStore.transform.position, 0);
+            }
+        }
+        else
+        {
+            state = AgentState.WAITING;
+        }
+    }
+    protected void DumpInvetoryState()
+    {
+        ClearInventory();
+        state = AgentState.WAITING;
     }
 
     public void SetMovingTowards(Vector3 pos, float dist)

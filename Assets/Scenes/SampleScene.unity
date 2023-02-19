@@ -170,7 +170,7 @@ MonoBehaviour:
   targetAgentCount: 1
   _agents: []
   resourceType: 5
-  _gatherSpeed: 35
+  _gatherSpeed: 20
   _minGatherDistance: 0.2
   _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
@@ -222,7 +222,7 @@ MonoBehaviour:
   targetAgentCount: 1
   _agents: []
   resourceType: 2
-  _gatherSpeed: 20
+  _gatherSpeed: 15
   _minGatherDistance: 0.2
   _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
@@ -680,6 +680,9 @@ MonoBehaviour:
   _agents: []
   _buildings: []
   _resourceStores: []
+  _totalStoredResources:
+    m_keys: 
+    m_values: []
 --- !u!4 &642292507
 Transform:
   m_ObjectHideFlags: 0
@@ -1053,8 +1056,8 @@ MonoBehaviour:
   targetAgentCount: 1
   _agents: []
   _processor: {fileID: 1164071938}
-  _minProcessingDistance: 0.2
-  _minPickupDistance: 0
+  _minProcessorDistance: 0.2
+  _minStoreDistance: 0
   _fillInventory: 0
 --- !u!4 &1164071937 stripped
 Transform:
@@ -1534,7 +1537,7 @@ MonoBehaviour:
   targetAgentCount: 1
   _agents: []
   resourceType: 1
-  _gatherSpeed: 50
+  _gatherSpeed: 25
   _minGatherDistance: 0.2
   _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
@@ -2031,19 +2034,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[1]
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[2]
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[3]
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[4]
-      value: 100
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3374df173f447d438ba28aa95e75540, type: 3}
@@ -2056,7 +2059,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _processTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _processInput.m_keys.Array.size
@@ -2080,11 +2083,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _processInput.m_values.Array.data[0]
-      value: 15
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _processInput.m_values.Array.data[1]
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processOutput.m_values.Array.data[0]
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[0]
