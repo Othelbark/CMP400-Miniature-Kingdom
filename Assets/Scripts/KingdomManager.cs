@@ -49,7 +49,7 @@ public class KingdomManager : MonoBehaviour
     void Update()
     {
         
-        if (_interactionSystemController.GetControlType() == ControlType.ABSTRACT)
+        if (_interactionSystemController.GetControlType() == ControlType.ABSTRACTED)
         {
             //Automatic management
             AgentDistribution();

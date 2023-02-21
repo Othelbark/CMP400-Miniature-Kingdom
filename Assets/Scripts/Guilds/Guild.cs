@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Guild : MonoBehaviour
 {
-    public string guildName = "";
     public GuildState state = GuildState.ACTIVE;
 
     public int targetAgentCount = 1;

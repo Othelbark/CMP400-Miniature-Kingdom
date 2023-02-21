@@ -50,6 +50,25 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                 }
             }
 
+            
+            if (Input.GetMouseButtonDown(1) && _selectedAgent)
+            {
+
+                RaycastHit2D clicked;
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+                if (clicked = Physics2D.Raycast(mousePos2D, Vector2.zero))
+                {
+                    Gatherable gatherable;
+                    if (gatherable = clicked.transform.gameObject.GetComponent<Gatherable>())
+                    {
+                        Guild gatherersGuild = GameObject.FindGameObjectWithTag(gatherable.resourceType + "GatherersGuild").GetComponent<Guild>();
+                        _selectedAgent.SetGuild(gatherersGuild);
+                    }
+                }
+            }
+
 
         }
     }

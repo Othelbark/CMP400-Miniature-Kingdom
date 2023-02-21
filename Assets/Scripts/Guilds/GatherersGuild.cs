@@ -23,7 +23,9 @@ public class GatherersGuild : Guild
     // Start is called before the first frame update
     new void Start()
     {
-        base.Start(); 
+        base.Start();
+
+        gameObject.tag = resourceType + "GatherersGuild";
     }
 
     // Update is called once per frame

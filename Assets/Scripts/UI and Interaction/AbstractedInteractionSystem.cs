@@ -9,7 +9,7 @@ public class AbstractedInteractionSystem : PlayerInteractionSystem
     {
         base.Start();
 
-        type = ControlType.ABSTRACT;
+        type = ControlType.ABSTRACTED;
     }
 
     // Update is called once per frame

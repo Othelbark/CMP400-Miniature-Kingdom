@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 141221133800370307}
   - component: {fileID: 6307642512426988667}
   - component: {fileID: 4016071225324370716}
+  - component: {fileID: 5610470418357727218}
   m_Layer: 0
   m_Name: Berry Bush
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3685033806510180400}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.2922, y: -0.0304, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
@@ -99,9 +100,24 @@ MonoBehaviour:
   resourceType: 5
   _currentResources: 0
   _infiniteResorces: 0
-  _growthRate: 10
+  _growthRate: 7
   _maxGrowth: 150
   _infiniteGrowth: 1
-  _totalGrowth: 0
   _minGrowth: 50
   _stopGrowthOnHarvest: 0
+--- !u!58 &5610470418357727218
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685033806510180400}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.49999997
