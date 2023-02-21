@@ -7,6 +7,7 @@ TagManager:
   - NaturalWorldManager
   - KingdomManager
   - Guildless
+  - InteractionSystemController
   layers:
   - Default
   - TransparentFX

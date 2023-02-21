@@ -20,29 +20,41 @@ public class KingdomManager : MonoBehaviour
     protected InventoryDictionary _totalStoredResources;
 
 
+    protected InteractionSystemController _interactionSystemController;
+    protected NaturalWorldManager _naturalWorldManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        try
+        {
+            _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find interaction system controller.");
+        }
+        try
+        {
+            _naturalWorldManager = GameObject.FindGameObjectWithTag("NaturalWorldManager").GetComponent<NaturalWorldManager>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find natural world manager.");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Assign guildless agents to guilds that want agents
-        //TODO: optimise and allow more than one agent to be reasinged per framw.
-        GameObject[] guildlessAgents = GameObject.FindGameObjectsWithTag("Guildless");
-
-        if (guildlessAgents.Length > 0)
+        
+        if (_interactionSystemController.GetControlType() == ControlType.ABSTRACT)
         {
-            foreach (Guild guild in _guilds)
-            {
-                if (guild.state == GuildState.ACTIVE && guild.GetCurrentAgentCount() < guild.targetAgentCount)
-                {
-                    guildlessAgents[0].GetComponent<Agent>().SetGuild(guild);
-                    break;
-                }
-            }
+            //Automatic management
+            AgentDistribution();
         }
+
 
         //Total up all stored resources
         _totalStoredResources.Clear();
@@ -57,6 +69,25 @@ public class KingdomManager : MonoBehaviour
                 else
                 {
                     _totalStoredResources[item.Key] += item.Value;
+                }
+            }
+        }
+    }
+
+    protected void AgentDistribution()
+    {
+        //Assign guildless agents to guilds that want agents
+        //TODO: optimise- and allow more than one agent to be reasinged per frame?
+        GameObject[] guildlessAgents = GameObject.FindGameObjectsWithTag("Guildless");
+
+        if (guildlessAgents.Length > 0)
+        {
+            foreach (Guild guild in _guilds)
+            {
+                if (guild.state == GuildState.ACTIVE && guild.GetCurrentAgentCount() < guild.targetAgentCount)
+                {
+                    guildlessAgents[0].GetComponent<Agent>().SetGuild(guild);
+                    break;
                 }
             }
         }

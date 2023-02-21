@@ -13,13 +13,22 @@ public class Guild : MonoBehaviour
     [SerializeField] //Temporalily Serialized for testing
     protected List<Agent> _agents;
 
+    protected InteractionSystemController _interactionSystemController;
     protected KingdomManager _kingdomManager;
-
     protected NaturalWorldManager _naturalWorldManager;
 
     // Start is called before the first frame update
     public void Start()
     {
+        try
+        {
+            _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find interaction system controller.");
+        }
+
         try
         {
             _kingdomManager = GameObject.FindGameObjectWithTag("KingdomManager").GetComponent<KingdomManager>();

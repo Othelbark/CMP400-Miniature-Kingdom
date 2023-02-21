@@ -8,12 +8,22 @@ public class DebugUI : MonoBehaviour
 
     public Text textObject;
 
+    protected InteractionSystemController _interactionSystemController;
     protected KingdomManager _kingdomManager;
     protected NaturalWorldManager _naturalWorldManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        try
+        {
+            _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find interaction system controller.");
+        }
+
         try
         {
             _kingdomManager = GameObject.FindGameObjectWithTag("KingdomManager").GetComponent<KingdomManager>();
@@ -55,12 +65,17 @@ public class DebugUI : MonoBehaviour
         {
             if (i != 0)
             {
-                textOutput += System.Enum.GetName(typeof(ResourceType), i);
+                textOutput += (ResourceType)i;
                 textOutput += ": " + _kingdomManager.GetTotalResources((ResourceType)i);
                 textOutput += "\n";
             }
         }
 
+        textOutput += "\n\n\n\n";
+
+        textOutput += "Interaction System: " + _interactionSystemController.GetControlType() + "\n";
+
+        textOutput += "(Space to toggle)";
 
         textObject.text = textOutput;
     }
