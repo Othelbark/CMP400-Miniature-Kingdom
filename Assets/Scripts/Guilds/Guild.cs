@@ -74,9 +74,4 @@ public class Guild : MonoBehaviour
     {
         _agents.Remove(agent);
     }
-
-    public int GetAgentCount()
-    {
-        return _agents.Count;
-    }
 }

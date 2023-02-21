@@ -8,6 +8,9 @@ TagManager:
   - KingdomManager
   - Guildless
   - InteractionSystemController
+  - FOODGatherersGuild
+  - WOODGatherersGuild
+  - STONEGatherersGuild
   layers:
   - Default
   - TransparentFX

@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0988174a36e4ad4ea11a6a62d50ee0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guildName: FruitPickersGuild
   state: 1
   targetAgentCount: 1
   _agents: []
@@ -219,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0988174a36e4ad4ea11a6a62d50ee0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guildName: StoneMinersGuild
   state: 1
   targetAgentCount: 1
   _agents: []
@@ -1277,7 +1275,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef8fd0ee98a2f740a669ee6ebd1fc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guildName: LumberYardGuild
   state: 1
   targetAgentCount: 1
   _agents: []
@@ -1663,18 +1660,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-      propertyPath: state
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-      propertyPath: _currentResources
-      value: 300
-      objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1883,7 +1868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0988174a36e4ad4ea11a6a62d50ee0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guildName: ForestersGuild
   state: 1
   targetAgentCount: 1
   _agents: []
@@ -1990,18 +1974,6 @@ PrefabInstance:
     - target: {fileID: 2174137302262737080, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_Name
       value: Tree
-      objectReference: {fileID: 0}
-    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-      propertyPath: _currentResources
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 3000862652574985428, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
-      propertyPath: _infiniteResorces
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8210296431267599414, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: m_RootOrder
@@ -2114,10 +2086,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Berry Bush
       objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _growthRate
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
 --- !u!1001 &3696239662487509355
@@ -2197,18 +2165,6 @@ PrefabInstance:
     - target: {fileID: 4365087580106326157, guid: 273d36a65b66b4b43ab4a9fb251a2e7a, type: 3}
       propertyPath: m_Name
       value: Stone Store
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365087580106326160, guid: 273d36a65b66b4b43ab4a9fb251a2e7a, type: 3}
-      propertyPath: m_Color.b
-      value: 0.050329305
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365087580106326160, guid: 273d36a65b66b4b43ab4a9fb251a2e7a, type: 3}
-      propertyPath: m_Color.g
-      value: 0.16340682
-      objectReference: {fileID: 0}
-    - target: {fileID: 4365087580106326160, guid: 273d36a65b66b4b43ab4a9fb251a2e7a, type: 3}
-      propertyPath: m_Color.r
-      value: 0.2735849
       objectReference: {fileID: 0}
     - target: {fileID: 4365087580106326162, guid: 273d36a65b66b4b43ab4a9fb251a2e7a, type: 3}
       propertyPath: m_RootOrder
@@ -2425,26 +2381,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stockpile
       objectReference: {fileID: 0}
-    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
-      propertyPath: _currentResorces.m_values.Array.data[0]
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
-      propertyPath: _currentResorces.m_values.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
-      propertyPath: _currentResorces.m_values.Array.data[2]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
-      propertyPath: _currentResorces.m_values.Array.data[3]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
-      propertyPath: _currentResorces.m_values.Array.data[4]
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3374df173f447d438ba28aa95e75540, type: 3}
 --- !u!1001 &8386973924879156950
@@ -2454,46 +2390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 871654240}
     m_Modifications:
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processInput.m_keys.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processInput.m_values.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _currentResorces.m_keys.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processInput.m_keys.Array.data[1]
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _currentResorces.m_values.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processInput.m_values.Array.data[0]
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processInput.m_values.Array.data[1]
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processOutput.m_values.Array.data[0]
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _currentResorces.m_values.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131286, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: m_Name
       value: Lumber Yard

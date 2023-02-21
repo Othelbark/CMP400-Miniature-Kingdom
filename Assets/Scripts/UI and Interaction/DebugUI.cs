@@ -55,7 +55,7 @@ public class DebugUI : MonoBehaviour
         textOutput += "Guilds: \n";
         foreach (Guild guild in _kingdomManager.GetGuilds())
         {
-            textOutput += guild.name + ": " + guild.GetAgentCount();
+            textOutput += guild.name + ": " + guild.GetCurrentAgentCount();
             textOutput += "\n";
         }
         textOutput += "\n";
