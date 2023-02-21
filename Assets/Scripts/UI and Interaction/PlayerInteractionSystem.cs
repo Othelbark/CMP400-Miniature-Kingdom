@@ -8,16 +8,12 @@ public class PlayerInteractionSystem : MonoBehaviour
 
     protected bool _active = false;
 
+    protected Camera _mainCamera;
+
     // Start is called before the first frame update
     public void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    public void Update()
-    {
-        
+        _mainCamera = Camera.main;
     }
 
     public virtual void SetActive(bool b) { _active = b; }

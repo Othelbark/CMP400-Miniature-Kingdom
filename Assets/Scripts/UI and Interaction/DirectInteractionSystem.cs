@@ -4,18 +4,61 @@ using UnityEngine;
 
 public class DirectInteractionSystem : PlayerInteractionSystem
 {
+    [SerializeField]
+    protected GameObject _selectedAgentHighlighter;
+
+    protected Agent _selectedAgent = null;
+
     // Start is called before the first frame update
     new void Start()
     {
+        base.Start();
+
         type = ControlType.DIRECT;
     }
 
     // Update is called once per frame
-    new void Update()
+    void Update()
     {
         if (_active)
         {
-            //Do stuff
+
+            //Detect clicks on agents
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit2D clicked; 
+                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
+
+                if (clicked = Physics2D.Raycast(mousePos2D, Vector2.zero))
+                {
+                    Agent agent;
+                    if (agent = clicked.transform.gameObject.GetComponent<Agent>())
+                    {
+                        if (_selectedAgent == null)
+                            _selectedAgentHighlighter.SetActive(true);
+
+                        _selectedAgent = agent;
+                    }
+                }
+                else
+                {
+                    if (_selectedAgent != null)
+                        _selectedAgentHighlighter.SetActive(false);
+
+                    _selectedAgent = null;
+                }
+            }
+
+
+        }
+    }
+
+    void LateUpdate()
+    {
+        if (_selectedAgent)
+        {
+            _selectedAgentHighlighter.transform.position = _selectedAgent.transform.position;
         }
     }
 
@@ -32,6 +75,8 @@ public class DirectInteractionSystem : PlayerInteractionSystem
         {
             //Disactivation
             //Debug.Log(type + " Control System Disactivated.");
+            _selectedAgent = null;
+            _selectedAgentHighlighter.SetActive(false);
         }
     }
 }

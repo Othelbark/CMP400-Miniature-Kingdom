@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5561669530525149655}
   - component: {fileID: 912454689286995520}
   - component: {fileID: 2966431717858257677}
+  - component: {fileID: 881169075853334200}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Untagged
@@ -103,3 +104,19 @@ MonoBehaviour:
   _capacity: 100
   _guild: {fileID: 0}
   _speed: 5
+--- !u!70 &881169075853334200
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078929437771182544}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0

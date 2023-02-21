@@ -7,11 +7,13 @@ public class AbstractedInteractionSystem : PlayerInteractionSystem
     // Start is called before the first frame update
     new void Start()
     {
+        base.Start();
+
         type = ControlType.ABSTRACT;
     }
 
     // Update is called once per frame
-    new void Update()
+    void Update()
     {
         if (_active)
         {
