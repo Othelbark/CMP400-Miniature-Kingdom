@@ -19,6 +19,12 @@ public class Guild : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        if (_agents == null)
+        {
+            _agents = new List<Agent>();
+        }
+
+
         try
         {
             _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
@@ -55,10 +61,7 @@ public class Guild : MonoBehaviour
     {
         if (state == GuildState.INACTIVE && _agents.Count > 0)
         {
-            while (_agents.Count > 0)
-            {
-                _agents[0].RemoveFromGuild();
-            }
+            ClearAgents();
         }
     }
 
@@ -73,5 +76,12 @@ public class Guild : MonoBehaviour
     public void RemoveAgent(Agent agent)
     {
         _agents.Remove(agent);
+    }
+    public void ClearAgents()
+    {
+        while (_agents.Count > 0)
+        {
+            _agents[0].RemoveFromGuild();
+        }
     }
 }

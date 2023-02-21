@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ProcessorGuild : Guild
 {
+    public void ProcessorGuildConstructor(ResourceProcessor processor)
+    {
+        _processor = processor;
+    }
 
     [SerializeField]
     protected ResourceProcessor _processor;

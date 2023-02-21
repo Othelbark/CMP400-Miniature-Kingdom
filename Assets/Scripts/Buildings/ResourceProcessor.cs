@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ResourceProcessor : Building
 {
+    [HideInInspector]
+    public ProcessorGuild guild;
+
     [SerializeField]
     protected InventoryDictionary _processInput;
 
@@ -26,6 +29,13 @@ public class ResourceProcessor : Building
     new void Start()
     {
         base.Start();
+
+        GameObject guildObject = new GameObject();
+        guildObject.name = gameObject.name + "Guild";
+        guildObject.transform.SetParent(_kingdomManager.transform);
+
+        guild = guildObject.AddComponent<ProcessorGuild>();
+        guild.ProcessorGuildConstructor(this);
 
         //initalise current resource inventory
         foreach (KeyValuePair<ResourceType, float> item in _processInput)
