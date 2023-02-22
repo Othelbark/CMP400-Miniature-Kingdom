@@ -23,10 +23,13 @@ public class KingdomManager : MonoBehaviour
     protected InteractionSystemController _interactionSystemController;
     protected NaturalWorldManager _naturalWorldManager;
 
+    protected Dictionary<string, float> priorities;
 
     // Start is called before the first frame update
     void Start()
     {
+        priorities = new Dictionary<string, float>();
+
         try
         {
             _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
@@ -90,6 +93,18 @@ public class KingdomManager : MonoBehaviour
                     break;
                 }
             }
+        }
+    }
+
+    public void SetPriority(string name, float value)
+    {
+        if (priorities.ContainsKey(name))
+        {
+            priorities[name] = value;
+        }
+        else
+        {
+            priorities.Add(name, value);
         }
     }
 

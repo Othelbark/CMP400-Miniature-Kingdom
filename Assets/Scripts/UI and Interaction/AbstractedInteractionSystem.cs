@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AbstractedInteractionSystem : PlayerInteractionSystem
 {
+    public GameObject AbstractedUI;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -29,11 +31,13 @@ public class AbstractedInteractionSystem : PlayerInteractionSystem
         {
             //Activation
             //Debug.Log(type + " Control System Activated.");
+            AbstractedUI.SetActive(true);
         }
         else
         {
             //Disactivation
             //Debug.Log(type + " Control System Disactivated.");
+            AbstractedUI.SetActive(false);
         }
     }
 }
