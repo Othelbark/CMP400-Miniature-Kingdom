@@ -37,6 +37,13 @@ public class GatherersGuild : Guild
         base.Update();
     }
 
+    protected override void UpdateTargetAgentCount()
+    {
+        float priorityFactor = _kingdomManager.GetPriority(_priorityName) / _kingdomManager.GetTotalPriority();
+
+        targetAgentCount = Mathf.CeilToInt((float)_kingdomManager.GetAgentCount() * priorityFactor);
+    }
+
     protected override void ActiveUpdate()
     {
 

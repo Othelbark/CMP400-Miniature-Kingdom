@@ -23,13 +23,11 @@ public class KingdomManager : MonoBehaviour
     protected InteractionSystemController _interactionSystemController;
     protected NaturalWorldManager _naturalWorldManager;
 
-    protected Dictionary<string, float> _priorities;
+    protected Dictionary<string, float> _priorities = new Dictionary<string, float> { { "gatherWOOD", 0.5f }, { "gatherFOOD", 0.5f }, { "gatherSTONE", 0.5f }, { "process", 0.5f } };
 
     // Start is called before the first frame update
     void Start()
     {
-        _priorities = new Dictionary<string, float>();
-
         try
         {
             _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
@@ -129,7 +127,7 @@ public class KingdomManager : MonoBehaviour
             total += priority.Value;
         }
 
-        return total;
+        return Mathf.Max(total, 1.0f);
     }
 
     public void AddGuild(Guild guild)

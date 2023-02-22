@@ -54,6 +54,11 @@ public class ProcessorGuild : Guild
         base.Update();
     }
 
+    protected override void UpdateTargetAgentCount()
+    {
+
+    }
+
     protected override void ActiveUpdate()
     {
         if (_agents.Count > 0)

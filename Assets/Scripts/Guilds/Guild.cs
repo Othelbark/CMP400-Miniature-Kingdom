@@ -59,6 +59,16 @@ public class Guild : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        if (_interactionSystemController.GetControlType() == ControlType.ABSTRACTED)
+        {
+            UpdateTargetAgentCount();
+
+            while (_agents.Count > targetAgentCount)
+            {
+                _agents[0].RemoveFromGuild();
+            }
+        }
+
         switch (state)
         {
             case GuildState.ACTIVE:
@@ -79,6 +89,10 @@ public class Guild : MonoBehaviour
         }
     }
 
+    protected virtual void UpdateTargetAgentCount()
+    {
+
+    }
     protected virtual void ActiveUpdate()
     {
 
