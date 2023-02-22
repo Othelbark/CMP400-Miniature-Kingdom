@@ -51,7 +51,12 @@ public class ProcessorGuild : Guild
 
         _currentProcessorNeeds = _processor.GetNeeds();
 
-        if (state == GuildState.ACTIVE && _agents.Count > 0)
+        base.Update();
+    }
+
+    protected override void ActiveUpdate()
+    {
+        if (_agents.Count > 0)
         {
             if (_agents[0].state == AgentState.WAITING)
             {
@@ -83,7 +88,7 @@ public class ProcessorGuild : Guild
 
                 if (distanceToProcessor <= _minProcessorDistance)
                 {
-                    if(!_processor.Process(Time.deltaTime))
+                    if (!_processor.Process(Time.deltaTime))
                     {
                         _agents[0].state = AgentState.WAITING;
                     }
@@ -93,7 +98,7 @@ public class ProcessorGuild : Guild
                     _agents[0].SetMovingTowards(_processor.transform.position, _minProcessorDistance);
                 }
             }
-            else if(_agents[0].state == AgentState.PICK_UP)
+            else if (_agents[0].state == AgentState.PICK_UP)
             {
                 float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
 
@@ -115,7 +120,7 @@ public class ProcessorGuild : Guild
                     _agents[0].SetMovingTowards(_processor.transform.position, _minProcessorDistance);
                 }
             }
-            else if(_agents[0].state == AgentState.STORING)
+            else if (_agents[0].state == AgentState.STORING)
             {
                 ResourceType typeToStore = ResourceType.NONE;
 
@@ -279,40 +284,38 @@ public class ProcessorGuild : Guild
             }
 
         }
+    }
 
-        if (state == GuildState.INACTIVE)
+    protected override void InactiveUpdate()
+    {
+        if (!_processor.HasNeeds())
         {
-            if (!_processor.HasNeeds())
+            state = GuildState.ACTIVE;
+        }
+        else if (_inactiveForSpace)
+        {
+            if (_kingdomManager.FirstResourceStoreOfType(_spaceNeededFor) != null)
+            {
+                _inactiveForSpace = false;
+                state = GuildState.ACTIVE;
+            }
+        }
+        else
+        {
+            //determine when there are enough resources to reactivate
+            bool enough = true;
+            foreach (KeyValuePair<ResourceType, float> need in _currentProcessorNeeds)
+            {
+                if (need.Value > _kingdomManager.GetTotalResources(need.Key))
+                {
+                    enough = false;
+                    break;
+                }
+            }
+            if (enough)
             {
                 state = GuildState.ACTIVE;
             }
-            else if (_inactiveForSpace)
-            {
-                if (_kingdomManager.FirstResourceStoreOfType(_spaceNeededFor) != null)
-                {
-                    _inactiveForSpace = false;
-                    state = GuildState.ACTIVE;
-                }
-            }
-            else
-            {
-                //TODO: determine when there are enough resources to reactivate
-                bool enough = true;
-                foreach (KeyValuePair<ResourceType, float> need in _currentProcessorNeeds)
-                {
-                    if (need.Value > _kingdomManager.GetTotalResources(need.Key))
-                    {
-                        enough = false;
-                        break;
-                    }
-                }
-                if (enough)
-                {
-                    state = GuildState.ACTIVE;
-                }
-            }
         }
-
-        base.Update();
     }
 }

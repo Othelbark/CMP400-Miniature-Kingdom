@@ -59,10 +59,33 @@ public class Guild : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (state == GuildState.INACTIVE && _agents.Count > 0)
+        switch (state)
         {
-            ClearAgents();
+            case GuildState.ACTIVE:
+
+                ActiveUpdate();
+
+                break;
+            case GuildState.INACTIVE:
+
+                InactiveUpdate();
+
+                if (_agents.Count > 0)
+                {
+                    ClearAgents();
+                }
+
+                break;
         }
+    }
+
+    protected virtual void ActiveUpdate()
+    {
+
+    }
+    protected virtual void InactiveUpdate()
+    {
+
     }
 
     public int GetCurrentAgentCount()

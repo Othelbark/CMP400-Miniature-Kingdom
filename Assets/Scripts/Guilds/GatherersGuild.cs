@@ -19,6 +19,7 @@ public class GatherersGuild : Guild
     [SerializeField]
     protected bool _onlyGatherFromReadyGatherables = false;
 
+    protected string _priorityName;
 
     // Start is called before the first frame update
     new void Start()
@@ -26,135 +27,139 @@ public class GatherersGuild : Guild
         base.Start();
 
         gameObject.tag = resourceType + "GatherersGuild";
+
+        _priorityName = "gather" + resourceType;
     }
 
     // Update is called once per frame
     new void Update()
     {
-        if (state == GuildState.ACTIVE)
-        {
-            foreach (Agent agent in _agents)
-            {
-                if (agent.state == AgentState.WAITING)
-                {
-                    if (agent.GetInventorySpace() > 0)
-                    {
-                        agent.state = AgentState.COLLECTING;
-                    }
-                    else
-                    {
-                        agent.state = AgentState.STORING;
-                    }
-                }
+        base.Update();
+    }
 
-                if (agent.state == AgentState.COLLECTING)
+    protected override void ActiveUpdate()
+    {
+
+        foreach (Agent agent in _agents)
+        {
+            if (agent.state == AgentState.WAITING)
+            {
+                if (agent.GetInventorySpace() > 0)
                 {
-                    float distanceToNearestGatherable;
-                    Gatherable nearestGatherable;
-                    if (_onlyGatherFromReadyGatherables)
+                    agent.state = AgentState.COLLECTING;
+                }
+                else
+                {
+                    agent.state = AgentState.STORING;
+                }
+            }
+
+            if (agent.state == AgentState.COLLECTING)
+            {
+                float distanceToNearestGatherable;
+                Gatherable nearestGatherable;
+                if (_onlyGatherFromReadyGatherables)
+                {
+                    nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
+                }
+                else
+                {
+                    nearestGatherable = _naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
+
+                    _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out float distanceToNearestReadyGatherable);
+
+                    if (distanceToNearestReadyGatherable - distanceToNearestGatherable < _prioritiseReadyGatherablesWithin)
                     {
+                        // If nearest ready gatherable is not too much further away
                         nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
                     }
-                    else
-                    {
-                        nearestGatherable = _naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
-
-                        _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out float distanceToNearestReadyGatherable);
-
-                        if (distanceToNearestReadyGatherable - distanceToNearestGatherable < _prioritiseReadyGatherablesWithin)
-                        {
-                            // If nearest ready gatherable is not too much further away
-                            nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
-                        }
-                    }
-
-                    if (nearestGatherable == null)
-                    {
-                        //No resource sources
-                        if (agent.GetInventorySpace() > 0)
-                            state = GuildState.INACTIVE;
-                    }
-                    else
-                    {
-                        if (distanceToNearestGatherable <= _minGatherDistance)
-                        {
-                            //near a source
-                            float maxGathered = _gatherSpeed * Time.deltaTime;
-
-                            float gathered = nearestGatherable.HarvestResources(maxGathered);
-
-                            float leftover = agent.AddToInventory(resourceType, gathered);
-
-                            if (leftover > 0)
-                            {
-                                nearestGatherable.AddResources(leftover);
-                            }
-                        }
-                        else
-                        {
-                            agent.SetMovingTowards(nearestGatherable.transform.position, _minGatherDistance);
-                        }
-                    }
-
-                    if (agent.GetInventorySpace() <= 0)
-                    {
-                        agent.state = AgentState.STORING;
-                    }
                 }
-                else if (agent.state == AgentState.STORING)
+
+                if (nearestGatherable == null)
                 {
-
-                    ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(resourceType, agent.transform.position);
-
-                    if (nearestStore == null)
-                    {
-                        //No storage spots
+                    //No resource sources
+                    if (agent.GetInventorySpace() > 0)
                         state = GuildState.INACTIVE;
-                        break;
-                    }
-
-                    if ((nearestStore.transform.position - agent.transform.position).magnitude <= _minStoreDistance)
+                }
+                else
+                {
+                    if (distanceToNearestGatherable <= _minGatherDistance)
                     {
-                        //near a store
-                        float fromInventory = agent.RemoveFromInventory(resourceType);
+                        //near a source
+                        float maxGathered = _gatherSpeed * Time.deltaTime;
 
-                        float leftover = nearestStore.AddResources(resourceType, fromInventory);
+                        float gathered = nearestGatherable.HarvestResources(maxGathered);
+
+                        float leftover = agent.AddToInventory(resourceType, gathered);
 
                         if (leftover > 0)
                         {
-                            agent.AddToInventory(resourceType, leftover);
+                            nearestGatherable.AddResources(leftover);
                         }
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
-                    }
-
-                    if (agent.CheckInventoryFor(resourceType) <= 0)
-                    {
-                        if (agent.GetCurrentTotalInventory() > 0)
-                        {
-                            //Inventory has other items in it
-                            agent.state = AgentState.CLEAR_INVENTORY;
-                        }
-                        else
-                        {
-                            agent.state = AgentState.WAITING;
-                        }
+                        agent.SetMovingTowards(nearestGatherable.transform.position, _minGatherDistance);
                     }
                 }
 
+                if (agent.GetInventorySpace() <= 0)
+                {
+                    agent.state = AgentState.STORING;
+                }
             }
-        }
-
-        if (state == GuildState.INACTIVE)
-        {
-            if (_kingdomManager.FirstResourceStoreOfType(resourceType) != null && _naturalWorldManager.FirstGatherableOfType(resourceType) != null)
+            else if (agent.state == AgentState.STORING)
             {
-                state = GuildState.ACTIVE;
-            }
-        }
 
-        base.Update();
+                ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(resourceType, agent.transform.position);
+
+                if (nearestStore == null)
+                {
+                    //No storage spots
+                    state = GuildState.INACTIVE;
+                    break;
+                }
+
+                if ((nearestStore.transform.position - agent.transform.position).magnitude <= _minStoreDistance)
+                {
+                    //near a store
+                    float fromInventory = agent.RemoveFromInventory(resourceType);
+
+                    float leftover = nearestStore.AddResources(resourceType, fromInventory);
+
+                    if (leftover > 0)
+                    {
+                        agent.AddToInventory(resourceType, leftover);
+                    }
+                }
+                else
+                {
+                    agent.SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
+                }
+
+                if (agent.CheckInventoryFor(resourceType) <= 0)
+                {
+                    if (agent.GetCurrentTotalInventory() > 0)
+                    {
+                        //Inventory has other items in it
+                        agent.state = AgentState.CLEAR_INVENTORY;
+                    }
+                    else
+                    {
+                        agent.state = AgentState.WAITING;
+                    }
+                }
+            }
+
+        }
+    }
+
+    protected override void InactiveUpdate()
+    {
+
+        if (_kingdomManager.FirstResourceStoreOfType(resourceType) != null && _naturalWorldManager.FirstGatherableOfType(resourceType) != null)
+        {
+            state = GuildState.ACTIVE;
+        }
     }
 }

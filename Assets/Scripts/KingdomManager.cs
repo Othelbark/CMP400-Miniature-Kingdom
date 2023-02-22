@@ -23,12 +23,12 @@ public class KingdomManager : MonoBehaviour
     protected InteractionSystemController _interactionSystemController;
     protected NaturalWorldManager _naturalWorldManager;
 
-    protected Dictionary<string, float> priorities;
+    protected Dictionary<string, float> _priorities;
 
     // Start is called before the first frame update
     void Start()
     {
-        priorities = new Dictionary<string, float>();
+        _priorities = new Dictionary<string, float>();
 
         try
         {
@@ -98,14 +98,38 @@ public class KingdomManager : MonoBehaviour
 
     public void SetPriority(string name, float value)
     {
-        if (priorities.ContainsKey(name))
+        if (_priorities.ContainsKey(name))
         {
-            priorities[name] = value;
+            _priorities[name] = value;
         }
         else
         {
-            priorities.Add(name, value);
+            _priorities.Add(name, value);
         }
+    }
+
+    public float GetPriority(string name)
+    {
+
+        if (_priorities.ContainsKey(name))
+        {
+            return _priorities[name];
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public float GetTotalPriority()
+    {
+        float total = 0;
+        foreach (KeyValuePair<string, float> priority in _priorities)
+        {
+            total += priority.Value;
+        }
+
+        return total;
     }
 
     public void AddGuild(Guild guild)
