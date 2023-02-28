@@ -76,13 +76,33 @@ public class Gatherable : MonoBehaviour
         if (_currentResources > r)
         {
             _currentResources -= r;
+
+            CheckSpent();
             return r;
         }
         else
         {
             int leftoverResources = _currentResources;
             _currentResources = 0;
+
+            CheckSpent();
             return leftoverResources;
         }
+
     }
+
+    protected virtual void CheckSpent()
+    {
+        if (_currentResources <= 0 && !_infiniteResorces)
+        {
+            Spent();
+        }
+    }
+
+    protected void Spent()
+    {
+        _naturalWorldManager.RemoveGatherable(this);
+        Destroy(gameObject);
+    }
+
 }

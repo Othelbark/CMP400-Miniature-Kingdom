@@ -69,7 +69,7 @@ public class GrowableGatherable : Gatherable
                 case GatherableState.NON_GATHERABLE:
                     if (!_infiniteGrowth && _totalGrowth >= _minGrowth)
                     {
-                        state = (_stopGrowthOnHarvest && !_infiniteGrowth) ? GatherableState.GATHERABLE_NOT_READY : GatherableState.GATHERABLE_READY;
+                        state = (_stopGrowthOnHarvest) ? GatherableState.GATHERABLE_NOT_READY : GatherableState.GATHERABLE_READY;
                     }
                     else if (_infiniteGrowth && _currentResources >= _minGrowth)
                     {
@@ -80,12 +80,18 @@ public class GrowableGatherable : Gatherable
                     if (_totalGrowth >= _maxGrowth)
                     {
                         state = GatherableState.GATHERABLE_READY;
+                        if (!_infiniteGrowth)
+                            _isGrowing = false;
                     }
                     break;
                 case GatherableState.GATHERABLE_READY:
-                    if (_infiniteGrowth && _currentResources < 1.0f)
+                    if (_infiniteGrowth && _currentResources <= 0)
                     {
                         state = GatherableState.NON_GATHERABLE;
+                    }
+                    else if (!_infiniteGrowth && _totalGrowth >= _maxGrowth)
+                    {
+                        _isGrowing = false;
                     }
                     break;
             }
@@ -103,4 +109,12 @@ public class GrowableGatherable : Gatherable
         return base.HarvestResources(r);
     }
 
+    protected override void CheckSpent()
+    {
+
+        if (_currentResources <= 0 && !_infiniteResorces && !_isGrowing)
+        {
+            Spent();
+        }
+    }
 }
