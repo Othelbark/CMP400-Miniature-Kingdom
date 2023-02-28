@@ -4,5 +4,5 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class InventoryDictionary : SerializableDictionary<ResourceType, float> { }
+public class InventoryDictionary : SerializableDictionary<ResourceType, int> { }
 

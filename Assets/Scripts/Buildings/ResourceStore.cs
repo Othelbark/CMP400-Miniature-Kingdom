@@ -10,10 +10,10 @@ public class ResourceStore : Building
     protected InventoryDictionary _currentResorces;
 
     [SerializeField] //Temporalily Serialized for testing
-    protected float _currentResourcesTotal = 0.0f; //TODO: add checks to avoid floating point errors desyncing this with _inventory
+    protected int _currentResourcesTotal = 0; 
 
     [SerializeField]
-    protected float _capacity = 100.0f;
+    protected int _capacity = 100;
 
 
     // Start is called before the first frame update
@@ -24,8 +24,8 @@ public class ResourceStore : Building
         _kingdomManager.AddResourceStore(this);
 
         //Update current resources total if inital resources set
-        _currentResourcesTotal = 0.0f;
-        foreach (KeyValuePair<ResourceType, float> item in _currentResorces)
+        _currentResourcesTotal = 0;
+        foreach (KeyValuePair<ResourceType, int> item in _currentResorces)
         {
             _currentResourcesTotal += item.Value;
         }
@@ -37,14 +37,14 @@ public class ResourceStore : Building
         base.Update();
     }
 
-    public float GetSpace()
+    public int GetSpace()
     {
-        return Mathf.Max(_capacity - _currentResourcesTotal, 0.0f);
+        return Mathf.Max(_capacity - _currentResourcesTotal, 0);
     }
 
     public bool HasType(ResourceType type) { return _currentResorces.ContainsKey(type); }
 
-    public float GetAmount(ResourceType type) 
+    public int GetAmount(ResourceType type) 
     {
         if (HasType(type))
         {
@@ -62,7 +62,7 @@ public class ResourceStore : Building
     }
 
     // Returns leftover resoucres if capacity is reached
-    public float AddResources(ResourceType type, float amount)
+    public int AddResources(ResourceType type, int amount)
     {
         if (!_currentResorces.ContainsKey(type))
         {
@@ -79,7 +79,7 @@ public class ResourceStore : Building
         }
         else
         {
-            float storeableResources = Mathf.Max(_capacity - _currentResourcesTotal, 0.0f);
+            int storeableResources = Mathf.Max(_capacity - _currentResourcesTotal, 0);
 
             _currentResorces[type] += storeableResources;
             _currentResourcesTotal += storeableResources;
@@ -89,7 +89,7 @@ public class ResourceStore : Building
     }
 
     //Returns amount actually taken
-    public float TakeResources(ResourceType type, float amount)
+    public int TakeResources(ResourceType type, int amount)
     {
         if (!_currentResorces.ContainsKey(type))
         {
@@ -107,9 +107,9 @@ public class ResourceStore : Building
         }
         else
         {
-            float leftoverResources = _currentResorces[type];
+            int leftoverResources = _currentResorces[type];
 
-            _currentResorces[type] = 0.0f;
+            _currentResorces[type] = 0;
             _currentResourcesTotal -= leftoverResources;
 
             return leftoverResources;

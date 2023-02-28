@@ -11,9 +11,9 @@ public class Agent : MonoBehaviour
     [SerializeField]
     protected InventoryDictionary _inventory;
     [SerializeField] //Temporalily Serialized for testing
-    protected float _totalInventory = 0.0f; //TODO: add checks to avoid floating point errors desyncing this with _inventory
+    protected int _totalInventory = 0;
     [SerializeField]
-    protected float _capacity = 100.0f;
+    protected int _capacity = 100;
 
     protected KingdomManager _kingdomManager;
     [SerializeField]
@@ -23,6 +23,8 @@ public class Agent : MonoBehaviour
     protected float _targetDistance;
     [SerializeField]
     protected float _speed = 1;
+
+    protected float _residualWork = 0.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -49,8 +51,8 @@ public class Agent : MonoBehaviour
         }
 
         //Update total inventory if inital inventory set
-        _totalInventory = 0.0f;
-        foreach (KeyValuePair<ResourceType, float> item in _inventory)
+        _totalInventory = 0;
+        foreach (KeyValuePair<ResourceType, int> item in _inventory)
         {
             _totalInventory += item.Value;
         }
@@ -96,7 +98,7 @@ public class Agent : MonoBehaviour
     {
         ResourceType typeToStore = ResourceType.NONE;
 
-        foreach (KeyValuePair<ResourceType, float> item in _inventory)
+        foreach (KeyValuePair<ResourceType, int> item in _inventory)
         {
             if (item.Value > 0)
             {
@@ -117,9 +119,9 @@ public class Agent : MonoBehaviour
             }
             else if (distanceToNearestStore <= 0)
             {
-                float fromInventory = RemoveFromInventory(typeToStore);
+                int fromInventory = RemoveFromInventory(typeToStore);
 
-                float leftover = nearestStore.AddResources(typeToStore, fromInventory);
+                int leftover = nearestStore.AddResources(typeToStore, fromInventory);
 
                 if (leftover > 0)
                 {
@@ -178,15 +180,18 @@ public class Agent : MonoBehaviour
         }
     }
 
-    public float GetInventorySpace()
+    public void SetResidualWork(float rw) { _residualWork = rw; }
+    public float GetResidualWork() { return _residualWork; }
+
+    public int GetInventorySpace()
     {
-        return Mathf.Max(_capacity - _totalInventory, 0.0f);
+        return Mathf.Max(_capacity - _totalInventory, 0);
     }
-    public float GetCurrentTotalInventory()
+    public int GetCurrentTotalInventory()
     {
-        if (_totalInventory < 0.05f && _totalInventory != 0)
+        if (_totalInventory < 0)
         {
-            Debug.LogWarning("Very low inventory, potential floating point error on _totalInventory tracking.");
+            Debug.LogWarning("Negitive total inventory");
             return 0;
         }
 
@@ -194,11 +199,11 @@ public class Agent : MonoBehaviour
     }
     public void ClearInventory()
     {
-        _totalInventory = 0.0f;
+        _totalInventory = 0;
 
         _inventory.Clear();
     }
-    public float CheckInventoryFor(ResourceType type)
+    public int CheckInventoryFor(ResourceType type)
     {
         if (_inventory.ContainsKey(type))
         {
@@ -208,7 +213,7 @@ public class Agent : MonoBehaviour
         return 0;
     }
     // Returns leftover resoucres if capacity is reached
-    public float AddToInventory(ResourceType type, float amount)
+    public int AddToInventory(ResourceType type, int amount)
     {
         if (!_inventory.ContainsKey(type))
         {
@@ -224,7 +229,7 @@ public class Agent : MonoBehaviour
         }
         else
         {
-            float storeableResources = Mathf.Max(_capacity - _totalInventory, 0.0f);
+            int storeableResources = Mathf.Max(_capacity - _totalInventory, 0);
 
             _inventory[type] += storeableResources;
             _totalInventory += storeableResources;
@@ -233,7 +238,7 @@ public class Agent : MonoBehaviour
         }
     }
     //Returns amount actually removed
-    public float RemoveFromInventory(ResourceType type, float amount)
+    public int RemoveFromInventory(ResourceType type, int amount)
     {
         if (!_inventory.ContainsKey(type))
         {
@@ -249,20 +254,20 @@ public class Agent : MonoBehaviour
         }
         else
         {
-            float leftoverResources = _inventory[type];
+            int leftoverResources = _inventory[type];
 
-            _inventory[type] = 0.0f;
+            _inventory[type] = 0;
             _totalInventory -= leftoverResources;
 
             return leftoverResources;
         }
     }
     //Removes all of a type and returns the amount removed
-    public float RemoveFromInventory(ResourceType type)
+    public int RemoveFromInventory(ResourceType type)
     {
-        float currentResorces = _inventory[type];
+        int currentResorces = _inventory[type];
 
-        _inventory[type] = 0.0f;
+        _inventory[type] = 0;
         _totalInventory -= currentResorces;
 
         return currentResorces;

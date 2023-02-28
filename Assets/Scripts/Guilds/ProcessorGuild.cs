@@ -111,9 +111,9 @@ public class ProcessorGuild : Guild
                 {
                     foreach (ResourceType type in _processor.GetOutputTypes())
                     {
-                        float maxToTake = _agents[0].GetInventorySpace();
+                        int maxToTake = _agents[0].GetInventorySpace();
 
-                        float amountTaken = _processor.TakeResources(type, maxToTake);
+                        int amountTaken = _processor.TakeResources(type, maxToTake);
 
                         _agents[0].AddToInventory(type, amountTaken);
                     }
@@ -152,9 +152,9 @@ public class ProcessorGuild : Guild
                     }
                     else if (distanceToNearestStore <= _minStoreDistance)
                     {
-                        float fromInventory = _agents[0].RemoveFromInventory(typeToStore);
+                        int fromInventory = _agents[0].RemoveFromInventory(typeToStore);
 
-                        float leftover = nearestStore.AddResources(typeToStore, fromInventory);
+                        int leftover = nearestStore.AddResources(typeToStore, fromInventory);
 
                         if (leftover > 0)
                         {
@@ -178,9 +178,9 @@ public class ProcessorGuild : Guild
 
                 bool needSelected = false;
                 ResourceType pickupType = ResourceType.NONE;
-                float pickupAmount = 0.0f;
+                int pickupAmount = 0;
 
-                foreach (KeyValuePair<ResourceType, float> need in _currentProcessorNeeds)
+                foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
                 {
                     if (_agents[0].CheckInventoryFor(need.Key) < need.Value)
                     {
@@ -202,7 +202,7 @@ public class ProcessorGuild : Guild
                     int multiplier = 2;
                     while (!needSelected)
                     {
-                        foreach (KeyValuePair<ResourceType, float> need in processorInputs)
+                        foreach (KeyValuePair<ResourceType, int> need in processorInputs)
                         {
                             if (_agents[0].CheckInventoryFor(need.Key) < (need.Value * multiplier))
                             {
@@ -234,9 +234,9 @@ public class ProcessorGuild : Guild
 
                         if (distanceToNearestStore <= _minStoreDistance)
                         {
-                            float pickedUp = nearestStore.TakeResources(pickupType, pickupAmount);
+                            int pickedUp = nearestStore.TakeResources(pickupType, pickupAmount);
 
-                            float leftover = _agents[0].AddToInventory(pickupType, pickedUp);
+                            int leftover = _agents[0].AddToInventory(pickupType, pickedUp);
 
                             if (leftover > 0)
                             {
@@ -261,11 +261,11 @@ public class ProcessorGuild : Guild
 
                 if (distanceToProcessor <= _minProcessorDistance)
                 {
-                    foreach (KeyValuePair<ResourceType, float> need in _currentProcessorNeeds)
+                    foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
                     {
-                        float fromInventory = _agents[0].RemoveFromInventory(need.Key);
+                        int fromInventory = _agents[0].RemoveFromInventory(need.Key);
 
-                        float leftover = _processor.AddResources(need.Key, fromInventory);
+                        int leftover = _processor.AddResources(need.Key, fromInventory);
 
                         if (leftover > 0)
                         {
@@ -310,7 +310,7 @@ public class ProcessorGuild : Guild
         {
             //determine when there are enough resources to reactivate
             bool enough = true;
-            foreach (KeyValuePair<ResourceType, float> need in _currentProcessorNeeds)
+            foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
             {
                 if (need.Value > _kingdomManager.GetTotalResources(need.Key))
                 {

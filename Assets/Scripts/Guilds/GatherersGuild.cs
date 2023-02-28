@@ -93,11 +93,13 @@ public class GatherersGuild : Guild
                     if (distanceToNearestGatherable <= _minGatherDistance)
                     {
                         //near a source
-                        float maxGathered = _gatherSpeed * Time.deltaTime;
+                        float maxGathered = _gatherSpeed * Time.deltaTime + agent.GetResidualWork();
+                        int maxGatheredInt = Mathf.FloorToInt(maxGathered);
+                        agent.SetResidualWork(maxGathered - maxGatheredInt);
 
-                        float gathered = nearestGatherable.HarvestResources(maxGathered);
+                        int gathered = nearestGatherable.HarvestResources(maxGatheredInt);
 
-                        float leftover = agent.AddToInventory(resourceType, gathered);
+                        int leftover = agent.AddToInventory(resourceType, gathered);
 
                         if (leftover > 0)
                         {
@@ -130,9 +132,9 @@ public class GatherersGuild : Guild
                 if ((nearestStore.transform.position - agent.transform.position).magnitude <= _minStoreDistance)
                 {
                     //near a store
-                    float fromInventory = agent.RemoveFromInventory(resourceType);
+                    int fromInventory = agent.RemoveFromInventory(resourceType);
 
-                    float leftover = nearestStore.AddResources(resourceType, fromInventory);
+                    int leftover = nearestStore.AddResources(resourceType, fromInventory);
 
                     if (leftover > 0)
                     {

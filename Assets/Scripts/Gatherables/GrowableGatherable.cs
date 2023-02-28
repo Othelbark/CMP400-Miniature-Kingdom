@@ -8,20 +8,21 @@ public class GrowableGatherable : Gatherable
     protected float _growthRate = 1.0f;
     [SerializeField]
     [Tooltip("Maximum about grow. If InfiniteGrowth is true: max amount to grow to.")]
-    protected float _maxGrowth = 100.0f;
+    protected int _maxGrowth = 100;
     [SerializeField]
     protected bool _infiniteGrowth = false;
 
-    protected float _totalGrowth = 0.0f;
-
     [SerializeField]
     [Tooltip("The minimum growth threshold to be gatherable")]
-    protected float _minGrowth = 0.0f;
+    protected int _minGrowth = 0;
     [SerializeField]
     [Tooltip("(Only functions if InfinteGrowth = false) If growth should stop on first harvest")]
     protected bool _stopGrowthOnHarvest = false;
 
     protected bool _isGrowing = true;
+
+    protected int _totalGrowth = 0;
+    protected float _residualGrowth = 0.0f;
 
     // Start is called before the first frame update
     new void Start()
@@ -47,15 +48,19 @@ public class GrowableGatherable : Gatherable
 
         if (_isGrowing)
         {
+            float growth = _growthRate * Time.deltaTime + _residualGrowth;
+            int growthInt = Mathf.FloorToInt(growth);
+            _residualGrowth = growth - growthInt;
+
             if (_infiniteGrowth)
             {
-                _currentResources += Mathf.Min(_growthRate * Time.deltaTime, _maxGrowth - _currentResources);
-                _totalGrowth += Mathf.Min(_growthRate * Time.deltaTime, _maxGrowth - _currentResources);
+                _currentResources += Mathf.Min(growthInt, _maxGrowth - _currentResources);
+                _totalGrowth += Mathf.Min(growthInt, _maxGrowth - _currentResources);
             }
             else if (_totalGrowth < _maxGrowth)
             {
-                _currentResources += Mathf.Min(_growthRate * Time.deltaTime, _maxGrowth - _totalGrowth);
-                _totalGrowth += Mathf.Min(_growthRate * Time.deltaTime, _maxGrowth - _totalGrowth);
+                _currentResources += Mathf.Min(growthInt, _maxGrowth - _totalGrowth);
+                _totalGrowth += Mathf.Min(growthInt, _maxGrowth - _totalGrowth);
             }
 
 
@@ -87,7 +92,7 @@ public class GrowableGatherable : Gatherable
         }
     }
 
-    public override float HarvestResources(float r)
+    public override int HarvestResources(int r)
     {
         if (_stopGrowthOnHarvest && !_infiniteGrowth)
         {

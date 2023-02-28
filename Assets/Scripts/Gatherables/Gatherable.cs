@@ -11,7 +11,7 @@ public class Gatherable : MonoBehaviour
     public ResourceType resourceType = ResourceType.NONE;
 
     [SerializeField]
-    protected float _currentResources = 0.0f;
+    protected int _currentResources = 0;
     [SerializeField]
     protected bool _infiniteResorces = false;
 
@@ -41,27 +41,27 @@ public class Gatherable : MonoBehaviour
         
     }
 
-    public float GetCurrentResources()
+    public int GetCurrentResources()
     {
         if (_infiniteResorces)
         {
-            return float.MaxValue;
+            return int.MaxValue;
         }
         return _currentResources;
     }
 
-    public void SetCurrentResources(float r)
+    public void SetCurrentResources(int r)
     {
         _currentResources = r;
     }
 
-    public void AddResources(float r)
+    public void AddResources(int r)
     {
         _currentResources += r;
     }
 
     //Returns amount actually harvested
-    public virtual float HarvestResources(float r)
+    public virtual int HarvestResources(int r)
     {
         if (state == GatherableState.NON_GATHERABLE)
         {
@@ -80,7 +80,7 @@ public class Gatherable : MonoBehaviour
         }
         else
         {
-            float leftoverResources = _currentResources;
+            int leftoverResources = _currentResources;
             _currentResources = 0;
             return leftoverResources;
         }

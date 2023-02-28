@@ -38,18 +38,18 @@ public class ResourceProcessor : Building
         guild.ProcessorGuildConstructor(this);
 
         //initalise current resource inventory
-        foreach (KeyValuePair<ResourceType, float> item in _processInput)
+        foreach (KeyValuePair<ResourceType, int> item in _processInput)
         {
             if (!_currentResorces.ContainsKey(item.Key))
             {
-                _currentResorces.Add(item.Key, 0.0f);
+                _currentResorces.Add(item.Key, 0);
             }
         }
-        foreach (KeyValuePair<ResourceType, float> item in _processOutput)
+        foreach (KeyValuePair<ResourceType, int> item in _processOutput)
         {
             if (!_currentResorces.ContainsKey(item.Key))
             {
-                _currentResorces.Add(item.Key, 0.0f);
+                _currentResorces.Add(item.Key, 0);
             }
         }
     }
@@ -64,11 +64,11 @@ public class ResourceProcessor : Building
             _timeThisProcess -= _processTime;
 
 
-            foreach (KeyValuePair<ResourceType, float> item in _processInput)
+            foreach (KeyValuePair<ResourceType, int> item in _processInput)
             {
                 _currentResorces[item.Key] -= item.Value;
             }
-            foreach (KeyValuePair<ResourceType, float> item in _processOutput)
+            foreach (KeyValuePair<ResourceType, int> item in _processOutput)
             {
                 _currentResorces[item.Key] += item.Value;
             }
@@ -77,7 +77,7 @@ public class ResourceProcessor : Building
         }    
     }
 
-    //TODO: make this not work if called more than once in a frame (generally make multiple agents per guild work better)
+    
     //Returns false when needs are not met
     public bool Process(float dt)
     {
@@ -95,15 +95,15 @@ public class ResourceProcessor : Building
 
     public bool HasType(ResourceType type) { return _currentResorces.ContainsKey(type); }
 
-    public float NeedsType(ResourceType type)
+    public int NeedsType(ResourceType type)
     {
         if (!_processInput.ContainsKey(type))
         {
-            return 0.0f;
+            return 0;
         }
         else
         {
-            return Mathf.Max(0.0f, _processInput[type] - _currentResorces[type]);
+            return Mathf.Max(0, _processInput[type] - _currentResorces[type]);
         }
     }
 
@@ -111,7 +111,7 @@ public class ResourceProcessor : Building
     {
         InventoryDictionary needs = new InventoryDictionary();
 
-        foreach (KeyValuePair<ResourceType, float> potentialNeed in _processInput)
+        foreach (KeyValuePair<ResourceType, int> potentialNeed in _processInput)
         {
             if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
             {
@@ -132,7 +132,7 @@ public class ResourceProcessor : Building
         if (_outputTypes == null)
         {
             _outputTypes = new List<ResourceType>();
-            foreach (KeyValuePair<ResourceType, float> output in _processOutput)
+            foreach (KeyValuePair<ResourceType, int> output in _processOutput)
             {
                 _outputTypes.Add(output.Key);
             }
@@ -155,7 +155,7 @@ public class ResourceProcessor : Building
 
     public bool HasNeeds()
     {
-        foreach (KeyValuePair<ResourceType, float> potentialNeed in _processInput)
+        foreach (KeyValuePair<ResourceType, int> potentialNeed in _processInput)
         {
             if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
             {
@@ -166,7 +166,7 @@ public class ResourceProcessor : Building
     }
 
     // Returns leftover resoucres if capacity is reached
-    public float AddResources(ResourceType type, float amount)
+    public int AddResources(ResourceType type, int amount)
     {
         if (!_processInput.ContainsKey(type))
         {
@@ -180,7 +180,7 @@ public class ResourceProcessor : Building
     }
 
     //Returns amount actually taken
-    public float TakeResources(ResourceType type, float amount)
+    public int TakeResources(ResourceType type, int amount)
     {
         if (_processing)
         {
@@ -207,9 +207,9 @@ public class ResourceProcessor : Building
         }
         else
         {
-            float leftoverResources = _currentResorces[type];
+            int leftoverResources = _currentResorces[type];
 
-            _currentResorces[type] = 0.0f;
+            _currentResorces[type] = 0;
 
             return leftoverResources;
         }

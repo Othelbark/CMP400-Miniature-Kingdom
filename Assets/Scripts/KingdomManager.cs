@@ -61,7 +61,7 @@ public class KingdomManager : MonoBehaviour
         _totalStoredResources.Clear();
         foreach(ResourceStore store in _resourceStores)
         {
-            foreach (KeyValuePair<ResourceType, float> item in store.GetResources())
+            foreach (KeyValuePair<ResourceType, int> item in store.GetResources())
             {
                 if (!_totalStoredResources.ContainsKey(item.Key))
                 {
@@ -232,7 +232,7 @@ public class KingdomManager : MonoBehaviour
         return null;
     }
     
-    public float GetTotalResources(ResourceType type)
+    public int GetTotalResources(ResourceType type)
     {
 
         if (_totalStoredResources.ContainsKey(type))
