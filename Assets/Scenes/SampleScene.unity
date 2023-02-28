@@ -1136,6 +1136,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 954448533
       objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5078929437771182544, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_Name
       value: Agent (1)
@@ -1759,6 +1763,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 954448533
       objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5078929437771182544, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_Name
       value: Agent
@@ -2308,6 +2316,10 @@ PrefabInstance:
     - target: {fileID: 912454689286995520, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_SortingLayerID
       value: 954448533
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _speed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5078929437771182544, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_Name
@@ -4046,6 +4058,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1169644461}
     m_Modifications:
+    - target: {fileID: 2966431717858257677, guid: 49833873b886aed4db07667023544c78, type: 3}
+      propertyPath: _speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5078929437771182544, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_Name
       value: Agent
@@ -4332,6 +4348,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stockpile
       objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[0]
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3374df173f447d438ba28aa95e75540, type: 3}
 --- !u!1001 &8386973924879156950
@@ -4341,6 +4361,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 871654240}
     m_Modifications:
+    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: _processInput.m_values.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131286, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: m_Name
       value: LumberYard

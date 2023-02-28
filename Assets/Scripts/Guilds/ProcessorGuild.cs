@@ -22,7 +22,7 @@ public class ProcessorGuild : Guild
 
     [SerializeField]
     [Tooltip("If true agents will always try to fill their invetory when collecting even if total needs are less than the agents capacity.")]
-    protected bool _fillInventory = false;
+    protected bool _fillInventory = true;
 
     //Temp TODO: create better system for dealing with multiple casues of inactivity
     protected bool _inactiveForSpace = false;
@@ -199,16 +199,16 @@ public class ProcessorGuild : Guild
                 if (!needSelected && _fillInventory)
                 {
                     InventoryDictionary processorInputs = _processor.GetInputs();
+                    int multiplier = 2;
                     while (!needSelected)
                     {
-                        int multiplier = 2;
                         foreach (KeyValuePair<ResourceType, float> need in processorInputs)
                         {
                             if (_agents[0].CheckInventoryFor(need.Key) < (need.Value * multiplier))
                             {
                                 needSelected = true;
                                 pickupType = need.Key;
-                                pickupAmount = need.Value - _agents[0].CheckInventoryFor(need.Key);
+                                pickupAmount = (need.Value * multiplier) - _agents[0].CheckInventoryFor(need.Key);
 
                                 nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, out distanceToNearestStore, true);
                                 break;
@@ -231,6 +231,7 @@ public class ProcessorGuild : Guild
                     }
                     else
                     {
+
                         if (distanceToNearestStore <= _minStoreDistance)
                         {
                             float pickedUp = nearestStore.TakeResources(pickupType, pickupAmount);
