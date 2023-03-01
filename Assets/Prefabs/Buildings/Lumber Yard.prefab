@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8386973925896131285}
   - component: {fileID: 8386973925896131284}
   - component: {fileID: 5946819246804417809}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lumber Yard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,17 +96,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f73934f090e264caefd2e55e5d5f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guild: {fileID: 0}
   _processInput:
     m_keys: 01000000
-    m_values:
-    - 50
+    m_values: 32000000
   _processOutput:
     m_keys: 03000000
-    m_values:
-    - 35
+    m_values: 23000000
   _currentResorces:
     m_keys: 
-    m_values: []
+    m_values: 
   _processTime: 5
 --- !u!60 &5946819246804417809
 PolygonCollider2D:

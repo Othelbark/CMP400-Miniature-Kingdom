@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 912454689286995520}
   - component: {fileID: 2966431717858257677}
   - component: {fileID: 881169075853334200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,9 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  _preMovementState: 0
   _inventory:
     m_keys: 
-    m_values: []
+    m_values: 
   _totalInventory: 0
   _capacity: 100
   _guild: {fileID: 0}

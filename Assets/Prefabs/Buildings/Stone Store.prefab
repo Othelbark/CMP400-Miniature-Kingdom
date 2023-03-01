@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4365087580106326160}
   - component: {fileID: 515815038730382830}
   - component: {fileID: 5123331531771111404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stone Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,8 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentResorces:
     m_keys: 02000000
-    m_values:
-    - 0
+    m_values: 00000000
   _currentResourcesTotal: 0
   _capacity: 500
 --- !u!61 &5123331531771111404

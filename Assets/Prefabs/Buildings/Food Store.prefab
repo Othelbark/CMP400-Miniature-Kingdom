@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8259614469996706628}
   - component: {fileID: 5267919178185397818}
   - component: {fileID: 419653143655190283}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Food Store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,8 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentResorces:
     m_keys: 05000000
-    m_values:
-    - 0
+    m_values: 00000000
   _currentResourcesTotal: 0
   _capacity: 300
 --- !u!61 &419653143655190283

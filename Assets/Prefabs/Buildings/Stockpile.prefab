@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7742054266361794166}
   - component: {fileID: 7742054266361794167}
   - component: {fileID: 1436783234290018987}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stockpile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,12 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentResorces:
     m_keys: 0100000002000000050000000300000004000000
-    m_values:
-    - 100
-    - 0
-    - 0
-    - 0
-    - 0
+    m_values: 6400000000000000000000000000000000000000
   _currentResourcesTotal: 0
   _capacity: 10000
 --- !u!61 &1436783234290018987

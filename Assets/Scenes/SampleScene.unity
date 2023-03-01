@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 51
+    m_Bits: 4294967295
   m_MaxRayIntersections: 0
 --- !u!20 &519420031
 Camera:

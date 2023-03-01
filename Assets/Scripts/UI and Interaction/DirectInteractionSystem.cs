@@ -9,6 +9,9 @@ public class DirectInteractionSystem : PlayerInteractionSystem
 
     protected Agent _selectedAgent = null;
 
+    public ContactFilter2D rightClickableFilter;
+    public ContactFilter2D leftClickableFilter;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -26,14 +29,14 @@ public class DirectInteractionSystem : PlayerInteractionSystem
             //Detect clicks on agents
             if (Input.GetMouseButtonDown(0))
             {
-                RaycastHit2D clicked; 
+                List<RaycastHit2D> clicked = new List<RaycastHit2D>();
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-                if (clicked = Physics2D.Raycast(mousePos2D, Vector2.zero))
+                if (Physics2D.Raycast(mousePos2D, Vector2.zero, leftClickableFilter, clicked) > 0)
                 {
                     Agent agent;
-                    if (agent = clicked.transform.gameObject.GetComponent<Agent>())
+                    if (agent = clicked[0].transform.gameObject.GetComponent<Agent>())
                     {
                         if (_selectedAgent == null)
                             _selectedAgentHighlighter.SetActive(true);
@@ -54,14 +57,14 @@ public class DirectInteractionSystem : PlayerInteractionSystem
             if (Input.GetMouseButtonDown(1) && _selectedAgent)
             {
 
-                RaycastHit2D clicked;
+                List<RaycastHit2D> clicked = new List<RaycastHit2D>();
                 Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-                if (clicked = Physics2D.Raycast(mousePos2D, Vector2.zero))
+                if (Physics2D.Raycast(mousePos2D, Vector2.zero, rightClickableFilter, clicked) > 0)
                 {
                     Gatherable gatherable;
-                    if (gatherable = clicked.transform.gameObject.GetComponent<Gatherable>())
+                    if (gatherable = clicked[0].transform.gameObject.GetComponent<Gatherable>())
                     {
                         Guild gatherersGuild = GameObject.FindGameObjectWithTag(gatherable.resourceType + "GatherersGuild").GetComponent<Guild>();
                         _selectedAgent.SetGuild(gatherersGuild);
@@ -69,7 +72,7 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                     }
 
                     ResourceProcessor processor;
-                    if (processor = clicked.transform.gameObject.GetComponent<ResourceProcessor>())
+                    if (processor = clicked[0].transform.gameObject.GetComponent<ResourceProcessor>())
                     {
                         Guild processorGuild = processor.guild;
                         processorGuild.ClearAgents();
