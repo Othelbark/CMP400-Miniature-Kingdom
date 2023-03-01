@@ -121,9 +121,9 @@ MonoBehaviour:
   _infiniteGrowth: 0
   _minGrowth: 85
   _stopGrowthOnHarvest: 1
-  _minSpawnTime: 1
-  _maxSpwanTime: 5
-  _minSpawnDistance: 0.5
-  _maxSpawnDistance: 1
+  _minSpawnTime: 5
+  _maxSpwanTime: 20
+  _minSpawnDistance: 0.6
+  _maxSpawnDistance: 0.9
   _prefabToSpawn: {fileID: 2174137302262737080}
   _spawnOnlyWhenFullyGrown: 1

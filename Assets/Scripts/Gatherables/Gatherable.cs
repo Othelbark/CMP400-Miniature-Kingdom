@@ -99,7 +99,7 @@ public class Gatherable : MonoBehaviour
         }
     }
 
-    protected void Spent()
+    protected virtual void Spent()
     {
         _naturalWorldManager.RemoveGatherable(this);
         Destroy(gameObject);

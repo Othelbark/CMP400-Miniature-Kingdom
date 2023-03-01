@@ -27,6 +27,8 @@ public class SelfSpawningGatherable : GrowableGatherable
     {
         base.Start();
 
+        _naturalWorldManager.AddSelfSpawningGatherable(this);
+
         _spawnTimer = Random.Range(_minSpawnTime, _maxSpwanTime);
     }
 
@@ -55,21 +57,16 @@ public class SelfSpawningGatherable : GrowableGatherable
         Vector3 direction = Random.insideUnitCircle.normalized;
 
         Vector3 childPos = transform.position + (direction * distance);
-        if (_naturalWorldManager.CanSpawn(childPos))
+        if (_naturalWorldManager.CanSpawn(childPos, _minSpawnDistance))
         {
             GameObject child = Instantiate(_prefabToSpawn, _naturalWorldManager.transform);
 
             child.transform.position = childPos;
         }
     }
-
-    protected void OnCollisionStay2D(Collision2D collision)
+    protected override void Spent()
     {
-        Debug.Log("Collision");
-        if (collision.gameObject.GetComponent<Gatherable>())
-        {
-            Debug.Log("with gatherable.");
-            Spent();
-        }
+        _naturalWorldManager.RemoveSelfSpawningGatherable(this);
+        base.Spent();
     }
 }
