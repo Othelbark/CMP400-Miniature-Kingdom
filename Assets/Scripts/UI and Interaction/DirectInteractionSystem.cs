@@ -65,6 +65,7 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                     {
                         Guild gatherersGuild = GameObject.FindGameObjectWithTag(gatherable.resourceType + "GatherersGuild").GetComponent<Guild>();
                         _selectedAgent.SetGuild(gatherersGuild);
+                        _selectedAgent.state = AgentState.WAITING;
                     }
 
                     ResourceProcessor processor;
@@ -73,7 +74,14 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                         Guild processorGuild = processor.guild;
                         processorGuild.ClearAgents();
                         _selectedAgent.SetGuild(processor.guild);
+                        _selectedAgent.state = AgentState.WAITING;
                     }
+                }
+                else
+                {
+                    //Right clicked on nothing
+                    _selectedAgent.RemoveFromGuild();
+                    _selectedAgent.SetMovingTowards(mousePos2D, 0.0f, true);
                 }
             }
 

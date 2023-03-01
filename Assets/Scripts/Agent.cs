@@ -6,6 +6,7 @@ using UnityEngine;
 public class Agent : MonoBehaviour
 {
     public AgentState state = AgentState.WAITING;
+    [SerializeField]
     protected AgentState _preMovementState = AgentState.WAITING;
 
     [SerializeField]
@@ -91,7 +92,7 @@ public class Agent : MonoBehaviour
         }
         else
         {
-            gameObject.transform.Translate(towardsTarget * _speed * Time.deltaTime);
+            gameObject.transform.Translate(towardsTarget * (_speed * Time.deltaTime));
         }
     }
     protected void ClearInventoryState()
@@ -144,11 +145,16 @@ public class Agent : MonoBehaviour
         state = AgentState.WAITING;
     }
 
-    public void SetMovingTowards(Vector3 pos, float dist)
+    public void SetMovingTowards(Vector3 pos, float dist, bool resetState = false)
     {
         _targetPosition = pos;
         _targetDistance = dist;
-        _preMovementState = state;
+
+        if (resetState || state == AgentState.MOVING)
+            _preMovementState = AgentState.WAITING;
+        else
+            _preMovementState = state;
+
         state = AgentState.MOVING;
     }
 
