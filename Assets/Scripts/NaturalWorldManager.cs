@@ -125,4 +125,10 @@ public class NaturalWorldManager : MonoBehaviour
 
         return null;
     }
+
+    public bool CanSpawn(Vector3 position)
+    {
+        //TODO: logic restricting where SelfSpawningGatherables can spawn
+        return true;
+    }
 }

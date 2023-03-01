@@ -25,7 +25,7 @@ public class GrowableGatherable : Gatherable
     protected float _residualGrowth = 0.0f;
 
     // Start is called before the first frame update
-    new void Start()
+    new public void Start()
     {
         base.Start();
 
@@ -42,7 +42,7 @@ public class GrowableGatherable : Gatherable
     }
 
     // Update is called once per frame
-    new void Update()
+    new public void Update()
     {
         base.Update();
 

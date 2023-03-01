@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8210296431267599414}
   - component: {fileID: 5781655899463990783}
-  - component: {fileID: 3000862652574985428}
   - component: {fileID: 2577790087765673376}
+  - component: {fileID: 7372256845369157351}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -84,22 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3000862652574985428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2174137302262737080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e649d55df20e484593934b010c4cfb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 2
-  resourceType: 1
-  _currentResources: 300
-  _infiniteResorces: 0
 --- !u!70 &2577790087765673376
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -116,3 +100,30 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
+--- !u!114 &7372256845369157351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174137302262737080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2007b11a79b3d46b125308c4fa6e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 2
+  resourceType: 1
+  _currentResources: 0
+  _infiniteResorces: 0
+  _growthRate: 5
+  _maxGrowth: 300
+  _infiniteGrowth: 0
+  _minGrowth: 85
+  _stopGrowthOnHarvest: 1
+  _minSpawnTime: 1
+  _maxSpwanTime: 5
+  _minSpawnDistance: 0.5
+  _maxSpawnDistance: 1
+  _prefabToSpawn: {fileID: 2174137302262737080}
+  _spawnOnlyWhenFullyGrown: 1
