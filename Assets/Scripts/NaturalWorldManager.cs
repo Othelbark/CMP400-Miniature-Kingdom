@@ -8,6 +8,8 @@ public class NaturalWorldManager : MonoBehaviour
     private List<Gatherable> _gatherables;
     private List<SelfSpawningGatherable> _selfSpawningGatherables;
 
+    public ContactFilter2D selfSpawningZoneFilter;
+
     void Awake()
     {
         _gatherables = new List<Gatherable>();
@@ -143,7 +145,12 @@ public class NaturalWorldManager : MonoBehaviour
 
     public bool CanSpawn(Vector3 position, float exclusionRadius)
     {
-        foreach(SelfSpawningGatherable gatherable in _selfSpawningGatherables)
+        List<RaycastHit2D> raycastHits = new List<RaycastHit2D>();
+        if (Physics2D.Raycast(position, Vector2.zero, selfSpawningZoneFilter, raycastHits) <= 0)
+        {
+            return false;
+        }
+        foreach (SelfSpawningGatherable gatherable in _selfSpawningGatherables)
         {
             float distance = (gatherable.transform.position - position).magnitude;
             if (distance <= exclusionRadius)
