@@ -100,6 +100,7 @@ MonoBehaviour:
   resourceType: 5
   _currentResources: 0
   _infiniteResorces: 0
+  _maxGatherers: 1
   _growthRate: 7
   _maxGrowth: 150
   _infiniteGrowth: 1

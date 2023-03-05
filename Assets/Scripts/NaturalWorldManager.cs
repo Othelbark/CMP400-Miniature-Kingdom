@@ -53,7 +53,7 @@ public class NaturalWorldManager : MonoBehaviour
         //TODO: optimise
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE && g.CanTakeMoreGatherers())
             {
                 float distance = (g.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -74,7 +74,7 @@ public class NaturalWorldManager : MonoBehaviour
         //TODO: optimise
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE && g.CanTakeMoreGatherers())
             {
                 float distance = (g.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -95,7 +95,7 @@ public class NaturalWorldManager : MonoBehaviour
         //TODO: optimise
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state == GatherableState.GATHERABLE_READY)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state == GatherableState.GATHERABLE_READY && g.CanTakeMoreGatherers())
             {
                 float distance = (g.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -116,7 +116,7 @@ public class NaturalWorldManager : MonoBehaviour
         //TODO: optimise
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state == GatherableState.GATHERABLE_READY)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state == GatherableState.GATHERABLE_READY && g.CanTakeMoreGatherers())
             {
                 float distance = (g.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -134,7 +134,7 @@ public class NaturalWorldManager : MonoBehaviour
     {
         foreach (Gatherable g in _gatherables)
         {
-            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE)
+            if (g.resourceType == type && g.GetCurrentResources() > 0.0f && g.state != GatherableState.NON_GATHERABLE && g.CanTakeMoreGatherers())
             {
                 return g;
             }

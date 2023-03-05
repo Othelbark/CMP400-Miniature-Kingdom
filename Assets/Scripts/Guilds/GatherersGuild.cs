@@ -63,26 +63,33 @@ public class GatherersGuild : Guild
 
             if (agent.state == AgentState.COLLECTING)
             {
-                float distanceToNearestGatherable;
-                Gatherable nearestGatherable;
-                if (_onlyGatherFromReadyGatherables)
+                float distanceToGatherable;
+                if (agent.targetGatherable == null)
                 {
-                    nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
+                    if (_onlyGatherFromReadyGatherables)
+                    {
+                        agent.SetTargetGatherable(_naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToGatherable));
+                    }
+                    else
+                    {
+                        agent.SetTargetGatherable(_naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position, out distanceToGatherable));
+
+                        Gatherable nearestReadyGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out float distanceToNearestReadyGatherable);
+
+                        if (distanceToNearestReadyGatherable - distanceToGatherable < _prioritiseReadyGatherablesWithin)
+                        {
+                            // If nearest ready gatherable is not too much further away
+                            agent.SetTargetGatherable(nearestReadyGatherable);
+                            distanceToGatherable = distanceToNearestReadyGatherable;
+                        }
+                    }
                 }
                 else
                 {
-                    nearestGatherable = _naturalWorldManager.NearestGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
-
-                    _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out float distanceToNearestReadyGatherable);
-
-                    if (distanceToNearestReadyGatherable - distanceToNearestGatherable < _prioritiseReadyGatherablesWithin)
-                    {
-                        // If nearest ready gatherable is not too much further away
-                        nearestGatherable = _naturalWorldManager.NearestReadyGatherableOfType(resourceType, agent.transform.position, out distanceToNearestGatherable);
-                    }
+                    distanceToGatherable = (agent.targetGatherable.transform.position - agent.transform.position).magnitude;
                 }
 
-                if (nearestGatherable == null)
+                if (agent.targetGatherable == null)
                 {
                     //No resource sources
                     if (agent.GetInventorySpace() > 0)
@@ -90,25 +97,25 @@ public class GatherersGuild : Guild
                 }
                 else
                 {
-                    if (distanceToNearestGatherable <= _minGatherDistance)
+                    if (distanceToGatherable <= _minGatherDistance)
                     {
                         //near a source
                         float maxGathered = _gatherSpeed * Time.deltaTime + agent.GetResidualWork();
                         int maxGatheredInt = Mathf.FloorToInt(maxGathered);
                         agent.SetResidualWork(maxGathered - maxGatheredInt);
 
-                        int gathered = nearestGatherable.HarvestResources(maxGatheredInt);
+                        int gathered = agent.targetGatherable.HarvestResources(maxGatheredInt);
 
                         int leftover = agent.AddToInventory(resourceType, gathered);
 
                         if (leftover > 0)
                         {
-                            nearestGatherable.AddResources(leftover);
+                            agent.targetGatherable.AddResources(leftover);
                         }
                     }
                     else
                     {
-                        agent.SetMovingTowards(nearestGatherable.transform.position, _minGatherDistance);
+                        agent.SetMovingTowards(agent.targetGatherable.transform.position, _minGatherDistance);
                     }
                 }
 

@@ -68,7 +68,8 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                     {
                         Guild gatherersGuild = GameObject.FindGameObjectWithTag(gatherable.resourceType + "GatherersGuild").GetComponent<Guild>();
                         _selectedAgent.SetGuild(gatherersGuild);
-                        _selectedAgent.state = AgentState.WAITING;
+                        _selectedAgent.SetTargetGatherable(gatherable, true);
+                        _selectedAgent.state = AgentState.COLLECTING;
                     }
 
                     ResourceProcessor processor;

@@ -15,8 +15,15 @@ public class Gatherable : MonoBehaviour
     [SerializeField]
     protected bool _infiniteResorces = false;
 
+    [SerializeField]
+    protected List<Agent> gatherers;
+    [SerializeField]
+    protected int _maxGatherers = 1;
+
     // Reference to the Natural World Manager
     protected NaturalWorldManager _naturalWorldManager;
+
+    protected bool _spent = false;
 
     // Start is called before the first frame update
     public void Start()
@@ -30,6 +37,8 @@ public class Gatherable : MonoBehaviour
             Debug.LogError("Can't find natural world manager.");
         }
 
+        gatherers = new List<Agent>();
+
         _naturalWorldManager.AddGatherable(this);
 
         state = GatherableState.GATHERABLE_READY;
@@ -38,7 +47,38 @@ public class Gatherable : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        
+        if (_spent)
+        {
+            Spent();
+        }
+    }
+
+    public bool AddGatherer(Agent gatherer, bool forceAdd = false)
+    {
+        if (gatherers.Count < _maxGatherers)
+        {
+            gatherers.Add(gatherer);
+            return true;
+        }
+        if (forceAdd)
+        {
+            gatherers[0].SetTargetGatherable(null);
+            gatherers.Add(gatherer);
+            return true;
+        }
+        return false;
+    }
+    public void RemoveGatherer(Agent gatherer)
+    {
+        gatherers.Remove(gatherer);
+    }
+    public bool CanTakeMoreGatherers()
+    {
+        if (gatherers.Count < _maxGatherers)
+        {
+            return true;
+        }
+        return false;
     }
 
     public int GetCurrentResources()
@@ -95,12 +135,17 @@ public class Gatherable : MonoBehaviour
     {
         if (_currentResources <= 0 && !_infiniteResorces)
         {
-            Spent();
+            _spent = true;
         }
     }
 
     protected virtual void Spent()
     {
+        foreach (Agent gatherer in gatherers)
+        {
+            gatherer.ClearTargetGatherable();
+        }
+
         _naturalWorldManager.RemoveGatherable(this);
         Destroy(gameObject);
     }

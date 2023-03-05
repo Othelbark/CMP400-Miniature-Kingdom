@@ -100,6 +100,7 @@ MonoBehaviour:
   resourceType: 2
   _currentResources: 0
   _infiniteResorces: 1
+  _maxGatherers: 1
 --- !u!60 &5539130499704322422
 PolygonCollider2D:
   m_ObjectHideFlags: 0

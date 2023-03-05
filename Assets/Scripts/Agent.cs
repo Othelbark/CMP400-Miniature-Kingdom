@@ -29,10 +29,8 @@ public class Agent : MonoBehaviour
     //[SerializeField]
     //protected ContactFilter2D _collisionFilter;
 
-    [SerializeField] //Temporalily Serialized for testing
     protected ResourceStore _targetStore = null;
-    [SerializeField] //Temporalily Serialized for testing
-    protected Gatherable _targetGatherable = null;
+    public Gatherable targetGatherable { get; protected set; } = null;
 
     // Start is called before the first frame update
     void Start()
@@ -81,6 +79,21 @@ public class Agent : MonoBehaviour
         else if (state == AgentState.DUMP_INVENTORY)
         {
             DumpInvetoryState();
+        }
+
+        //if not collecting then reset any target gathererable
+        if (state != AgentState.COLLECTING && _preMovementState != AgentState.COLLECTING && targetGatherable != null)
+        {
+            targetGatherable.RemoveGatherer(this);
+            targetGatherable = null;
+        }
+        if (targetGatherable != null)
+        {
+            if (targetGatherable.state == GatherableState.NON_GATHERABLE)
+            {
+                targetGatherable.RemoveGatherer(this);
+                targetGatherable = null;
+            }
         }
     }
 
@@ -221,6 +234,32 @@ public class Agent : MonoBehaviour
 
         _targetStore = store;
         state = AgentState.CLEAR_INVENTORY;
+    }
+
+    public bool SetTargetGatherable(Gatherable gatherable, bool forceAdd = false)
+    {
+        if (targetGatherable != null)
+        {
+            targetGatherable.RemoveGatherer(this);
+        }
+
+        if (gatherable == null)
+        {
+            targetGatherable = null;
+            return true;
+        }
+
+        if (gatherable.AddGatherer(this, forceAdd))
+        {
+            targetGatherable = gatherable;
+            return true;
+        }
+        return false;
+    }
+    //only to be used when gatherabel is spent
+    public void ClearTargetGatherable()
+    {
+        targetGatherable = null;
     }
 
     public void SetGuild (Guild guild)

@@ -112,9 +112,9 @@ public class GrowableGatherable : Gatherable
     protected override void CheckSpent()
     {
 
-        if (_currentResources <= 0 && !_infiniteResorces && !_isGrowing)
+        if (!_isGrowing)
         {
-            Spent();
+            base.CheckSpent();
         }
     }
 }
