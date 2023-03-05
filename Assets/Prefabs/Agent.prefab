@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  _preMovementState: 0
   _inventory:
     m_keys: 
     m_values: 
@@ -105,6 +104,20 @@ MonoBehaviour:
   _capacity: 100
   _guild: {fileID: 0}
   _speed: 5
+  _collisionFilter:
+    useTriggers: 0
+    useLayerMask: 1
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!70 &881169075853334200
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

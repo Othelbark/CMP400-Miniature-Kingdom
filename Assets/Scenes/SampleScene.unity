@@ -1838,6 +1838,7 @@ Transform:
   - {fileID: 1792470788}
   - {fileID: 471702459210720894}
   - {fileID: 1164071937}
+  - {fileID: 8450082179441298643}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4181,6 +4182,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
+--- !u!1001 &3152898265599802024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 871654240}
+    m_Modifications:
+    - target: {fileID: 6811097110775101050, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_Name
+      value: Stone Cutters
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.004873514
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.3180892
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
 --- !u!1001 &3696239662487509355
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4322,7 +4380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148460, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5749998
+      value: -2.575
       objectReference: {fileID: 0}
     - target: {fileID: 4304142780662148460, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4491,21 +4549,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 871654240}
     m_Modifications:
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processTime
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131284, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: _processInput.m_values.Array.data[0]
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131286, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: m_Name
       value: LumberYard
-      objectReference: {fileID: 0}
-    - target: {fileID: 8386973925896131286, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
       propertyPath: m_RootOrder
@@ -4610,3 +4656,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1001f75daf03ca489dc2131b839b674, type: 3}
+--- !u!4 &8450082179441298643 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6811097110775101051, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+  m_PrefabInstance: {fileID: 3152898265599802024}
+  m_PrefabAsset: {fileID: 0}

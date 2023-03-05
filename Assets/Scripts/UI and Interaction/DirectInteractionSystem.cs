@@ -79,6 +79,13 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                         _selectedAgent.SetGuild(processor.guild);
                         _selectedAgent.state = AgentState.WAITING;
                     }
+
+                    ResourceStore store;
+                    if (store = clicked[0].transform.gameObject.GetComponent<ResourceStore>())
+                    {
+                        _selectedAgent.RemoveFromGuild();
+                        _selectedAgent.ClearInventoryInto(store);
+                    }
                 }
                 else
                 {

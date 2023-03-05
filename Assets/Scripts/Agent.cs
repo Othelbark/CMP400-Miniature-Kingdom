@@ -6,7 +6,6 @@ using UnityEngine;
 public class Agent : MonoBehaviour
 {
     public AgentState state = AgentState.WAITING;
-    [SerializeField]
     protected AgentState _preMovementState = AgentState.WAITING;
 
     [SerializeField]
@@ -26,6 +25,14 @@ public class Agent : MonoBehaviour
     protected float _speed = 1;
 
     protected float _residualWork = 0.0f;
+
+    //[SerializeField]
+    //protected ContactFilter2D _collisionFilter;
+
+    [SerializeField] //Temporalily Serialized for testing
+    protected ResourceStore _targetStore = null;
+    [SerializeField] //Temporalily Serialized for testing
+    protected Gatherable _targetGatherable = null;
 
     // Start is called before the first frame update
     void Start()
@@ -79,64 +86,115 @@ public class Agent : MonoBehaviour
 
     protected void MoveState()
     {
-        //TODO: pathfinding
-
-        Vector3 towardsTarget = _targetPosition - gameObject.transform.position;
+        Vector3 towardsTarget;
+        towardsTarget = _targetPosition - gameObject.transform.position;
         towardsTarget.Normalize();
+
+        //TODO: Pathfinding
+        //List<RaycastHit2D> raycastHits = new List<RaycastHit2D>();
+        //if (Physics2D.Raycast(transform.position, towardsTarget, _collisionFilter, raycastHits) > 0)
+        //{
+        //}
 
         if ((_targetPosition - gameObject.transform.position).magnitude <= Mathf.Max(_speed * Time.deltaTime, _targetDistance))
         {
             state = _preMovementState;
 
-            gameObject.transform.position = _targetPosition - (towardsTarget * (_targetDistance * 0.9f)); //10% closer that target to make sure within range even with floating point errors
+            gameObject.transform.position = _targetPosition - (towardsTarget * (_targetDistance * 0.9f)); //Warp to target position if agent would overshoot
         }
         else
         {
             gameObject.transform.Translate(towardsTarget * (_speed * Time.deltaTime));
         }
+
     }
+
     protected void ClearInventoryState()
     {
-        ResourceType typeToStore = ResourceType.NONE;
-
-        foreach (KeyValuePair<ResourceType, int> item in _inventory)
+        if (_targetStore != null)
         {
-            if (item.Value > 0)
+            ResourceType typeToStore = ResourceType.NONE;
+
+            foreach (KeyValuePair<ResourceType, int> item in _inventory)
             {
-                typeToStore = item.Key;
-                break;
-            }
-        }
-
-
-        if (typeToStore != ResourceType.NONE)
-        {
-            float distanceToNearestStore;
-            ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(typeToStore, gameObject.transform.position, out distanceToNearestStore);
-
-            if (nearestStore == null)
-            {
-                RemoveFromInventory(typeToStore);
-            }
-            else if (distanceToNearestStore <= 0)
-            {
-                int fromInventory = RemoveFromInventory(typeToStore);
-
-                int leftover = nearestStore.AddResources(typeToStore, fromInventory);
-
-                if (leftover > 0)
+                if (item.Value > 0 && _targetStore.HasType(item.Key))
                 {
-                    AddToInventory(typeToStore, leftover);
+                    typeToStore = item.Key;
+                    break;
+                }
+            }
+
+
+            if (typeToStore != ResourceType.NONE)
+            {
+                float distanceToTargetStore = (_targetStore.transform.position - transform.position).magnitude;
+
+                if (distanceToTargetStore <= 0)
+                {
+                    int fromInventory = RemoveFromInventory(typeToStore);
+
+                    int leftover = _targetStore.AddResources(typeToStore, fromInventory);
+
+                    if (leftover > 0)
+                    {
+                        AddToInventory(typeToStore, leftover);
+                    }
+                }
+                else
+                {
+                    SetMovingTowards(_targetStore.transform.position, 0);
                 }
             }
             else
             {
-                SetMovingTowards(nearestStore.transform.position, 0);
+                state = AgentState.WAITING;
+                SetMovingTowards(_targetStore.transform.position, 0.0f);
+                _targetStore = null;
             }
         }
         else
         {
-            state = AgentState.WAITING;
+            ResourceType typeToStore = ResourceType.NONE;
+
+            foreach (KeyValuePair<ResourceType, int> item in _inventory)
+            {
+                if (item.Value > 0)
+                {
+                    typeToStore = item.Key;
+                    break;
+                }
+            }
+
+            if (typeToStore != ResourceType.NONE)
+            {
+                float distanceToNearestStore;
+                ResourceStore nearestStore;
+                nearestStore = _kingdomManager.NearestResourceStoreOfType(typeToStore, gameObject.transform.position, out distanceToNearestStore);
+
+                if (nearestStore == null)
+                {
+                    RemoveFromInventory(typeToStore);
+                }
+                else if (distanceToNearestStore <= 0)
+                {
+                    int fromInventory = RemoveFromInventory(typeToStore);
+
+                    int leftover = nearestStore.AddResources(typeToStore, fromInventory);
+
+                    if (leftover > 0)
+                    {
+                        AddToInventory(typeToStore, leftover);
+                    }
+                }
+                else
+                {
+                    SetMovingTowards(nearestStore.transform.position, 0);
+                }
+            }
+            else
+            {
+                state = AgentState.WAITING;
+            }
         }
     }
     protected void DumpInvetoryState()
@@ -156,6 +214,13 @@ public class Agent : MonoBehaviour
             _preMovementState = state;
 
         state = AgentState.MOVING;
+    }
+
+    public void ClearInventoryInto(ResourceStore store)
+    {
+
+        _targetStore = store;
+        state = AgentState.CLEAR_INVENTORY;
     }
 
     public void SetGuild (Guild guild)
