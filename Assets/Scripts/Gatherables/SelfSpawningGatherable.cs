@@ -17,7 +17,7 @@ public class SelfSpawningGatherable : GrowableGatherable
     protected float _maxSpawnDistance = 1.0f;
 
     [SerializeField]
-    protected GameObject _prefabToSpawn;
+    protected PrefabReference _prefabToSpawnReference;
 
     [SerializeField]
     protected bool _spawnOnlyWhenFullyGrown = true;
@@ -59,7 +59,7 @@ public class SelfSpawningGatherable : GrowableGatherable
         Vector3 childPos = transform.position + (direction * distance);
         if (_naturalWorldManager.CanSpawn(childPos, _minSpawnDistance))
         {
-            GameObject child = Instantiate(_prefabToSpawn, _naturalWorldManager.transform);
+            GameObject child = Instantiate(_prefabToSpawnReference.prefab, _naturalWorldManager.transform);
 
             child.transform.position = childPos;
         }

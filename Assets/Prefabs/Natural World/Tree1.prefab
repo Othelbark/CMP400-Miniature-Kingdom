@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2577790087765673376}
   - component: {fileID: 7372256845369157351}
   m_Layer: 8
-  m_Name: Tree
+  m_Name: Tree1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6e6ae4142797fb640bd869778e241420, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfb7f421c2a6cf4489799d7f686cf5c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -97,8 +97,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.44, y: 1}
+  m_Offset: {x: 0, y: -0.075}
+  m_Size: {x: 0.7, y: 0.85}
   m_Direction: 0
 --- !u!114 &7372256845369157351
 MonoBehaviour:
@@ -123,9 +123,9 @@ MonoBehaviour:
   _infiniteGrowth: 0
   _minGrowth: 85
   _stopGrowthOnHarvest: 1
-  _minSpawnTime: 5
-  _maxSpwanTime: 20
-  _minSpawnDistance: 0.6
-  _maxSpawnDistance: 0.9
-  _prefabToSpawn: {fileID: 2174137302262737080}
+  _minSpawnTime: 15
+  _maxSpwanTime: 45
+  _minSpawnDistance: 1
+  _maxSpawnDistance: 1.5
+  _prefabToSpawnReference: {fileID: 11400000, guid: 5f15ee435eb9623479e42a307895ccac, type: 2}
   _spawnOnlyWhenFullyGrown: 1

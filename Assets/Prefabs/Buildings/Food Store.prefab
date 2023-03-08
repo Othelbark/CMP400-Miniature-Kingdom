@@ -100,7 +100,7 @@ MonoBehaviour:
     m_keys: 05000000
     m_values: 00000000
   _currentResourcesTotal: 0
-  _capacity: 300
+  _capacity: 1000
 --- !u!61 &419653143655190283
 BoxCollider2D:
   m_ObjectHideFlags: 0
