@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e649d55df20e484593934b010c4cfb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tooltipName: Rock
+  _tooltipText: Source of stone
   state: 2
   resourceType: 2
   _currentResources: 0

@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2007b11a79b3d46b125308c4fa6e21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tooltipName: Tree
+  _tooltipText: Source of wood
   state: 2
   resourceType: 1
   _currentResources: 0

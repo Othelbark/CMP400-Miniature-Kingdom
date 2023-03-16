@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bfa9083da6b65c41898ba247466f0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tooltipName: Agent
+  _tooltipText: Hard Working
   state: 0
   _inventory:
     m_keys: 
@@ -103,7 +105,7 @@ MonoBehaviour:
   _totalInventory: 0
   _capacity: 100
   _guild: {fileID: 0}
-  _speed: 5
+  _speed: 1.5
 --- !u!70 &881169075853334200
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

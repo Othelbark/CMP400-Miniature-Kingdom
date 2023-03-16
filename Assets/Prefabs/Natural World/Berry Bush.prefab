@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 015ece4177d064545804b784703461d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tooltipName: Berry Bush
+  _tooltipText: Source of food
   state: 2
   resourceType: 5
   _currentResources: 0

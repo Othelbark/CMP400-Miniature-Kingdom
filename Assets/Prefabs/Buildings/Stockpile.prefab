@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tooltipName: Stockpile
+  _tooltipText: Stores anything
   _currentResorces:
     m_keys: 0100000002000000050000000300000004000000
     m_values: 6400000000000000000000000000000000000000

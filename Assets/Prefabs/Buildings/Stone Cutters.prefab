@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9f73934f090e264caefd2e55e5d5f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tooltipName: Stone Mason
+  _tooltipText: Makes blocks from stone
   guild: {fileID: 0}
   _processInput:
     m_keys: 02000000
