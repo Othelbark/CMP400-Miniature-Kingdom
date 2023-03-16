@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Agent : MonoBehaviour
+public class Agent : TooltipedObject
 {
     public AgentState state = AgentState.WAITING;
     protected AgentState _preMovementState = AgentState.WAITING;

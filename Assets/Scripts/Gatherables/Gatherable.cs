@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class Gatherable : MonoBehaviour
+public class Gatherable : TooltipedObject
 {
     [HideInInspector]
     public GatherableState state = GatherableState.GATHERABLE_READY;
