@@ -542,14 +542,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Berry Bush (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _growthRate
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
       propertyPath: _currentResources
       value: 150
@@ -884,14 +876,6 @@ PrefabInstance:
     - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
       propertyPath: m_Name
       value: Berry Bush (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _growthRate
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
@@ -1592,18 +1576,6 @@ PrefabInstance:
     - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
       propertyPath: m_Name
       value: Berry Bush (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _growthRate
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _currentResources
-      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
@@ -2872,14 +2844,6 @@ PrefabInstance:
     - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
       propertyPath: m_Name
       value: Berry Bush (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _growthRate
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
@@ -5059,14 +5023,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Berry Bush (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: _growthRate
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
       propertyPath: _currentResources
       value: 150
@@ -5374,9 +5330,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Berry Bush
       objectReference: {fileID: 0}
-    - target: {fileID: 3685033806510180400, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 4016071225324370716, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
+      propertyPath: _currentResources
+      value: 150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 999ce207275afcb45869c3a8141a7875, type: 3}

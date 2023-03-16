@@ -115,4 +115,28 @@ public class ResourceStore : Building
             return leftoverResources;
         }
     }
+
+    public override string GetText(string additionalText = "")
+    {
+        string storeInfo = "";
+        foreach (KeyValuePair<ResourceType, int> item in _currentResorces)
+        {
+            storeInfo += "\n";
+            storeInfo += "Current ";
+
+            string resourceName = "";
+            resourceName += item.Key;
+            resourceName = resourceName.Replace("_", " ");
+            storeInfo += resourceName.ToLower();
+
+            storeInfo += ": " + item.Value;
+        }
+
+        if (_currentResorces.Count == 1)
+        {
+            storeInfo += "/" + _capacity;
+        }
+
+        return base.GetText(storeInfo);
+    }
 }

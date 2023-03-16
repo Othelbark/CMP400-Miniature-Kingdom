@@ -104,7 +104,7 @@ MonoBehaviour:
   _infiniteResorces: 0
   gatherers: []
   _maxGatherers: 1
-  _growthRate: 7
+  _growthRate: 3
   _maxGrowth: 150
   _infiniteGrowth: 1
   _minGrowth: 50

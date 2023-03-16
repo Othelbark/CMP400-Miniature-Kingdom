@@ -152,7 +152,7 @@ public class Gatherable : TooltipedObject
 
     public override string GetText(string additionalText = "")
     {
-        string gatherableInfo = "";
+        string gatherableInfo = "\n";
 
         if (!_infiniteResorces)
         {

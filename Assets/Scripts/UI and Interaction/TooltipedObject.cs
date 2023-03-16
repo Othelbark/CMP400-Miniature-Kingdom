@@ -26,7 +26,6 @@ public class TooltipedObject : MonoBehaviour
 
         if (additionalText != "")
         {
-            fullText += "\n";
             fullText += additionalText;
         }
 
