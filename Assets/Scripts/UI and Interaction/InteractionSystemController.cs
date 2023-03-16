@@ -9,6 +9,11 @@ public class InteractionSystemController : MonoBehaviour
     [SerializeField]
     protected int _activeIS = 0;
 
+    [SerializeField]
+    protected GameObject _pauseMenu;
+    protected bool _paused = false;
+    protected float _activeTimeScale = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +35,30 @@ public class InteractionSystemController : MonoBehaviour
 
             _playerInteractionSystems[_activeIS].SetActive(true);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            _paused = !_paused;
+
+            if (_paused)
+            {
+                Time.timeScale = 0;
+                _pauseMenu.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = _activeTimeScale;
+                _pauseMenu.SetActive(false);
+            }
+        }
     }
 
     public ControlType GetControlType() { return _playerInteractionSystems[_activeIS].type; }
+
+    public void SetTimeScale(float ts)
+    {
+        _activeTimeScale = ts;
+        if (!_paused)
+            Time.timeScale = _activeTimeScale;
+    }
 }

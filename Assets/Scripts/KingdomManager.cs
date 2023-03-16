@@ -15,8 +15,10 @@ public class KingdomManager : MonoBehaviour
                                                                 "Leighton", "Grier", "Moon", "Waller", "Ewart", "Huxtable", "Westbrook", "McCaig", "Mooney", " Ó Dochartaigh"};
     protected List<string> _discriptors = new List<string>() { "hard working", "prone to slacking off", "strong", "weak", "the life of the party", "shy", "amicable", "rowdy", "loud", "quiet",
                                                                 "holds a grudge", "forgives easily", "forgetful", "perfect memory", "musical", "tone deaf", "content", "ambitious", "arrogant", "humble",
-                                                                "brave", "craven", "strong sense of justice", "fickle", "greedy", "generous", "honest", "deceitful", "calm", "wrathful",
-                                                                "diligent", "careless", "compassionate", "callous", "wise", "foolish", "loyal", "untrustworthy", "reliable", "unreliable" };
+                                                                "brave", "craven", "strong sense of justice", "arbitary", "greedy", "generous", "honest", "deceitful", "calm", "wrathful",
+                                                                "diligent", "careless", "compassionate", "callous", "wise", "foolish", "loyal", "untrustworthy", "reliable", "unreliable",
+                                                                "cheerful", "depressed", "cunning", "naive", "proud", "self-effacing", "stubborn", "fickle", "polite", "rude",
+                                                                "agile", "clumsy", "silly", "serious" };
 
     [SerializeField] //Temporalily Serialized for testing
     protected List<Guild> _guilds;
