@@ -150,4 +150,26 @@ public class Gatherable : TooltipedObject
         Destroy(gameObject);
     }
 
+    public override string GetText(string additionalText = "")
+    {
+        string gatherableInfo = "";
+
+        if (!_infiniteResorces)
+        {
+            gatherableInfo += "Current ";
+
+            string resourceName = "";
+            resourceName += resourceType;
+            gatherableInfo += resourceName.ToLower();
+
+            gatherableInfo += ": " + _currentResources;
+        }
+        else
+        {
+            gatherableInfo += "Never runs out";
+        }
+
+        return base.GetText(gatherableInfo);
+    }
+
 }

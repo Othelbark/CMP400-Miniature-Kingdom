@@ -9,7 +9,7 @@ public class TooltipedObject : MonoBehaviour
     [SerializeField]
     protected string _tooltipText;
 
-    public virtual string GetText()
+    public virtual string GetText(string additionalText = "")
     {
         string fullText = "";
 
@@ -22,7 +22,13 @@ public class TooltipedObject : MonoBehaviour
             fullText += "<b>" + _tooltipName + "</b>\n";
         }
 
-        fullText += _tooltipText;
+        fullText += "<i>" + _tooltipText + "</i>";
+
+        if (additionalText != "")
+        {
+            fullText += "\n";
+            fullText += additionalText;
+        }
 
         return fullText;
     }
