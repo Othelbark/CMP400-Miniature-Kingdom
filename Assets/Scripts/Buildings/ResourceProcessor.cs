@@ -243,4 +243,36 @@ public class ResourceProcessor : Building
             return leftoverResources;
         }
     }
+
+    public override string GetText(string additionalText = "")
+    {
+        string processorInfo = "";
+
+        if (_processing)
+        {
+            processorInfo += "\n";
+            //Percent done process
+            int processPercent = Mathf.FloorToInt((_timeThisProcess / _processTime) * 100);
+            processorInfo += "Processing: " + processPercent + "%";
+        }
+
+
+        foreach (KeyValuePair<ResourceType, int> item in _currentResorces)
+        {
+            if (item.Value > 0)
+            {
+                processorInfo += "\n";
+                processorInfo += "Current ";
+
+                string resourceName = "";
+                resourceName += item.Key;
+                resourceName = resourceName.Replace("_", " ");
+                processorInfo += resourceName.ToLower();
+
+                processorInfo += ": " + item.Value;
+            }
+        }
+
+        return base.GetText(processorInfo);
+    }
 }
