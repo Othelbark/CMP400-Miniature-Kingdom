@@ -45,6 +45,8 @@ public class Agent : TooltipedObject
         }
 
         _kingdomManager.AddAgent(this);
+        _tooltipName = _kingdomManager.GenerateAgentName();
+        _tooltipText = _kingdomManager.GenerateDescription();
 
         //Add to guild if one is set
         if (_guild != null)

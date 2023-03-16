@@ -4,6 +4,20 @@ using UnityEngine;
 
 public class KingdomManager : MonoBehaviour
 {
+    protected List<string> _firstNames = new List<string>() { "Adalhard", "Fabia", "Domitianus", "Dagfinnr", "Romaeus", "Valerius", "Ælfgar", "Thais", "Eudokimos", "Ragnhildr",
+                                                                "Lucius", "Rahul", "Berahthram", "Fachtna", "Pippin", "Nonna", "Raimund", "Dubgall", "Hardwin", "Æðelmær",
+                                                                "Tressach", "Maximianus", "Felinus", "Dubthach", "Maximilianus", "Lysandros", "Ásgeirr", "Constantia", "Benignus", "Mærwine",
+                                                                "Amalia", "Arsaces", "Manegold", "Theoderich", " Walahelin", "Eutychia", "Yseut", "Hallvarðr", "Alfarr", "Airmanagild",
+                                                                "Godfrey", "Blanch", "Primula", "Valeria", "Harmon", "Marva", "Clinton", "Gabby", "Totty", "Justin",
+                                                                "Torin", "Tasha", "Newt", "Gaby", "Ed", "Collins", "Bertram", "Gorden", "Tarah", "Barney"};
+    protected List<string> _lastNames = new List<string>() { "Ecclestone", "Gardener", "Winston", "Kingsley", "Pound", "Walsh", "Norwood", "Dyer", "Ó Cnáimhín", "Montague",
+                                                                "Monroe", "Wood", "Fitzpatrick", " Thomas", "MacIntyre", "Fisher", "Mould", "Haines", "Smythe", "Milburn",
+                                                                "Leighton", "Grier", "Moon", "Waller", "Ewart", "Huxtable", "Westbrook", "McCaig", "Mooney", " Ó Dochartaigh"};
+    protected List<string> _discriptors = new List<string>() { "hard working", "prone to slacking off", "strong", "weak", "the life of the party", "shy", "amicable", "rowdy", "loud", "quiet",
+                                                                "holds a grudge", "forgives easily", "forgetful", "perfect memory", "musical", "tone deaf", "content", "ambitious", "arrogant", "humble",
+                                                                "brave", "craven", "strong sense of justice", "fickle", "greedy", "generous", "honest", "deceitful", "calm", "wrathful",
+                                                                "diligent", "careless", "compassionate", "callous", "wise", "foolish", "loyal", "untrustworthy", "reliable", "unreliable" };
+
     [SerializeField] //Temporalily Serialized for testing
     protected List<Guild> _guilds;
 
@@ -241,5 +255,25 @@ public class KingdomManager : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public string GenerateAgentName()
+    {
+        string name = "";
+        name += _firstNames[Random.Range(0, _firstNames.Count)] + " ";
+        name += _lastNames[Random.Range(0, _lastNames.Count)];
+        return name;
+    }
+
+    public string GenerateDescription()
+    {
+        string description = "";
+        description += _discriptors[Random.Range(0, _lastNames.Count)] + ", ";
+        description += _discriptors[Random.Range(0, _lastNames.Count)] + ", and ";
+        description += _discriptors[Random.Range(0, _lastNames.Count)];
+
+        char[] chars = description.ToCharArray();
+        chars[0] = char.ToUpper(chars[0]);
+        return new string(chars);
     }
 }
