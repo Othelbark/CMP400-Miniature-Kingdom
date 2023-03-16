@@ -383,4 +383,30 @@ public class Agent : TooltipedObject
         return currentResorces;
     }
 
+    public override string GetText(string additionalText = "")
+    {
+        string agentInfo = "";
+        foreach (KeyValuePair<ResourceType, int> item in _inventory)
+        {
+            if (item.Value > 0)
+            {
+                agentInfo += "\n";
+                agentInfo += "Current ";
+
+                string resourceName = "";
+                resourceName += item.Key;
+                resourceName = resourceName.Replace("_", " ");
+                agentInfo += resourceName.ToLower();
+
+                agentInfo += ": " + item.Value;
+            }
+        }
+
+
+        agentInfo += "\n";
+        agentInfo += "Inventory: " + _totalInventory + "/" + _capacity;
+
+        return base.GetText(agentInfo);
+    }
+
 }

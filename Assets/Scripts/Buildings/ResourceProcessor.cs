@@ -37,21 +37,50 @@ public class ResourceProcessor : Building
         guild = guildObject.AddComponent<ProcessorGuild>();
         guild.ProcessorGuildConstructor(this);
 
-        //initalise current resource inventory
+        //initalise current resource inventory and tooltip text
+
+        _tooltipText = "Turns";
+
         foreach (KeyValuePair<ResourceType, int> item in _processInput)
         {
+            _tooltipText += " " + item.Value + " ";
+
+            string resourceName = "";
+            resourceName += item.Key;
+            resourceName = resourceName.Replace("_", " ");
+            _tooltipText += resourceName.ToLower();
+
+            _tooltipText += ",";
+
             if (!_currentResorces.ContainsKey(item.Key))
             {
                 _currentResorces.Add(item.Key, 0);
             }
         }
+
+        _tooltipText = _tooltipText.TrimEnd(',');
+        _tooltipText += " into";
+
         foreach (KeyValuePair<ResourceType, int> item in _processOutput)
         {
+            _tooltipText += " " + item.Value + " ";
+
+            string resourceName = "";
+            resourceName += item.Key;
+            resourceName = resourceName.Replace("_", " ");
+            _tooltipText += resourceName.ToLower();
+
+            _tooltipText += ",";
+
             if (!_currentResorces.ContainsKey(item.Key))
             {
                 _currentResorces.Add(item.Key, 0);
             }
         }
+
+        _tooltipText = _tooltipText.TrimEnd(',');
+        _tooltipText += " every " + _processTime + " seconds";
+
     }
 
     // Update is called once per frame

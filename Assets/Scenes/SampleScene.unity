@@ -5177,7 +5177,7 @@ MonoBehaviour:
   _offset: {x: 20, y: 0}
   _verticalSpacing: 20
   _horizontalSpacing: 20
-  _maxHorizontalSize: 300
+  _maxHorizontalSize: 500
   tooltipableFilter:
     useTriggers: 0
     useLayerMask: 1
