@@ -33,6 +33,9 @@ public class KingdomManager : MonoBehaviour
     protected List<ResourceStore> _resourceStores;
 
     [SerializeField] //Temporalily Serialized for testing
+    protected List<Construction> _constructions;
+
+    [SerializeField] //Temporalily Serialized for testing
     protected InventoryDictionary _totalStoredResources;
 
 
@@ -191,6 +194,15 @@ public class KingdomManager : MonoBehaviour
     public void RemoveResourceStore(ResourceStore resourceStore)
     {
         _resourceStores.Remove(resourceStore);
+    }
+
+    public void AddConstruction(Construction construction)
+    {
+        _constructions.Add(construction);
+    }
+    public void RemoveConstruction(Construction construction)
+    {
+        _constructions.Remove(construction);
     }
 
     public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position, bool pickupSearch = false)

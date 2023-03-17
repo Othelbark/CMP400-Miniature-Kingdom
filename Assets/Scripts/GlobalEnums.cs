@@ -9,3 +9,5 @@ public enum GuildState { INACTIVE, ACTIVE }
 public enum GatherableState { NON_GATHERABLE, GATHERABLE_NOT_READY, GATHERABLE_READY }
 
 public enum ControlType { NONE = 0, DIRECT = 1, ABSTRACTED = 2 }
+
+public enum ConstructionState { WAITING_FOR_RESOURCES, BUILDING, DECONSTRUCTING }
