@@ -83,12 +83,7 @@ public class Agent : TooltipedObject
             DumpInvetoryState();
         }
 
-        //if not collecting then reset any target gathererable
-        if (state != AgentState.COLLECTING && _preMovementState != AgentState.COLLECTING && targetGatherable != null)
-        {
-            targetGatherable.RemoveGatherer(this);
-            targetGatherable = null;
-        }
+
         if (targetGatherable != null)
         {
             if (targetGatherable.state == GatherableState.NON_GATHERABLE)
@@ -270,6 +265,14 @@ public class Agent : TooltipedObject
         {
             RemoveFromGuild();
         }
+
+        if (targetGatherable != null)
+        {
+            targetGatherable.RemoveGatherer(this);
+            targetGatherable = null;
+        }
+        _targetStore = null;
+
         gameObject.tag = "Untagged";
 
         _guild = guild;

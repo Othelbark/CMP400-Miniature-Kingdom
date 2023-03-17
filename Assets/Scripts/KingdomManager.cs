@@ -11,7 +11,7 @@ public class KingdomManager : MonoBehaviour
                                                                 "Godfrey", "Blanch", "Primula", "Valeria", "Harmon", "Marva", "Clinton", "Gabby", "Totty", "Justin",
                                                                 "Torin", "Tasha", "Newt", "Gaby", "Ed", "Collins", "Bertram", "Gorden", "Tarah", "Barney"};
     protected List<string> _lastNames = new List<string>() { "Ecclestone", "Gardener", "Winston", "Kingsley", "Pound", "Walsh", "Norwood", "Dyer", "Ó Cnáimhín", "Montague",
-                                                                "Monroe", "Wood", "Fitzpatrick", " Thomas", "MacIntyre", "Fisher", "Mould", "Haines", "Smythe", "Milburn",
+                                                                "Monroe", "Wood", "Fitzpatrick", "Thomas", "MacIntyre", "Fisher", "Mould", "Haines", "Smythe", "Milburn",
                                                                 "Leighton", "Grier", "Moon", "Waller", "Ewart", "Huxtable", "Westbrook", "McCaig", "Mooney", " Ó Dochartaigh"};
     protected List<string> _discriptors = new List<string>() { "hard working", "prone to slacking off", "strong", "weak", "the life of the party", "shy", "amicable", "rowdy", "loud", "quiet",
                                                                 "holds a grudge", "forgives easily", "forgetful", "perfect memory", "musical", "tone deaf", "content", "ambitious", "arrogant", "humble",
