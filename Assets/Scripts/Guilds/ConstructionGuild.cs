@@ -50,28 +50,58 @@ public class ConstructionGuild : Guild
 
     protected override void CheckTasks()
     {
-
         /*Task flows:
          COLLECTING -> DROP_OFF -> WAITING
          WORKING -> WAITING
          PICK_UP -> STORING -> WAITING
          */
 
-        // Check DROP_OFF
-        bool canDropOff = true;
-        if (_waitingConstructions.Count <= 0)
-        {
-            canDropOff = false;
-        }
-        _guildTaskValidity[AgentState.DROP_OFF] = canDropOff;
+        // Check DROP_OFF and COLLECTING
+        bool canDropOff = false;
+        bool canCollect = false;
 
-        //Check COLLECTING
-        bool canCollect = true;
-        if (!canDropOff)
+        foreach (Construction construction in _waitingConstructions)
         {
-            canCollect = false;
+            if (construction.CanTakeMoreAgents()) //returns true only when avalible resources to meet the needs that are more than AssignedAgents * AgentInventorySpace
+            {
+                canDropOff = true;
+                canCollect = true;
+                break;
+            }
         }
+
+        _guildTaskValidity[AgentState.DROP_OFF] = canDropOff;
         _guildTaskValidity[AgentState.COLLECTING] = canCollect;
+
+        // Check WORKING
+        bool canWork = false;
+        foreach (Construction construction in _buildingConstructions)
+        {
+            if (construction.CanTakeMoreAgents())
+            {
+                canWork = true;
+                break;
+            }
+        }
+
+        _guildTaskValidity[AgentState.WORKING] = canWork;
+
+        // Check STORING and PICK_UP
+        bool canStore = false;
+        bool canPickUp = false;
+
+        foreach (Construction construction in _deconstructingConstructions)
+        {
+            if (construction.CanTakeMoreAgents()) //returns true only when storeable resources is more than AssignedAgents * AgentInventorySpace
+            {
+                canStore = true;
+                canPickUp = true;
+                break;
+            }
+        }
+
+        _guildTaskValidity[AgentState.STORING] = canStore;
+        _guildTaskValidity[AgentState.PICK_UP] = canPickUp;
     }
 
 
