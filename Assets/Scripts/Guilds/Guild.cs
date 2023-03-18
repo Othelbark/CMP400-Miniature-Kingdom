@@ -16,6 +16,8 @@ public class Guild : MonoBehaviour
     protected KingdomManager _kingdomManager;
     protected NaturalWorldManager _naturalWorldManager;
 
+    protected Dictionary<AgentState, bool> _guildTaskValidity;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -45,7 +47,6 @@ public class Guild : MonoBehaviour
 
         _kingdomManager.AddGuild(this);
 
-
         try
         {
             _naturalWorldManager = GameObject.FindGameObjectWithTag("NaturalWorldManager").GetComponent<NaturalWorldManager>();
@@ -54,6 +55,8 @@ public class Guild : MonoBehaviour
         {
             Debug.LogError("Can't find natural world manager.");
         }
+
+        InitaliseGuildTaskValidity();
     }
 
     // Update is called once per frame
@@ -68,6 +71,8 @@ public class Guild : MonoBehaviour
                 _agents[0].RemoveFromGuild();
             }
         }
+
+        CheckTasksAndActivity();
 
         switch (state)
         {
@@ -89,7 +94,16 @@ public class Guild : MonoBehaviour
         }
     }
 
+    protected virtual void InitaliseGuildTaskValidity()
+    {
+
+    }
+
     protected virtual void UpdateTargetAgentCount()
+    {
+
+    }
+    protected virtual void CheckTasksAndActivity()
     {
 
     }

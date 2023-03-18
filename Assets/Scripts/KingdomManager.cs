@@ -113,6 +113,7 @@ public class KingdomManager : MonoBehaviour
         }
     }
 
+
     public void SetPriority(string name, float value)
     {
         if (_priorities.ContainsKey(name))
@@ -124,7 +125,6 @@ public class KingdomManager : MonoBehaviour
             _priorities.Add(name, value);
         }
     }
-
     public float GetPriority(string name)
     {
 
@@ -137,7 +137,6 @@ public class KingdomManager : MonoBehaviour
             return 0;
         }
     }
-
     public float GetTotalPriority()
     {
         float total = 0;
@@ -149,6 +148,7 @@ public class KingdomManager : MonoBehaviour
         return Mathf.Max(total, 1.0f);
     }
 
+
     public void AddGuild(Guild guild)
     {
         _guilds.Add(guild);
@@ -157,7 +157,6 @@ public class KingdomManager : MonoBehaviour
     {
         _guilds.Remove(guild);
     }
-
     public List<Guild> GetGuilds()
     {
         List<Guild> guilds = _guilds;
@@ -172,11 +171,11 @@ public class KingdomManager : MonoBehaviour
     {
         _agents.Remove(agent);
     }
-
     public int GetAgentCount()
     {
         return _agents.Count;
     }
+
 
     public void AddBuilding(Building building)
     {
@@ -186,7 +185,6 @@ public class KingdomManager : MonoBehaviour
     {
         _buildings.Remove(building);
     }
-   
     public void AddResourceStore(ResourceStore resourceStore)
     {
         _resourceStores.Add(resourceStore);
@@ -195,7 +193,6 @@ public class KingdomManager : MonoBehaviour
     {
         _resourceStores.Remove(resourceStore);
     }
-
     public void AddConstruction(Construction construction)
     {
         _constructions.Add(construction);
@@ -204,6 +201,7 @@ public class KingdomManager : MonoBehaviour
     {
         _constructions.Remove(construction);
     }
+
 
     public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position, bool pickupSearch = false)
     {
@@ -260,6 +258,45 @@ public class KingdomManager : MonoBehaviour
         return null;
     }
     
+
+    public List<Construction> WaitingConstructions()
+    {
+        List<Construction> waitingConstructions = new List<Construction>();
+
+        foreach (Construction construction in _constructions)
+        {
+            if (construction.state == ConstructionState.WAITING_FOR_RESOURCES)
+                waitingConstructions.Add(construction);
+        }
+
+        return waitingConstructions;
+    }
+    public List<Construction> BuildingConstructions()
+    {
+        List<Construction> buildingConstructions = new List<Construction>();
+
+        foreach (Construction construction in _constructions)
+        {
+            if (construction.state == ConstructionState.BUILDING)
+                buildingConstructions.Add(construction);
+        }
+
+        return buildingConstructions;
+    }
+    public List<Construction> DeconstructingConstructions()
+    {
+        List<Construction> deconstructingConstructions = new List<Construction>();
+
+        foreach (Construction construction in _constructions)
+        {
+            if (construction.state == ConstructionState.DECONSTRUCTING)
+                deconstructingConstructions.Add(construction);
+        }
+
+        return deconstructingConstructions;
+    }
+
+
     public int GetTotalResources(ResourceType type)
     {
 
@@ -271,6 +308,7 @@ public class KingdomManager : MonoBehaviour
         return 0;
     }
 
+
     public string GenerateAgentName()
     {
         string name = "";
@@ -278,7 +316,6 @@ public class KingdomManager : MonoBehaviour
         name += _lastNames[Random.Range(0, _lastNames.Count)];
         return name;
     }
-
     public string GenerateDescription()
     {
         string description = "";

@@ -16,7 +16,7 @@ public class Gatherable : TooltipedObject
     protected bool _infiniteResorces = false;
 
     [SerializeField]
-    protected List<Agent> gatherers;
+    protected List<Agent> _gatherers;
     [SerializeField]
     protected int _maxGatherers = 1;
 
@@ -37,7 +37,7 @@ public class Gatherable : TooltipedObject
             Debug.LogError("Can't find natural world manager.");
         }
 
-        gatherers = new List<Agent>();
+        _gatherers = new List<Agent>();
 
         _naturalWorldManager.AddGatherable(this);
 
@@ -55,26 +55,26 @@ public class Gatherable : TooltipedObject
 
     public bool AddGatherer(Agent gatherer, bool forceAdd = false)
     {
-        if (gatherers.Count < _maxGatherers)
+        if (_gatherers.Count < _maxGatherers)
         {
-            gatherers.Add(gatherer);
+            _gatherers.Add(gatherer);
             return true;
         }
         if (forceAdd)
         {
-            gatherers[0].SetTargetGatherable(null);
-            gatherers.Add(gatherer);
+            _gatherers[0].SetTargetGatherable(null);
+            _gatherers.Add(gatherer);
             return true;
         }
         return false;
     }
     public void RemoveGatherer(Agent gatherer)
     {
-        gatherers.Remove(gatherer);
+        _gatherers.Remove(gatherer);
     }
     public bool CanTakeMoreGatherers()
     {
-        if (gatherers.Count < _maxGatherers)
+        if (_gatherers.Count < _maxGatherers)
         {
             return true;
         }
@@ -141,7 +141,7 @@ public class Gatherable : TooltipedObject
 
     protected virtual void Spent()
     {
-        foreach (Agent gatherer in gatherers)
+        foreach (Agent gatherer in _gatherers)
         {
             gatherer.ClearTargetGatherable();
         }

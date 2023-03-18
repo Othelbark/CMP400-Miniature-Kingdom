@@ -23,6 +23,11 @@ public class Construction : Building
     protected float _additionalBuildersScaler = 1.0f;
     protected int _buildCallsSinceLastUpdate = 0;
 
+    //[SerializeField]
+    //protected List<Agent> _workers;
+    //[SerializeField]
+    //protected int _maxBuilders = 1;
+
 
     // Start is called before the first frame update
     new void Start()
@@ -72,6 +77,7 @@ public class Construction : Building
         }
     }
 
+
     public bool Build(float dt)
     {
         if (state == ConstructionState.BUILDING)
@@ -87,6 +93,7 @@ public class Construction : Building
         }
     }
 
+
     public bool HasNeeds()
     {
         foreach (KeyValuePair<ResourceType, int> potentialNeed in _resourceRequirements)
@@ -98,7 +105,6 @@ public class Construction : Building
         }
         return false;
     }
-
     public InventoryDictionary GetNeeds()
     {
         InventoryDictionary needs = new InventoryDictionary();
@@ -113,6 +119,8 @@ public class Construction : Building
 
         return needs;
     }
+    public int GetNeedCount() { return GetNeeds().Count; }
+
 
     public int AddResources(ResourceType type, int amount)
     {
@@ -141,7 +149,6 @@ public class Construction : Building
             return leftover;
         }
     }
-
     public int TakeResources(ResourceType type, int amount)
     {
 
@@ -174,6 +181,7 @@ public class Construction : Building
         }
     }
 
+
     //Pass in "false" to cancel a deconstruction
     public void Deconstruct(bool b = true)
     {
@@ -186,6 +194,7 @@ public class Construction : Building
             state = ConstructionState.WAITING_FOR_RESOURCES;
         }
     }
+
 
     public override string GetText(string additionalText = "")
     {
