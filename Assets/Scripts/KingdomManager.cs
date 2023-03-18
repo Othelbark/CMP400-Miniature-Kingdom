@@ -37,6 +37,8 @@ public class KingdomManager : MonoBehaviour
 
     [SerializeField] //Temporalily Serialized for testing
     protected InventoryDictionary _totalStoredResources;
+    [SerializeField] //Temporalily Serialized for testing
+    protected InventoryDictionary _totalSpacePerType;
 
 
     protected InteractionSystemController _interactionSystemController;
@@ -78,6 +80,7 @@ public class KingdomManager : MonoBehaviour
 
         //Total up all stored resources
         _totalStoredResources.Clear();
+        _totalSpacePerType.Clear();
         foreach(ResourceStore store in _resourceStores)
         {
             foreach (KeyValuePair<ResourceType, int> item in store.GetResources())
@@ -89,6 +92,15 @@ public class KingdomManager : MonoBehaviour
                 else
                 {
                     _totalStoredResources[item.Key] += item.Value;
+                }
+
+                if (!_totalSpacePerType.ContainsKey(item.Key))
+                {
+                    _totalSpacePerType.Add(item.Key, store.GetSpace());
+                }
+                else
+                {
+                    _totalSpacePerType[item.Key] += store.GetSpace();
                 }
             }
         }
@@ -303,6 +315,16 @@ public class KingdomManager : MonoBehaviour
         if (_totalStoredResources.ContainsKey(type))
         {
             return _totalStoredResources[type];
+        }
+
+        return 0;
+    }
+    public int GetTotalSpaceFor(ResourceType type)
+    {
+
+        if (_totalSpacePerType.ContainsKey(type))
+        {
+            return _totalSpacePerType[type];
         }
 
         return 0;
