@@ -53,6 +53,8 @@ public class Gatherable : TooltipedObject
         }
     }
 
+
+    //Only call from Agent
     public bool AddGatherer(Agent gatherer, bool forceAdd = false)
     {
         if (_gatherers.Count < _maxGatherers)
@@ -68,6 +70,7 @@ public class Gatherable : TooltipedObject
         }
         return false;
     }
+    //Only call from Agent
     public void RemoveGatherer(Agent gatherer)
     {
         _gatherers.Remove(gatherer);
@@ -81,6 +84,7 @@ public class Gatherable : TooltipedObject
         return false;
     }
 
+
     public int GetCurrentResources()
     {
         if (_infiniteResorces)
@@ -89,17 +93,14 @@ public class Gatherable : TooltipedObject
         }
         return _currentResources;
     }
-
     public void SetCurrentResources(int r)
     {
         _currentResources = r;
     }
-
     public void AddResources(int r)
     {
         _currentResources += r;
     }
-
     //Returns amount actually harvested
     public virtual int HarvestResources(int r)
     {
@@ -131,6 +132,7 @@ public class Gatherable : TooltipedObject
 
     }
 
+
     protected virtual void CheckSpent()
     {
         if (_currentResources <= 0 && !_infiniteResorces)
@@ -138,7 +140,6 @@ public class Gatherable : TooltipedObject
             _spent = true;
         }
     }
-
     protected virtual void Spent()
     {
         foreach (Agent gatherer in _gatherers)
@@ -149,6 +150,7 @@ public class Gatherable : TooltipedObject
         _naturalWorldManager.RemoveGatherable(this);
         Destroy(gameObject);
     }
+
 
     public override string GetText(string additionalText = "")
     {

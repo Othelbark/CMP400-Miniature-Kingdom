@@ -85,7 +85,8 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                     if (store = clicked[0].transform.gameObject.GetComponent<ResourceStore>())
                     {
                         _selectedAgent.RemoveFromGuild();
-                        _selectedAgent.ClearInventoryInto(store);
+                        _selectedAgent.SetTargetBuilding(store, true);
+                        _selectedAgent.state = AgentState.CLEAR_INVENTORY;
                     }
                 }
                 else

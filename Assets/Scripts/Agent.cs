@@ -29,7 +29,7 @@ public class Agent : TooltipedObject
     //[SerializeField]
     //protected ContactFilter2D _collisionFilter;
 
-    protected ResourceStore _targetStore = null;
+    public Building targetBuilding { get; protected set; } = null;
     public Gatherable targetGatherable { get; protected set; } = null;
 
     // Start is called before the first frame update
@@ -99,6 +99,7 @@ public class Agent : TooltipedObject
         }
     }
 
+
     protected void MoveState()
     {
         Vector3 towardsTarget;
@@ -123,16 +124,16 @@ public class Agent : TooltipedObject
         }
 
     }
-
     protected void ClearInventoryState()
     {
-        if (_targetStore != null)
+        ResourceStore targetStore = targetBuilding as ResourceStore;
+        if (targetStore != null)
         {
             ResourceType typeToStore = ResourceType.NONE;
 
             foreach (KeyValuePair<ResourceType, int> item in _inventory)
             {
-                if (item.Value > 0 && _targetStore.HasType(item.Key))
+                if (item.Value > 0 && targetStore.HasType(item.Key))
                 {
                     typeToStore = item.Key;
                     break;
@@ -142,13 +143,13 @@ public class Agent : TooltipedObject
 
             if (typeToStore != ResourceType.NONE)
             {
-                float distanceToTargetStore = (_targetStore.transform.position - transform.position).magnitude;
+                float distanceToTargetStore = (targetStore.transform.position - transform.position).magnitude;
 
                 if (distanceToTargetStore <= 0)
                 {
                     int fromInventory = RemoveFromInventory(typeToStore);
 
-                    int leftover = _targetStore.AddResources(typeToStore, fromInventory);
+                    int leftover = targetStore.AddResources(typeToStore, fromInventory);
 
                     if (leftover > 0)
                     {
@@ -157,14 +158,14 @@ public class Agent : TooltipedObject
                 }
                 else
                 {
-                    SetMovingTowards(_targetStore.transform.position, 0);
+                    SetMovingTowards(targetStore.transform.position, 0);
                 }
             }
             else
             {
                 state = AgentState.WAITING;
-                SetMovingTowards(_targetStore.transform.position, 0.0f);
-                _targetStore = null;
+                SetMovingTowards(targetStore.transform.position, 0.0f);
+                targetStore = null;
             }
         }
         else
@@ -218,6 +219,7 @@ public class Agent : TooltipedObject
         state = AgentState.WAITING;
     }
 
+
     public void SetMovingTowards(Vector3 pos, float dist, bool resetState = false)
     {
         _targetPosition = pos;
@@ -231,12 +233,6 @@ public class Agent : TooltipedObject
         state = AgentState.MOVING;
     }
 
-    public void ClearInventoryInto(ResourceStore store)
-    {
-
-        _targetStore = store;
-        state = AgentState.CLEAR_INVENTORY;
-    }
 
     public bool SetTargetGatherable(Gatherable gatherable, bool forceAdd = false)
     {
@@ -258,11 +254,37 @@ public class Agent : TooltipedObject
         }
         return false;
     }
-    //only to be used when gatherabel is spent
+    //only to be called when gatherable is spent
     public void ClearTargetGatherable()
     {
         targetGatherable = null;
     }
+    public bool SetTargetBuilding (Building building, bool forceAdd = false)
+    {
+        if (targetBuilding != null)
+        {
+            targetBuilding.RemoveAgent(this);
+        }
+
+        if (building == null)
+        {
+            targetBuilding = null;
+            return true;
+        }
+
+        if (building.AddAgent(this, forceAdd))
+        {
+            targetBuilding = building;
+            return true;
+        }
+        return false;
+    }
+    //only to be called when building is destroyed
+    public void ClearTargetBuilding()
+    {
+        targetBuilding = null;
+    }
+
 
     public void SetGuild (Guild guild)
     {
@@ -276,7 +298,11 @@ public class Agent : TooltipedObject
             targetGatherable.RemoveGatherer(this);
             targetGatherable = null;
         }
-        _targetStore = null;
+        if (targetBuilding != null)
+        {
+            targetBuilding.RemoveAgent(this);
+            targetBuilding = null;
+        }
 
         gameObject.tag = "Untagged";
 
@@ -300,8 +326,10 @@ public class Agent : TooltipedObject
         }
     }
 
+
     public void SetResidualWork(float rw) { _residualWork = rw; }
     public float GetResidualWork() { return _residualWork; }
+
 
     public int GetInventorySpace()
     {
@@ -392,6 +420,7 @@ public class Agent : TooltipedObject
 
         return currentResorces;
     }
+
 
     public override string GetText(string additionalText = "")
     {

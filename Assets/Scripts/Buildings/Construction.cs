@@ -24,8 +24,6 @@ public class Construction : Building
     protected int _buildCallsSinceLastUpdate = 0;
 
     //[SerializeField]
-    //protected List<Agent> _workers;
-    //[SerializeField]
     //protected int _maxBuilders = 1;
 
 
