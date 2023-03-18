@@ -117,6 +117,7 @@ public class ConstructionGuild : Guild
 
             if (agent.state == AgentState.COLLECTING)
             {
+                #region Assign to building if not already
                 if (agent.targetBuilding == null)
                 {
                     foreach (Construction construction in _waitingConstructions)
@@ -127,6 +128,8 @@ public class ConstructionGuild : Guild
                         }
                     }
                 }
+                #endregion
+
 
             }
             else if (agent.state == AgentState.DROP_OFF)
@@ -134,9 +137,33 @@ public class ConstructionGuild : Guild
             }
             else if (agent.state == AgentState.WORKING)
             {
+                #region Assign to building if not already
+                if (agent.targetBuilding == null)
+                {
+                    foreach (Construction construction in _buildingConstructions)
+                    {
+                        if (construction.CanTakeMoreAgents())
+                        {
+                            agent.SetTargetBuilding(construction);
+                        }
+                    }
+                }
+                #endregion
             }
             else if (agent.state == AgentState.PICK_UP)
             {
+                #region Assign to building if not already
+                if (agent.targetBuilding == null)
+                {
+                    foreach (Construction construction in _deconstructingConstructions)
+                    {
+                        if (construction.CanTakeMoreAgents())
+                        {
+                            agent.SetTargetBuilding(construction);
+                        }
+                    }
+                }
+                #endregion
             }
             else if (agent.state == AgentState.STORING)
             {
