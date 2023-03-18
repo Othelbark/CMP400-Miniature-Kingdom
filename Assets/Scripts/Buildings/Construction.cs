@@ -124,15 +124,25 @@ public class Construction : Building
         }
         return false;
     }
-    public InventoryDictionary GetNeeds()
+    public InventoryDictionary GetNeeds(bool excludeHeldResources = false)
     {
         InventoryDictionary needs = new InventoryDictionary();
 
         foreach (KeyValuePair<ResourceType, int> potentialNeed in _resourceRequirements)
         {
-            if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
+            if (excludeHeldResources)
             {
-                needs.Add(potentialNeed.Key, potentialNeed.Value - _currentResorces[potentialNeed.Key]);
+                if (potentialNeed.Value - _currentResorces[potentialNeed.Key] - GetTotalResourcesInAssignedAgents(potentialNeed.Key) > 0.0f)
+                {
+                    needs.Add(potentialNeed.Key, potentialNeed.Value - _currentResorces[potentialNeed.Key] - GetTotalResourcesInAssignedAgents(potentialNeed.Key));
+                }
+            }
+            else
+            {
+                if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
+                {
+                    needs.Add(potentialNeed.Key, potentialNeed.Value - _currentResorces[potentialNeed.Key]);
+                }
             }
         }
 
