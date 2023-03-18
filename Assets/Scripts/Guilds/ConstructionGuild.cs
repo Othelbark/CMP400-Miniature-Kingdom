@@ -23,8 +23,13 @@ public class ConstructionGuild : Guild
     // Update is called once per frame
     new void Update()
     {
+        _waitingConstructions = _kingdomManager.WaitingConstructions();
+        _buildingConstructions = _kingdomManager.BuildingConstructions();
+        _deconstructingConstructions = _kingdomManager.DeconstructingConstructions();
+
         base.Update();
     }
+
 
     protected override void InitaliseGuildTaskValidity()
     {
@@ -42,21 +47,15 @@ public class ConstructionGuild : Guild
         _guildTaskValidity.Add(AgentState.STORING, true);
     }
 
-    protected override void UpdateTargetAgentCount()
+
+    protected override void CheckTasks()
     {
 
-    }
-    protected override void CheckTasksAndActivity()
-    {
         /*Task flows:
          COLLECTING -> DROP_OFF -> WAITING
          WORKING -> WAITING
          PICK_UP -> STORING -> WAITING
          */
-
-        _waitingConstructions = _kingdomManager.WaitingConstructions();
-        _buildingConstructions = _kingdomManager.BuildingConstructions();
-        _deconstructingConstructions = _kingdomManager.DeconstructingConstructions();
 
         // Check DROP_OFF
         bool canDropOff = true;
@@ -73,6 +72,11 @@ public class ConstructionGuild : Guild
             canCollect = false;
         }
         _guildTaskValidity[AgentState.COLLECTING] = canCollect;
+    }
+
+
+    protected override void UpdateTargetAgentCount()
+    {
 
     }
     protected override void ActiveUpdate()
@@ -81,6 +85,7 @@ public class ConstructionGuild : Guild
         {
             if (agent.state == AgentState.WAITING)
             {
+                CheckTasks();
             }
 
             if (agent.state == AgentState.COLLECTING)

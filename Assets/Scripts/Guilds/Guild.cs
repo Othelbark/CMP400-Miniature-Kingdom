@@ -72,7 +72,7 @@ public class Guild : MonoBehaviour
             }
         }
 
-        CheckTasksAndActivity();
+        CheckActivity();
 
         switch (state)
         {
@@ -94,16 +94,57 @@ public class Guild : MonoBehaviour
         }
     }
 
+
     protected virtual void InitaliseGuildTaskValidity()
     {
-
+        //Set it up so HasActivity always returns true when this and CheckTasks are not overriden
+        _guildTaskValidity = new Dictionary<AgentState, bool>();
+        _guildTaskValidity.Add(AgentState.WAITING, true);
     }
 
-    protected virtual void UpdateTargetAgentCount()
+
+    protected void CheckActivity()
+    {
+        if (HasActivity())
+        {
+            state = GuildState.ACTIVE;
+        }
+        else
+        {
+            state = GuildState.INACTIVE;
+        }
+    }
+    protected bool HasActivity()
+    {
+        CheckTasks();
+
+        foreach (KeyValuePair<AgentState, bool> task in _guildTaskValidity)
+        {
+            if (task.Value == true)
+            {
+                return true;
+            }
+        }
+
+        foreach (Agent agent in _agents)
+        {
+            if (agent.state != AgentState.WAITING)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    protected virtual void CheckTasks()
     {
 
     }
-    protected virtual void CheckTasksAndActivity()
+
+
+    protected virtual void UpdateTargetAgentCount()
     {
 
     }
