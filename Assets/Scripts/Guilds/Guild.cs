@@ -16,7 +16,7 @@ public class Guild : MonoBehaviour
     protected KingdomManager _kingdomManager;
     protected NaturalWorldManager _naturalWorldManager;
 
-    protected Dictionary<AgentState, bool> _guildTaskValidity;
+    protected Dictionary<AgentState, bool> _guildTaskValidity; //Dictionary of all tasks that can be assigned from waiting and their current validity
 
     // Start is called before the first frame update
     public void Start()
@@ -138,6 +138,25 @@ public class Guild : MonoBehaviour
     }
 
 
+    protected void AssignWaitingAgent(Agent agent)
+    {
+        if (agent.state != AgentState.WAITING)
+            Debug.LogError("Called \"AssignWaitingAgent\" on an agent not in waiting state.");
+
+        CheckTasks();
+
+        foreach (KeyValuePair<AgentState, bool> task in _guildTaskValidity)
+        {
+            if (task.Value)
+            {
+                agent.state = task.Key;
+                return;
+            }
+        }
+
+        agent.state = AgentState.WAITING;
+        Debug.Log("Waiting assigned to waiting in guild: " + gameObject.name);
+    }
     protected virtual void CheckTasks()
     {
 
