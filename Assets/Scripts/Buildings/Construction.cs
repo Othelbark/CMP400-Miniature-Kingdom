@@ -90,7 +90,7 @@ public class Construction : Building
         }
         else // if (state == ConstructionState.DECONSTRUCTING)
         {
-            float fMaxAgents = (float)GetTotalResources() / (float)Constants.AgentInventorySpace;
+            float fMaxAgents = (float)GetTotalStoreableResources() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
             return iMaxAgents;
         }
@@ -228,13 +228,13 @@ public class Construction : Building
             return leftoverResources;
         }
     }
-    public int GetTotalResources()
+    public int GetTotalStoreableResources()
     {
         int total = 0;
 
         foreach (KeyValuePair<ResourceType, int> resource in _currentResorces)
         {
-            total += resource.Value;
+            total += Mathf.Max(resource.Value + GetTotalResourcesInAssignedAgents(resource.Key), _kingdomManager.GetTotalSpaceFor(resource.Key));
         }
 
         return (total);
