@@ -64,6 +64,10 @@ public class Building : TooltipedObject
         }
         return false;
     }
+    public int GetAssignedAgentCount()
+    {
+        return _assignedAgents.Count;
+    }
 
 
 }

@@ -12,8 +12,7 @@ public class Agent : TooltipedObject
     protected InventoryDictionary _inventory;
     [SerializeField] //Temporalily Serialized for testing
     protected int _totalInventory = 0;
-    [SerializeField]
-    protected int _capacity = 100;
+    protected int _capacity = Constants.AgentInventorySpace;
 
     protected KingdomManager _kingdomManager;
     [SerializeField]

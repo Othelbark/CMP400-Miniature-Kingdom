@@ -23,8 +23,8 @@ public class Construction : Building
     protected float _additionalBuildersScaler = 1.0f;
     protected int _buildCallsSinceLastUpdate = 0;
 
-    //[SerializeField]
-    //protected int _maxBuilders = 1;
+    [SerializeField]
+    protected int _maxBuilders = 1;
 
 
     // Start is called before the first frame update
@@ -74,6 +74,27 @@ public class Construction : Building
                 break;
         }
     }
+    
+    
+    public override int GetMaxAssignedAgents()
+    {
+        if (state == ConstructionState.BUILDING)
+        {
+            return _maxBuilders;
+        }
+        else if (state == ConstructionState.WAITING_FOR_RESOURCES)
+        {
+            float fMaxAgents = (float)GetTotalNeeds() / (float)Constants.AgentInventorySpace;
+            int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
+            return iMaxAgents;
+        }
+        else // if (state == ConstructionState.DECONSTRUCTING)
+        {
+            float fMaxAgents = (float)GetTotalResources() / (float)Constants.AgentInventorySpace;
+            int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
+            return iMaxAgents;
+        }
+    }
 
 
     public bool Build(float dt)
@@ -116,6 +137,21 @@ public class Construction : Building
         }
 
         return needs;
+    }
+    public int GetTotalNeeds()
+    {
+
+        int totalNeeds = 0;
+
+        foreach (KeyValuePair<ResourceType, int> potentialNeed in _resourceRequirements)
+        {
+            if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
+            {
+                totalNeeds += potentialNeed.Value - _currentResorces[potentialNeed.Key];
+            }
+        }
+
+        return totalNeeds;
     }
     public int GetNeedCount() { return GetNeeds().Count; }
 
@@ -177,6 +213,17 @@ public class Construction : Building
 
             return leftoverResources;
         }
+    }
+    public int GetTotalResources()
+    {
+        int total = 0;
+
+        foreach (KeyValuePair<ResourceType, int> resource in _currentResorces)
+        {
+            total += resource.Value;
+        }
+
+        return (total);
     }
 
 
