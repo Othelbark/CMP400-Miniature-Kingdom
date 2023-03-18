@@ -84,7 +84,7 @@ public class Construction : Building
         }
         else if (state == ConstructionState.WAITING_FOR_RESOURCES)
         {
-            float fMaxAgents = (float)GetTotalNeeds() / (float)Constants.AgentInventorySpace;
+            float fMaxAgents = (float)GetTotalFillableNeeds() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
             return iMaxAgents;
         }
@@ -138,22 +138,36 @@ public class Construction : Building
 
         return needs;
     }
-    public int GetTotalNeeds()
+    public int GetTotalFillableNeeds()
     {
 
         int totalNeeds = 0;
 
-        foreach (KeyValuePair<ResourceType, int> potentialNeed in _resourceRequirements)
+        foreach (KeyValuePair<ResourceType, int> resource in _resourceRequirements)
         {
-            if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
+            if (resource.Value - _currentResorces[resource.Key] > 0.0f)
             {
-                totalNeeds += potentialNeed.Value - _currentResorces[potentialNeed.Key];
+                int potentialNeed = resource.Value - _currentResorces[resource.Key];
+                totalNeeds += Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key) + GetTotalResourcesInAssignedAgents(resource.Key));
             }
         }
 
         return totalNeeds;
     }
     public int GetNeedCount() { return GetNeeds().Count; }
+
+
+    protected int GetTotalResourcesInAssignedAgents(ResourceType type)
+    {
+        int total = 0;
+
+        foreach (Agent agent in _assignedAgents)
+        {
+            total += agent.CheckInventoryFor(type);
+        }
+
+        return total;
+    }
 
 
     public int AddResources(ResourceType type, int amount)
