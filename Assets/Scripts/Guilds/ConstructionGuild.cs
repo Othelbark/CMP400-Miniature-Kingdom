@@ -37,14 +37,18 @@ public class ConstructionGuild : Guild
 
         //Get resources from stores
         _guildTaskValidity.Add(AgentState.COLLECTING, true);
-        //Add resources to constructions
-        _guildTaskValidity.Add(AgentState.DROP_OFF, true);
+
+        //Add resources to constructions 
+        //Not assigned from WAITING
+
         //Build constructions
         _guildTaskValidity.Add(AgentState.WORKING, true);
+
         //Take resources from canceled constructions
         _guildTaskValidity.Add(AgentState.PICK_UP, true);
+
         //Store resources taken from canceled constructions
-        _guildTaskValidity.Add(AgentState.STORING, true);
+        //Not assigned from WAITING
     }
 
 
@@ -56,21 +60,17 @@ public class ConstructionGuild : Guild
          PICK_UP -> STORING -> WAITING
          */
 
-        // Check DROP_OFF and COLLECTING
-        bool canDropOff = false;
+        // Check COLLECTING
         bool canCollect = false;
 
         foreach (Construction construction in _waitingConstructions)
         {
             if (construction.CanTakeMoreAgents()) //returns true only when avalible resources to meet the needs that are more than AssignedAgents * AgentInventorySpace
             {
-                canDropOff = true;
                 canCollect = true;
                 break;
             }
         }
-
-        _guildTaskValidity[AgentState.DROP_OFF] = canDropOff;
         _guildTaskValidity[AgentState.COLLECTING] = canCollect;
 
         // Check WORKING
@@ -86,21 +86,18 @@ public class ConstructionGuild : Guild
 
         _guildTaskValidity[AgentState.WORKING] = canWork;
 
-        // Check STORING and PICK_UP
-        bool canStore = false;
+        // Check PICK_UP
         bool canPickUp = false;
 
         foreach (Construction construction in _deconstructingConstructions)
         {
             if (construction.CanTakeMoreAgents()) //returns true only when storeable resources is more than AssignedAgents * AgentInventorySpace
             {
-                canStore = true;
                 canPickUp = true;
                 break;
             }
         }
 
-        _guildTaskValidity[AgentState.STORING] = canStore;
         _guildTaskValidity[AgentState.PICK_UP] = canPickUp;
     }
 
@@ -115,11 +112,22 @@ public class ConstructionGuild : Guild
         {
             if (agent.state == AgentState.WAITING)
             {
-                CheckTasks();
+                AssignWaitingAgent(agent);
             }
 
             if (agent.state == AgentState.COLLECTING)
             {
+                if (agent.targetBuilding == null)
+                {
+                    foreach (Construction construction in _waitingConstructions)
+                    {
+                        if (construction.CanTakeMoreAgents())
+                        {
+                            agent.SetTargetBuilding(construction);
+                        }
+                    }
+                }
+
             }
             else if (agent.state == AgentState.DROP_OFF)
             {
