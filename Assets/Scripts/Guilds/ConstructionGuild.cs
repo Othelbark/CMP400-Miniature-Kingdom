@@ -5,9 +5,9 @@ using UnityEngine;
 
 /*Task flows:
  COLLECTING -> DROP_OFF -> WAITING
- WORKING -> WAITING
+ WORKING -> WAITING / null target
  UNWORKING -> WAITING
- PICK_UP -> STORING -> WAITING
+ PICK_UP -> STORING -> WAITING / null target
  */
 public class ConstructionGuild : Guild
 {
@@ -62,9 +62,9 @@ public class ConstructionGuild : Guild
     {
         /*Task flows:
          COLLECTING -> DROP_OFF -> WAITING
-         WORKING -> WAITING
+         WORKING -> WAITING / null target
          UNWORKING -> WAITING
-         PICK_UP -> STORING -> WAITING
+         PICK_UP -> STORING -> WAITING / null target
          */
 
         // Check COLLECTING
@@ -132,9 +132,9 @@ public class ConstructionGuild : Guild
     {
         /*Task flows:
          COLLECTING -> DROP_OFF -> WAITING
-         WORKING -> WAITING
+         WORKING -> WAITING / null target
          UNWORKING -> WAITING
-         PICK_UP -> STORING -> WAITING
+         PICK_UP -> STORING -> WAITING / null target
          */
         foreach (Agent agent in _agents)
         {
@@ -145,34 +145,45 @@ public class ConstructionGuild : Guild
 
             if (agent.state == AgentState.COLLECTING)
             {
-                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_RESOURCES, _waitingForResourcesConstructions) == false)
+                Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_RESOURCES, _waitingForResourcesConstructions);
+                if (targetConstruction == null)
                     continue;
-
-
-
 
             }
             else if (agent.state == AgentState.DROP_OFF)
             {
+                Construction targetConstruction = agent.targetBuilding as Construction;
+                if (targetConstruction == null)
+                    Debug.LogError("Can't find targetConstruction for " + agent.name + " in " + agent.state + " state.");
             }
             else if (agent.state == AgentState.WORKING)
             {
-                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.BUILDING, _buildingConstructions) == false)
+                Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.BUILDING, _buildingConstructions);
+                if (targetConstruction == null)
                     continue;
             }
             else if (agent.state == AgentState.UNWORKING)
             {
-                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.DECONSTRUCTING, _deconstructingConstructions) == false)
+                Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.DECONSTRUCTING, _deconstructingConstructions);
+                if (targetConstruction == null)
                     continue;
 
             }
             else if (agent.state == AgentState.PICK_UP)
             {
-                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_EMPTY, _waitingForEmptyConstructions) == false)
+                Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_EMPTY, _waitingForEmptyConstructions);
+                if (targetConstruction == null)
                     continue;
             }
             else if (agent.state == AgentState.STORING)
             {
+                Construction targetConstruction = agent.targetBuilding as Construction;
+                if (targetConstruction == null)
+                {
+                    Debug.Log("Target construction not assigned while in " + agent.state + " state.");
+                    agent.state = AgentState.CLEAR_INVENTORY;
+                    continue;
+                }
             }
 
         }
@@ -183,8 +194,8 @@ public class ConstructionGuild : Guild
     }
 
 
-    //returns false when agent state changed
-    protected bool CheckAndUpdateAssignedBuilding(Agent agent, ConstructionState expectedStateInAssignedBuilding, List<Construction> constructionsWithExpectedState)
+    //returns target construction
+    protected Construction CheckAndUpdateAssignedBuilding(Agent agent, ConstructionState expectedStateInAssignedBuilding, List<Construction> constructionsWithExpectedState)
     {
 
         #region Check if assigned building valid for this state, change state if assigned building valid for some task
@@ -199,7 +210,7 @@ public class ConstructionGuild : Guild
                 {
                     //reassign to valid task for target
                     UpdateAgentStateForConstruction(agent, targetConstruction);
-                    return false;
+                    return null;
                 }
                 else
                 {
@@ -223,9 +234,9 @@ public class ConstructionGuild : Guild
         }
         #endregion
         if (targetConstruction == null)
-            Debug.LogError("Target construction not assigned while in " + agent.state + " state.");
+            Debug.Log("Target construction not assigned while in " + agent.state + " state.");
 
-        return true;
+        return targetConstruction;
     }
     protected void UpdateAgentStateForConstruction(Agent agent, Construction construction)
     {
