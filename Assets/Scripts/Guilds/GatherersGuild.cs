@@ -10,8 +10,6 @@ public class GatherersGuild : Guild
     protected float _gatherSpeed = 10.0f;
     [SerializeField]
     protected float _minGatherDistance = 0.2f;
-    [SerializeField]
-    protected float _minStoreDistance = 0.0f;
 
     [SerializeField]
     protected float _prioritiseReadyGatherablesWithin = 5.0f;

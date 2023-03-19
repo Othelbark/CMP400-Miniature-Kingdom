@@ -17,8 +17,6 @@ public class ProcessorGuild : Guild
 
     [SerializeField]
     protected float _minProcessorDistance = 0.2f;
-    [SerializeField]
-    protected float _minStoreDistance = 0.0f;
 
     [SerializeField]
     [Tooltip("If true agents will always try to fill their invetory when collecting even if total needs are less than the agents capacity.")]
@@ -173,9 +171,7 @@ public class ProcessorGuild : Guild
             }
             else if (_agents[0].state == AgentState.COLLECTING)
             {
-                float distanceToNearestStore = float.MaxValue;
                 ResourceStore nearestStore = null;
-
                 bool needSelected = false;
                 ResourceType pickupType = ResourceType.NONE;
                 int pickupAmount = 0;
@@ -188,7 +184,7 @@ public class ProcessorGuild : Guild
                         pickupType = need.Key;
                         pickupAmount = need.Value - _agents[0].CheckInventoryFor(need.Key);
 
-                        nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, out distanceToNearestStore, true);
+                        nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, true);
                         break;
                     }
                 }
@@ -210,7 +206,7 @@ public class ProcessorGuild : Guild
                                 pickupType = need.Key;
                                 pickupAmount = (need.Value * multiplier) - _agents[0].CheckInventoryFor(need.Key);
 
-                                nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, out distanceToNearestStore, true);
+                                nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, true);
                                 break;
                             }
                         }
@@ -231,22 +227,7 @@ public class ProcessorGuild : Guild
                     }
                     else
                     {
-
-                        if (distanceToNearestStore <= _minStoreDistance)
-                        {
-                            int pickedUp = nearestStore.TakeResources(pickupType, pickupAmount);
-
-                            int leftover = _agents[0].AddToInventory(pickupType, pickedUp);
-
-                            if (leftover > 0)
-                            {
-                                nearestStore.AddResources(pickupType, leftover);
-                            }
-                        }
-                        else
-                        {
-                            _agents[0].SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
-                        }
+                        CollectFromStore(_agents[0], nearestStore, pickupType, pickupAmount);
                     }
                 }
 

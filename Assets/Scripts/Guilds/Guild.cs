@@ -18,6 +18,10 @@ public class Guild : MonoBehaviour
 
     protected Dictionary<AgentState, bool> _guildTaskValidity; //Dictionary of all tasks that can be assigned from waiting and their current validity
 
+
+    [SerializeField]
+    protected float _minStoreDistance = 0.0f;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -138,6 +142,26 @@ public class Guild : MonoBehaviour
     }
 
 
+    protected virtual void CheckTasks()
+    {
+
+    }
+
+
+    protected virtual void UpdateTargetAgentCount()
+    {
+
+    }
+    protected virtual void ActiveUpdate()
+    {
+
+    }
+    protected virtual void InactiveUpdate()
+    {
+
+    }
+
+
     protected void AssignWaitingAgent(Agent agent)
     {
         if (agent.state != AgentState.WAITING)
@@ -157,24 +181,25 @@ public class Guild : MonoBehaviour
         agent.state = AgentState.WAITING;
         Debug.Log("Waiting assigned to waiting in guild: " + gameObject.name);
     }
-    protected virtual void CheckTasks()
+    protected void CollectFromStore(Agent agent, ResourceStore store, ResourceType type, int amount)
     {
+        if ((store.transform.position - agent.transform.position).magnitude <= _minStoreDistance)
+        {
+            int pickedUp = store.TakeResources(type, amount);
 
+            int leftover = agent.AddToInventory(type, pickedUp);
+
+            if (leftover > 0)
+            {
+                store.AddResources(type, leftover);
+            }
+        }
+        else
+        {
+            agent.SetMovingTowards(store.transform.position, _minStoreDistance);
+        }
     }
 
-
-    protected virtual void UpdateTargetAgentCount()
-    {
-
-    }
-    protected virtual void ActiveUpdate()
-    {
-
-    }
-    protected virtual void InactiveUpdate()
-    {
-
-    }
 
     public int GetCurrentAgentCount()
     {
