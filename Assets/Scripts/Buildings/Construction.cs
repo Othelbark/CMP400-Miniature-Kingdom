@@ -245,7 +245,9 @@ public class Construction : Building
                 if (resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key) > 0)
                 {
                     int potentialNeed = resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key);
-                    needs.Add(resource.Key, Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key)));
+                    int avalibleResources = _kingdomManager.GetTotalResources(resource.Key);
+                    if (avalibleResources > 0)
+                        needs.Add(resource.Key, Mathf.Min(potentialNeed, avalibleResources));
                 }
             }
             else
@@ -253,7 +255,9 @@ public class Construction : Building
                 if (resource.Value - _currentResorces[resource.Key] > 0)
                 {
                     int potentialNeed = resource.Value - _currentResorces[resource.Key];
-                    needs.Add(resource.Key, Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key) + GetTotalResourcesInAssignedAgents(resource.Key)));
+                    int avalibleResources = _kingdomManager.GetTotalResources(resource.Key) + GetTotalResourcesInAssignedAgents(resource.Key);
+                    if (avalibleResources > 0)
+                        needs.Add(resource.Key, Mathf.Min(potentialNeed, avalibleResources));
                 }
             }
         }
@@ -262,7 +266,6 @@ public class Construction : Building
     }
     public int GetTotalFillableNeeds()
     {
-
         int totalNeeds = 0;
 
         foreach (KeyValuePair<ResourceType, int> resource in _resourceRequirements)
