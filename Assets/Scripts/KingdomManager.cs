@@ -321,15 +321,26 @@ public class KingdomManager : MonoBehaviour
     }
 
 
-    public int GetTotalResources(ResourceType type)
+    public int GetTotalResources(ResourceType type, bool getLive = false)
     {
-
-        if (_totalStoredResources.ContainsKey(type))
+        if (getLive)
         {
-            return _totalStoredResources[type];
+            int total = 0;
+            foreach (ResourceStore store in _resourceStores)
+            {
+                total += store.GetAmount(type);
+            }
+            return total;
         }
+        else
+        {
+            if (_totalStoredResources.ContainsKey(type))
+            {
+                return _totalStoredResources[type];
+            }
 
-        return 0;
+            return 0;
+        }
     }
     public int GetTotalSpaceFor(ResourceType type)
     {
