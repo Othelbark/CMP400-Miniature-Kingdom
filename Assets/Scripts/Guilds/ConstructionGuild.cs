@@ -19,6 +19,8 @@ public class ConstructionGuild : Guild
     // Start is called before the first frame update
     new void Start()
     {
+        gameObject.tag = "ConstructionGuild";
+
         base.Start();
     }
 
@@ -298,7 +300,6 @@ public class ConstructionGuild : Guild
     //returns target construction
     protected Construction CheckAndUpdateAssignedBuilding(Agent agent, ConstructionState expectedStateInAssignedBuilding, List<Construction> constructionsWithExpectedState)
     {
-
         #region Check if assigned building valid for this state, change state if assigned building valid for some task
         Construction targetConstruction = agent.targetBuilding as Construction;
         if (targetConstruction != null)
@@ -342,8 +343,13 @@ public class ConstructionGuild : Guild
 
         return targetConstruction;
     }
-    protected void UpdateAgentStateForConstruction(Agent agent, Construction construction)
+    public void UpdateAgentStateForConstruction(Agent agent, Construction construction)
     {
+        if (!construction.HasAgent(agent))
+        {
+            Debug.LogError("Called \"UpdateAgentStateForConstruction\" passing an agent not assigned to passed construction.");
+            return;
+        }
         /*Task flows:
          COLLECTING -> DROP_OFF -> WAITING
          WORKING -> WAITING

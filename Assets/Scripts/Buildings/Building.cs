@@ -56,6 +56,10 @@ public class Building : TooltipedObject
     {
         _assignedAgents.Remove(agent);
     }
+    public bool HasAgent(Agent agent)
+    {
+        return _assignedAgents.Contains(agent);
+    }
     public bool CanTakeMoreAgents()
     {
         if (_assignedAgents.Count < GetMaxAssignedAgents())

@@ -12,6 +12,7 @@ TagManager:
   - WOODGatherersGuild
   - STONEGatherersGuild
   - Tooltip
+  - ConstructionGuild
   layers:
   - Default
   - TransparentFX

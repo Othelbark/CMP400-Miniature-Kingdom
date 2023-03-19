@@ -88,6 +88,15 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                         _selectedAgent.SetTargetBuilding(store, true);
                         _selectedAgent.state = AgentState.CLEAR_INVENTORY;
                     }
+
+                    Construction construction;
+                    if (construction = clicked[0].transform.gameObject.GetComponent<Construction>())
+                    {
+                        ConstructionGuild constructionGuild = GameObject.FindGameObjectWithTag("ConstructionGuild").GetComponent<ConstructionGuild>();
+                        _selectedAgent.SetGuild(constructionGuild);
+                        _selectedAgent.SetTargetBuilding(construction, true);
+                        constructionGuild.UpdateAgentStateForConstruction(_selectedAgent, construction);
+                    }
                 }
                 else
                 {
