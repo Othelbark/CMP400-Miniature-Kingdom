@@ -6,13 +6,15 @@ using UnityEngine;
 /*Task flows:
  COLLECTING -> DROP_OFF -> WAITING
  WORKING -> WAITING
+ UNWORKING -> WAITING
  PICK_UP -> STORING -> WAITING
  */
 public class ConstructionGuild : Guild
 {
-    protected List<Construction> _waitingConstructions;
+    protected List<Construction> _waitingForResourcesConstructions;
     protected List<Construction> _buildingConstructions;
     protected List<Construction> _deconstructingConstructions;
+    protected List<Construction> _waitingForEmptyConstructions;
 
     // Start is called before the first frame update
     new void Start()
@@ -23,9 +25,10 @@ public class ConstructionGuild : Guild
     // Update is called once per frame
     new void Update()
     {
-        _waitingConstructions = _kingdomManager.WaitingConstructions();
+        _waitingForResourcesConstructions = _kingdomManager.WaitingForResourcesConstructions();
         _buildingConstructions = _kingdomManager.BuildingConstructions();
         _deconstructingConstructions = _kingdomManager.DeconstructingConstructions();
+        _waitingForEmptyConstructions = _kingdomManager.WaitingForEmptyConstructions();
 
         base.Update();
     }
@@ -44,6 +47,9 @@ public class ConstructionGuild : Guild
         //Build constructions
         _guildTaskValidity.Add(AgentState.WORKING, true);
 
+        //Deconstruct constructions
+        _guildTaskValidity.Add(AgentState.UNWORKING, true);
+
         //Take resources from canceled constructions
         _guildTaskValidity.Add(AgentState.PICK_UP, true);
 
@@ -57,13 +63,14 @@ public class ConstructionGuild : Guild
         /*Task flows:
          COLLECTING -> DROP_OFF -> WAITING
          WORKING -> WAITING
+         UNWORKING -> WAITING
          PICK_UP -> STORING -> WAITING
          */
 
         // Check COLLECTING
         bool canCollect = false;
 
-        foreach (Construction construction in _waitingConstructions)
+        foreach (Construction construction in _waitingForResourcesConstructions)
         {
             if (construction.CanTakeMoreAgents()) //returns true only when avalible resources to meet the needs that are more than AssignedAgents * AgentInventorySpace
             {
@@ -86,10 +93,25 @@ public class ConstructionGuild : Guild
 
         _guildTaskValidity[AgentState.WORKING] = canWork;
 
+        // Check UNWORKING
+        bool canUnwork = false;
+
+        foreach (Construction construction in _deconstructingConstructions)
+        {
+            if (construction.CanTakeMoreAgents())
+            {
+                canUnwork = true;
+                break;
+            }
+        }
+
+        _guildTaskValidity[AgentState.UNWORKING] = canUnwork;
+
+
         // Check PICK_UP
         bool canPickUp = false;
 
-        foreach (Construction construction in _deconstructingConstructions)
+        foreach (Construction construction in _waitingForEmptyConstructions)
         {
             if (construction.CanTakeMoreAgents()) //returns true only when storeable resources is more than AssignedAgents * AgentInventorySpace
             {
@@ -120,7 +142,7 @@ public class ConstructionGuild : Guild
                 #region Assign to building if not already
                 if (agent.targetBuilding == null)
                 {
-                    foreach (Construction construction in _waitingConstructions)
+                    foreach (Construction construction in _waitingForResourcesConstructions)
                     {
                         if (construction.CanTakeMoreAgents())
                         {
@@ -150,12 +172,28 @@ public class ConstructionGuild : Guild
                 }
                 #endregion
             }
-            else if (agent.state == AgentState.PICK_UP)
+            else if (agent.state == AgentState.UNWORKING)
             {
                 #region Assign to building if not already
                 if (agent.targetBuilding == null)
                 {
                     foreach (Construction construction in _deconstructingConstructions)
+                    {
+                        if (construction.CanTakeMoreAgents())
+                        {
+                            agent.SetTargetBuilding(construction);
+                        }
+                    }
+                }
+                #endregion
+
+            }
+            else if (agent.state == AgentState.PICK_UP)
+            {
+                #region Assign to building if not already
+                if (agent.targetBuilding == null)
+                {
+                    foreach (Construction construction in _waitingForEmptyConstructions)
                     {
                         if (construction.CanTakeMoreAgents())
                         {

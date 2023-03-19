@@ -110,7 +110,11 @@ public class Construction : Building
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
             return iMaxAgents;
         }
-        else // if (state == ConstructionState.DECONSTRUCTING)
+        else if (state == ConstructionState.DECONSTRUCTING)
+        {
+            return _maxBuilders;
+        }
+        else // if (state == ConstructionState.WAITING_FOR_EMPTY)
         {
             float fMaxAgents = (float)GetTotalStoreableResources() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);

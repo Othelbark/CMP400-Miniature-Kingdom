@@ -271,7 +271,7 @@ public class KingdomManager : MonoBehaviour
     }
     
 
-    public List<Construction> WaitingConstructions()
+    public List<Construction> WaitingForResourcesConstructions()
     {
         List<Construction> waitingConstructions = new List<Construction>();
 
@@ -302,6 +302,18 @@ public class KingdomManager : MonoBehaviour
         foreach (Construction construction in _constructions)
         {
             if (construction.state == ConstructionState.DECONSTRUCTING)
+                deconstructingConstructions.Add(construction);
+        }
+
+        return deconstructingConstructions;
+    }
+    public List<Construction> WaitingForEmptyConstructions()
+    {
+        List<Construction> deconstructingConstructions = new List<Construction>();
+
+        foreach (Construction construction in _constructions)
+        {
+            if (construction.state == ConstructionState.WAITING_FOR_EMPTY)
                 deconstructingConstructions.Add(construction);
         }
 
