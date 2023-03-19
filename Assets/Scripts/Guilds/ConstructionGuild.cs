@@ -130,6 +130,12 @@ public class ConstructionGuild : Guild
     }
     protected override void ActiveUpdate()
     {
+        /*Task flows:
+         COLLECTING -> DROP_OFF -> WAITING
+         WORKING -> WAITING
+         UNWORKING -> WAITING
+         PICK_UP -> STORING -> WAITING
+         */
         foreach (Agent agent in _agents)
         {
             if (agent.state == AgentState.WAITING)
@@ -139,18 +145,10 @@ public class ConstructionGuild : Guild
 
             if (agent.state == AgentState.COLLECTING)
             {
-                #region Assign to building if not already
-                if (agent.targetBuilding == null)
-                {
-                    foreach (Construction construction in _waitingForResourcesConstructions)
-                    {
-                        if (construction.CanTakeMoreAgents())
-                        {
-                            agent.SetTargetBuilding(construction);
-                        }
-                    }
-                }
-                #endregion
+                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_RESOURCES, _waitingForResourcesConstructions) == false)
+                    continue;
+
+
 
 
             }
@@ -159,49 +157,19 @@ public class ConstructionGuild : Guild
             }
             else if (agent.state == AgentState.WORKING)
             {
-                #region Assign to building if not already
-                if (agent.targetBuilding == null)
-                {
-                    foreach (Construction construction in _buildingConstructions)
-                    {
-                        if (construction.CanTakeMoreAgents())
-                        {
-                            agent.SetTargetBuilding(construction);
-                        }
-                    }
-                }
-                #endregion
+                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.BUILDING, _buildingConstructions) == false)
+                    continue;
             }
             else if (agent.state == AgentState.UNWORKING)
             {
-                #region Assign to building if not already
-                if (agent.targetBuilding == null)
-                {
-                    foreach (Construction construction in _deconstructingConstructions)
-                    {
-                        if (construction.CanTakeMoreAgents())
-                        {
-                            agent.SetTargetBuilding(construction);
-                        }
-                    }
-                }
-                #endregion
+                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.DECONSTRUCTING, _deconstructingConstructions) == false)
+                    continue;
 
             }
             else if (agent.state == AgentState.PICK_UP)
             {
-                #region Assign to building if not already
-                if (agent.targetBuilding == null)
-                {
-                    foreach (Construction construction in _waitingForEmptyConstructions)
-                    {
-                        if (construction.CanTakeMoreAgents())
-                        {
-                            agent.SetTargetBuilding(construction);
-                        }
-                    }
-                }
-                #endregion
+                if (CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_EMPTY, _waitingForEmptyConstructions) == false)
+                    continue;
             }
             else if (agent.state == AgentState.STORING)
             {
@@ -212,5 +180,76 @@ public class ConstructionGuild : Guild
     protected override void InactiveUpdate()
     {
 
+    }
+
+
+    //returns false when agent state changed
+    protected bool CheckAndUpdateAssignedBuilding(Agent agent, ConstructionState expectedStateInAssignedBuilding, List<Construction> constructionsWithExpectedState)
+    {
+
+        #region Check if assigned building valid for this state, change state if assigned building valid for some task
+        Construction targetConstruction = agent.targetBuilding as Construction;
+        if (targetConstruction != null)
+        {
+            //if target invalid
+            if (targetConstruction.state != expectedStateInAssignedBuilding)
+            {
+                //if target valid at all
+                if (targetConstruction.CanTakeMoreAgents())
+                {
+                    //reassign to valid task for target
+                    UpdateAgentStateForConstruction(agent, targetConstruction);
+                    return false;
+                }
+                else
+                {
+                    //clear assignment 
+                    agent.SetTargetBuilding(null);
+                }
+            }
+        }
+        #endregion
+        #region Assign to building if not already
+        else
+        {
+            foreach (Construction construction in constructionsWithExpectedState)
+            {
+                if (construction.CanTakeMoreAgents())
+                {
+                    agent.SetTargetBuilding(construction);
+                    targetConstruction = construction;
+                }
+            }
+        }
+        #endregion
+        if (targetConstruction == null)
+            Debug.LogError("Target construction not assigned while in " + agent.state + " state.");
+
+        return true;
+    }
+    protected void UpdateAgentStateForConstruction(Agent agent, Construction construction)
+    {
+        /*Task flows:
+         COLLECTING -> DROP_OFF -> WAITING
+         WORKING -> WAITING
+         UNWORKING -> WAITING
+         PICK_UP -> STORING -> WAITING
+         */
+        if (construction.state == ConstructionState.WAITING_FOR_RESOURCES)
+        {
+            agent.state = AgentState.COLLECTING;
+        }
+        else if (construction.state == ConstructionState.BUILDING)
+        {
+            agent.state = AgentState.WORKING;
+        }
+        else if (construction.state == ConstructionState.DECONSTRUCTING)
+        {
+            agent.state = AgentState.UNWORKING;
+        }
+        else //if (construction.state == COnstructionState.WAITING_FOR_EMPTY
+        {
+            agent.state = AgentState.PICK_UP;
+        }
     }
 }
