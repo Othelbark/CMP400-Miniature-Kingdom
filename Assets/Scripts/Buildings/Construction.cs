@@ -164,24 +164,26 @@ public class Construction : Building
         }
         return false;
     }
-    public InventoryDictionary GetNeeds(bool excludeHeldResources = false)
+    public InventoryDictionary GetFillableNeeds(bool excludeHeldResources = false)
     {
         InventoryDictionary needs = new InventoryDictionary();
 
-        foreach (KeyValuePair<ResourceType, int> potentialNeed in _resourceRequirements)
+        foreach (KeyValuePair<ResourceType, int> resource in _resourceRequirements)
         {
             if (excludeHeldResources)
             {
-                if (potentialNeed.Value - _currentResorces[potentialNeed.Key] - GetTotalResourcesInAssignedAgents(potentialNeed.Key) > 0.0f)
+                if (resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key) > 0.0f)
                 {
-                    needs.Add(potentialNeed.Key, potentialNeed.Value - _currentResorces[potentialNeed.Key] - GetTotalResourcesInAssignedAgents(potentialNeed.Key));
+                    int potentialNeed = resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key);
+                    needs.Add(resource.Key, Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key)));
                 }
             }
             else
             {
-                if (potentialNeed.Value - _currentResorces[potentialNeed.Key] > 0.0f)
+                if (resource.Value - _currentResorces[resource.Key] > 0.0f)
                 {
-                    needs.Add(potentialNeed.Key, potentialNeed.Value - _currentResorces[potentialNeed.Key]);
+                    int potentialNeed = resource.Value - _currentResorces[resource.Key];
+                    needs.Add(resource.Key, Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key) + GetTotalResourcesInAssignedAgents(resource.Key)));
                 }
             }
         }
@@ -204,7 +206,6 @@ public class Construction : Building
 
         return totalNeeds;
     }
-    public int GetNeedCount() { return GetNeeds().Count; }
 
 
     protected int GetTotalResourcesInAssignedAgents(ResourceType type)
