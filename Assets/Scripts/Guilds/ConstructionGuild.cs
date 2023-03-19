@@ -142,7 +142,15 @@ public class ConstructionGuild : Guild
         {
             if (agent.state == AgentState.WAITING)
             {
-                AssignWaitingAgent(agent);
+                Construction targetConstruction = agent.targetBuilding as Construction;
+                if (targetConstruction != null)
+                {
+                    UpdateAgentStateForConstruction(agent, targetConstruction);
+                }
+                else
+                {
+                    AssignWaitingAgent(agent);
+                }
             }
 
             if (agent.state == AgentState.COLLECTING)
@@ -293,7 +301,14 @@ public class ConstructionGuild : Guild
     }
     protected override void InactiveUpdate()
     {
-
+        foreach (Agent agent in _agents)
+        {
+            Construction targetConstruction = agent.targetBuilding as Construction;
+            if (targetConstruction != null)
+            {
+                 UpdateAgentStateForConstruction(agent, targetConstruction);
+            }
+        }
     }
 
 
