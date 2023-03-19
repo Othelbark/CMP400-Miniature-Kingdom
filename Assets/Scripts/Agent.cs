@@ -422,6 +422,11 @@ public class Agent : TooltipedObject
     //Removes all of a type and returns the amount removed
     public int RemoveFromInventory(ResourceType type)
     {
+        if (!_inventory.ContainsKey(type))
+        {
+            return 0;
+        }
+
         int currentResorces = _inventory[type];
 
         _inventory[type] = 0;

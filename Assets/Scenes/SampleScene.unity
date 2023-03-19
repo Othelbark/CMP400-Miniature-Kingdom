@@ -169,10 +169,10 @@ MonoBehaviour:
   state: 1
   targetAgentCount: 1
   _agents: []
+  _minStoreDistance: 0
+  _minInteractionDistance: 0.2
   resourceType: 5
   _gatherSpeed: 10
-  _minGatherDistance: 0.2
-  _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
   _onlyGatherFromReadyGatherables: 0
 --- !u!1 &48789987
@@ -519,10 +519,10 @@ MonoBehaviour:
   state: 1
   targetAgentCount: 1
   _agents: []
+  _minStoreDistance: 0
+  _minInteractionDistance: 0.2
   resourceType: 2
   _gatherSpeed: 8.5
-  _minGatherDistance: 0.2
-  _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
   _onlyGatherFromReadyGatherables: 0
 --- !u!1 &85905291
@@ -1369,6 +1369,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410239713}
   m_CullTransparentMesh: 1
+--- !u!1 &410902435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410902436}
+  - component: {fileID: 410902437}
+  m_Layer: 0
+  m_Name: ConstructionGuild
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410902436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410902435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 642292507}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &410902437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410902435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f60a17d4e118334388a0b81ded2818b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  targetAgentCount: 1
+  _agents: []
+  _minStoreDistance: 0
+  _minInteractionDistance: 0.2
 --- !u!1 &450071869
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,6 +2288,9 @@ MonoBehaviour:
   _totalStoredResources:
     m_keys: 
     m_values: 
+  _totalSpacePerType:
+    m_keys: 
+    m_values: 
 --- !u!4 &642292507
 Transform:
   m_ObjectHideFlags: 0
@@ -2254,6 +2305,7 @@ Transform:
   - {fileID: 1940998429}
   - {fileID: 14191384}
   - {fileID: 79601164}
+  - {fileID: 410902436}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3139,6 +3191,7 @@ Transform:
   - {fileID: 471702459210720894}
   - {fileID: 1164071937}
   - {fileID: 8450082179441298643}
+  - {fileID: 1883604331}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6479,16 +6532,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipName: Castle
   _tooltipText: It will be magnificant!
+  _assignedAgents: []
   state: 0
   _buildingPrefab: {fileID: 7742054266361794165, guid: d3374df173f447d438ba28aa95e75540, type: 3}
   _resourceRequirements:
     m_keys: 0400000003000000
-    m_values: 88130000d0070000
+    m_values: f4010000f4010000
   _currentResorces:
     m_keys: 
     m_values: 
   _buildTime: 20
+  _deconstructBuildWorkMultiplier: 2
   _additionalBuildersScaler: 1
+  _maxBuilders: 1
 --- !u!212 &1883604329
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6573,16 +6629,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1883604327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 871654240}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.96, y: -0.53}
+  m_AnchoredPosition: {x: -2.83, y: -1.1099999}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1889410873
@@ -6817,10 +6873,10 @@ MonoBehaviour:
   state: 1
   targetAgentCount: 1
   _agents: []
+  _minStoreDistance: 0
+  _minInteractionDistance: 0.2
   resourceType: 1
   _gatherSpeed: 12.5
-  _minGatherDistance: 0.2
-  _minStoreDistance: 0
   _prioritiseReadyGatherablesWithin: 5
   _onlyGatherFromReadyGatherables: 0
 --- !u!1 &1953648380
