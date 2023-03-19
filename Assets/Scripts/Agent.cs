@@ -30,6 +30,7 @@ public class Agent : TooltipedObject
 
     public Building targetBuilding { get; protected set; } = null;
     public Gatherable targetGatherable { get; protected set; } = null;
+    public ResourceType targetResource { get; protected set; } = ResourceType.NONE;
 
     // Start is called before the first frame update
     void Start()
@@ -82,11 +83,16 @@ public class Agent : TooltipedObject
             DumpInvetoryState();
         }
 
-        //if not collecting then reset any target gathererable
-        if (state != AgentState.COLLECTING && _preMovementState != AgentState.COLLECTING && targetGatherable != null)
+        //if not collecting then reset any target gathererable and target resourse
+        if (state != AgentState.COLLECTING && _preMovementState != AgentState.COLLECTING)
         {
-            targetGatherable.RemoveGatherer(this);
-            targetGatherable = null;
+            if (targetGatherable != null)
+            {
+                targetGatherable.RemoveGatherer(this);
+                targetGatherable = null;
+            }
+
+            targetResource = ResourceType.NONE;
         }
         if (targetGatherable != null)
         {
@@ -282,6 +288,10 @@ public class Agent : TooltipedObject
     public void ClearTargetBuilding()
     {
         targetBuilding = null;
+    }
+    public void SetTargetResource(ResourceType type)
+    {
+        targetResource = type;
     }
 
 
