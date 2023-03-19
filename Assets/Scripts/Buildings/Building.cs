@@ -45,7 +45,10 @@ public class Building : TooltipedObject
         }
         if (forceAdd)
         {
-            _assignedAgents[0].SetTargetBuilding(null);
+            if (_assignedAgents.Count > 0)
+            {
+                _assignedAgents[0].SetTargetBuilding(null);
+            }
             _assignedAgents.Add(agent);
             return true;
         }

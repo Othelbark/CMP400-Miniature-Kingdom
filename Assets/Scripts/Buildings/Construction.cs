@@ -63,7 +63,7 @@ public class Construction : Building
 
         try
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         }
         catch
         {
@@ -172,23 +172,23 @@ public class Construction : Building
     {
         if (state == ConstructionState.BUILDING)
         {
-            return Mathf.Max(_maxBuilders, 1);
+            return _maxBuilders;
         }
         else if (state == ConstructionState.WAITING_FOR_RESOURCES)
         {
             float fMaxAgents = (float)GetTotalFillableNeeds() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
-            return Mathf.Max(iMaxAgents, 1);
+            return iMaxAgents;
         }
         else if (state == ConstructionState.DECONSTRUCTING)
         {
-            return Mathf.Max(_maxBuilders, 1);
+            return _maxBuilders;
         }
         else // if (state == ConstructionState.WAITING_FOR_EMPTY)
         {
             float fMaxAgents = (float)GetTotalStoreableResources() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
-            return Mathf.Max(iMaxAgents, 1);
+            return iMaxAgents;
         }
     }
 

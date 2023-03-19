@@ -306,7 +306,10 @@ public class ConstructionGuild : Guild
             Construction targetConstruction = agent.targetBuilding as Construction;
             if (targetConstruction != null)
             {
-                 UpdateAgentStateForConstruction(agent, targetConstruction);
+                if (targetConstruction.GetMaxAssignedAgents() > 0)
+                {
+                    UpdateAgentStateForConstruction(agent, targetConstruction);
+                }
             }
         }
     }
@@ -323,7 +326,7 @@ public class ConstructionGuild : Guild
             if (targetConstruction.state != expectedStateInAssignedBuilding)
             {
                 //if target valid at all
-                if (targetConstruction.CanTakeMoreAgents())
+                if (targetConstruction.GetMaxAssignedAgents() > 0)
                 {
                     //reassign to valid task for target
                     UpdateAgentStateForConstruction(agent, targetConstruction);
