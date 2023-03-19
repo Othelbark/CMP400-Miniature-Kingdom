@@ -21,6 +21,8 @@ public class Guild : MonoBehaviour
 
     [SerializeField]
     protected float _minStoreDistance = 0.0f;
+    [SerializeField]
+    protected float _minInteractionDistance = 0.2f;
 
     // Start is called before the first frame update
     public void Start()

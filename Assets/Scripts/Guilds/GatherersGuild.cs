@@ -8,8 +8,6 @@ public class GatherersGuild : Guild
 
     [SerializeField]
     protected float _gatherSpeed = 10.0f;
-    [SerializeField]
-    protected float _minGatherDistance = 0.2f;
 
     [SerializeField]
     protected float _prioritiseReadyGatherablesWithin = 5.0f;
@@ -96,7 +94,7 @@ public class GatherersGuild : Guild
                 }
                 else
                 {
-                    if (distanceToGatherable <= _minGatherDistance)
+                    if (distanceToGatherable <= _minInteractionDistance)
                     {
                         //near a source
                         float maxGathered = _gatherSpeed * Time.deltaTime + agent.GetResidualWork();
@@ -114,7 +112,7 @@ public class GatherersGuild : Guild
                     }
                     else
                     {
-                        agent.SetMovingTowards(agent.targetGatherable.transform.position, _minGatherDistance);
+                        agent.SetMovingTowards(agent.targetGatherable.transform.position, _minInteractionDistance);
                     }
                 }
 

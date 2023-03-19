@@ -195,7 +195,6 @@ public class ConstructionGuild : Guild
                 Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.DECONSTRUCTING, _deconstructingConstructions);
                 if (targetConstruction == null)
                     continue;
-
             }
             else if (agent.state == AgentState.PICK_UP)
             {

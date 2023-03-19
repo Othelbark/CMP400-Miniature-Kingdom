@@ -16,9 +16,6 @@ public class ProcessorGuild : Guild
     protected InventoryDictionary _currentProcessorNeeds;
 
     [SerializeField]
-    protected float _minProcessorDistance = 0.2f;
-
-    [SerializeField]
     [Tooltip("If true agents will always try to fill their invetory when collecting even if total needs are less than the agents capacity.")]
     protected bool _fillInventory = true;
 
@@ -89,7 +86,7 @@ public class ProcessorGuild : Guild
             {
                 float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
 
-                if (distanceToProcessor <= _minProcessorDistance)
+                if (distanceToProcessor <= _minInteractionDistance)
                 {
                     if (!_processor.Process(Time.deltaTime))
                     {
@@ -98,14 +95,14 @@ public class ProcessorGuild : Guild
                 }
                 else
                 {
-                    _agents[0].SetMovingTowards(_processor.transform.position, _minProcessorDistance);
+                    _agents[0].SetMovingTowards(_processor.transform.position, _minInteractionDistance);
                 }
             }
             else if (_agents[0].state == AgentState.PICK_UP)
             {
                 float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
 
-                if (distanceToProcessor <= _minProcessorDistance)
+                if (distanceToProcessor <= _minInteractionDistance)
                 {
                     foreach (ResourceType type in _processor.GetOutputTypes())
                     {
@@ -120,7 +117,7 @@ public class ProcessorGuild : Guild
                 }
                 else
                 {
-                    _agents[0].SetMovingTowards(_processor.transform.position, _minProcessorDistance);
+                    _agents[0].SetMovingTowards(_processor.transform.position, _minInteractionDistance);
                 }
             }
             else if (_agents[0].state == AgentState.STORING)
@@ -240,7 +237,7 @@ public class ProcessorGuild : Guild
             {
                 float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
 
-                if (distanceToProcessor <= _minProcessorDistance)
+                if (distanceToProcessor <= _minInteractionDistance)
                 {
                     foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
                     {
@@ -266,7 +263,7 @@ public class ProcessorGuild : Guild
                 }
                 else
                 {
-                    _agents[0].SetMovingTowards(_processor.transform.position, _minProcessorDistance);
+                    _agents[0].SetMovingTowards(_processor.transform.position, _minInteractionDistance);
                 }
             }
 
