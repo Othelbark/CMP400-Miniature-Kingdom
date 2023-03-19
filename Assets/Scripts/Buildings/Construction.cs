@@ -17,10 +17,13 @@ public class Construction : Building
 
     [SerializeField]
     protected float _buildTime = 20.0f;
+    [SerializeField]
+    [Tooltip("Muliplier applied to work when undoing BuildTime")]
+    protected float _deconstructBuildWorkMultiplier = 2.0f;
     protected float _buildWork = 0.0f;
 
     [SerializeField]
-    protected float _additionalBuildersScaler = 1.0f;
+    protected float _additionalBuildersScaler = 0.7f;
     protected int _buildCallsSinceLastUpdate = 0;
 
     [SerializeField]
@@ -65,12 +68,31 @@ public class Construction : Building
                     finishedBuilding.transform.position = transform.position;
 
                     _kingdomManager.RemoveConstruction(this);
+                    foreach (Agent agent in _assignedAgents)
+                    {
+                        agent.ClearTargetBuilding();
+                    }
                     Destroy(gameObject);
                 }
 
                 _buildCallsSinceLastUpdate = 0;
                 break;
             case ConstructionState.DECONSTRUCTING:
+                if (_buildWork <= 0.0f)
+                {
+                    state = ConstructionState.WAITING_FOR_EMPTY;
+                }
+                break;
+            case ConstructionState.WAITING_FOR_EMPTY:
+                if (GetTotalResources() <= 0)
+                {
+                    _kingdomManager.RemoveConstruction(this);
+                    foreach (Agent agent in _assignedAgents)
+                    {
+                        agent.ClearTargetBuilding();
+                    }
+                    Destroy(gameObject);
+                }
                 break;
         }
     }
@@ -104,6 +126,20 @@ public class Construction : Building
             _buildWork += dt * Mathf.Pow(_additionalBuildersScaler, _buildCallsSinceLastUpdate);
 
             _buildCallsSinceLastUpdate++; 
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool Deconstruct(float dt)
+    {
+        if(state == ConstructionState.DECONSTRUCTING)
+        {
+            _buildWork -= dt * _deconstructBuildWorkMultiplier * Mathf.Pow(_additionalBuildersScaler, _buildCallsSinceLastUpdate);
+
+            _buildCallsSinceLastUpdate++;
             return true;
         }
         else
@@ -249,10 +285,21 @@ public class Construction : Building
 
         return (total);
     }
+    public int GetTotalResources()
+    {
+        int total = 0;
+
+        foreach (KeyValuePair<ResourceType, int> resource in _currentResorces)
+        {
+            total += resource.Value;
+        }
+
+        return (total);
+    }
 
 
     //Pass in "false" to cancel a deconstruction
-    public void Deconstruct(bool b = true)
+    public void SetDeconstruct(bool b = true)
     {
         if (b)
         {
