@@ -91,11 +91,6 @@ public class Guild : MonoBehaviour
 
                 InactiveUpdate();
 
-                if (_agents.Count > 0)
-                {
-                    ClearAgents();
-                }
-
                 break;
         }
     }
@@ -146,7 +141,6 @@ public class Guild : MonoBehaviour
 
     protected virtual void CheckTasks()
     {
-
     }
 
 
