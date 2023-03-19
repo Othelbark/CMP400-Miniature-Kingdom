@@ -7,7 +7,7 @@ using UnityEngine;
  COLLECTING -> DROP_OFF -> WAITING
  WORKING -> WAITING / null target
  UNWORKING -> WAITING
- PICK_UP -> STORING -> WAITING / null target
+ PICK_UP -> CLEAR_INVENTORY
  */
 public class ConstructionGuild : Guild
 {
@@ -64,7 +64,7 @@ public class ConstructionGuild : Guild
          COLLECTING -> DROP_OFF -> WAITING
          WORKING -> WAITING / null target
          UNWORKING -> WAITING
-         PICK_UP -> STORING -> WAITING / null target
+         PICK_UP -> CLEAR_INVENTORY
          */
 
         // Check COLLECTING
@@ -134,7 +134,7 @@ public class ConstructionGuild : Guild
          COLLECTING -> DROP_OFF -> WAITING
          WORKING -> WAITING / null target
          UNWORKING -> WAITING
-         PICK_UP -> STORING -> WAITING / null target
+         PICK_UP -> CLEAR_INVENTORY
          */
         foreach (Agent agent in _agents)
         {
@@ -279,21 +279,11 @@ public class ConstructionGuild : Guild
                         agent.AddToInventory(resource.Key, amountTaken);
                     }
 
-                    agent.state = AgentState.STORING;
+                    agent.state = AgentState.CLEAR_INVENTORY;
                 }
                 else
                 {
                     agent.SetMovingTowards(targetConstruction.transform.position, _minInteractionDistance);
-                }
-            }
-            else if (agent.state == AgentState.STORING)
-            {
-                Construction targetConstruction = agent.targetBuilding as Construction;
-                if (targetConstruction == null)
-                {
-                    Debug.Log("Target construction not assigned while in " + agent.state + " state.");
-                    agent.state = AgentState.CLEAR_INVENTORY;
-                    continue;
                 }
             }
 
