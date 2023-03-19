@@ -149,6 +149,34 @@ public class ConstructionGuild : Guild
                 if (targetConstruction == null)
                     continue;
 
+                InventoryDictionary constructionNeeds = targetConstruction.GetFillableNeeds(true);
+
+                if (!constructionNeeds.ContainsKey(agent.targetResource))
+                {
+                    if (constructionNeeds.Count > 0)
+                    {
+                        ResourceType randomNeed = (new List<ResourceType>(constructionNeeds.Keys))[Random.Range(0, constructionNeeds.Count)];
+                        agent.SetTargetResource(randomNeed);
+                    }
+                    else
+                    {
+                        agent.state = AgentState.DROP_OFF;
+                        continue;
+                    }
+                }
+
+                ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(agent.targetResource, agent.transform.position, true);
+                int pickupAmount = constructionNeeds[agent.targetResource];
+
+                if (nearestStore != null)
+                {
+                    CollectFromStore(agent, nearestStore, agent.targetResource, pickupAmount);
+                }
+
+                if (agent.GetInventorySpace() <= 0 || nearestStore == null)
+                {
+                    agent.state = AgentState.DROP_OFF;
+                }
             }
             else if (agent.state == AgentState.DROP_OFF)
             {
