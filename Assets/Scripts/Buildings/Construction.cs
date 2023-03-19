@@ -301,6 +301,10 @@ public class Construction : Building
 
         return (total);
     }
+    public InventoryDictionary GetCurrentResources()
+    {
+        return _currentResorces;
+    }
 
 
     //Pass in "false" to cancel a deconstruction

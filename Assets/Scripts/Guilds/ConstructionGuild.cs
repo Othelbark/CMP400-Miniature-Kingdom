@@ -265,6 +265,26 @@ public class ConstructionGuild : Guild
                 Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_EMPTY, _waitingForEmptyConstructions);
                 if (targetConstruction == null)
                     continue;
+
+                float distanceToConstruction = (agent.transform.position - targetConstruction.transform.position).magnitude;
+
+                if (distanceToConstruction <= _minInteractionDistance)
+                {
+                    foreach (KeyValuePair<ResourceType, int> resource in targetConstruction.GetCurrentResources())
+                    {
+                        int maxToTake = agent.GetInventorySpace();
+
+                        int amountTaken = targetConstruction.TakeResources(resource.Key, maxToTake);
+
+                        agent.AddToInventory(resource.Key, amountTaken);
+                    }
+
+                    agent.state = AgentState.STORING;
+                }
+                else
+                {
+                    agent.SetMovingTowards(targetConstruction.transform.position, _minInteractionDistance);
+                }
             }
             else if (agent.state == AgentState.STORING)
             {
