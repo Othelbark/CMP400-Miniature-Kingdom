@@ -149,13 +149,13 @@ public class ConstructionGuild : Guild
                 if (targetConstruction == null)
                     continue;
 
-                InventoryDictionary constructionNeeds = targetConstruction.GetFillableNeeds(true);
+                InventoryDictionary constructionNeedsExcludingInventories = targetConstruction.GetFillableNeeds(true);
 
-                if (!constructionNeeds.ContainsKey(agent.targetResource))
+                if (!constructionNeedsExcludingInventories.ContainsKey(agent.targetResource))
                 {
-                    if (constructionNeeds.Count > 0)
+                    if (constructionNeedsExcludingInventories.Count > 0)
                     {
-                        ResourceType randomNeed = (new List<ResourceType>(constructionNeeds.Keys))[Random.Range(0, constructionNeeds.Count)];
+                        ResourceType randomNeed = (new List<ResourceType>(constructionNeedsExcludingInventories.Keys))[Random.Range(0, constructionNeedsExcludingInventories.Count)];
                         agent.SetTargetResource(randomNeed);
                     }
                     else
@@ -166,7 +166,7 @@ public class ConstructionGuild : Guild
                 }
 
                 ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(agent.targetResource, agent.transform.position, true);
-                int pickupAmount = constructionNeeds[agent.targetResource];
+                int pickupAmount = constructionNeedsExcludingInventories[agent.targetResource];
 
                 if (nearestStore != null)
                 {
@@ -183,18 +183,82 @@ public class ConstructionGuild : Guild
                 Construction targetConstruction = agent.targetBuilding as Construction;
                 if (targetConstruction == null)
                     Debug.LogError("Can't find targetConstruction for " + agent.name + " in " + agent.state + " state.");
+
+
+                float distanceToConstruction = (agent.transform.position - targetConstruction.transform.position).magnitude;
+
+                if (distanceToConstruction <= _minInteractionDistance)
+                {
+                    InventoryDictionary constructionNeeds = targetConstruction.GetFillableNeeds();
+
+                    foreach (KeyValuePair<ResourceType, int> need in constructionNeeds)
+                    {
+                        int fromInventory = agent.RemoveFromInventory(need.Key);
+
+                        int leftover = targetConstruction.AddResources(need.Key, fromInventory);
+
+                        if (leftover > 0)
+                        {
+                            agent.AddToInventory(need.Key, leftover);
+                        }
+                    }
+
+                    if (agent.GetCurrentTotalInventory() > 0)
+                    {
+                        //Inventory has other items in it
+                        agent.state = AgentState.CLEAR_INVENTORY;
+                    }
+                    else
+                    {
+                        agent.state = AgentState.WAITING;
+                    }
+                }
+                else
+                {
+                    agent.SetMovingTowards(targetConstruction.transform.position, _minInteractionDistance);
+                }
             }
             else if (agent.state == AgentState.WORKING)
             {
                 Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.BUILDING, _buildingConstructions);
                 if (targetConstruction == null)
                     continue;
+
+
+                float distanceToConstruction = (agent.transform.position - targetConstruction.transform.position).magnitude;
+
+                if (distanceToConstruction <= _minInteractionDistance)
+                {
+                    if (!targetConstruction.Build(Time.deltaTime))
+                    {
+                        agent.state = AgentState.WAITING;
+                    }
+                }
+                else
+                {
+                    agent.SetMovingTowards(targetConstruction.transform.position, _minInteractionDistance);
+                }
             }
             else if (agent.state == AgentState.UNWORKING)
             {
                 Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.DECONSTRUCTING, _deconstructingConstructions);
                 if (targetConstruction == null)
                     continue;
+
+
+                float distanceToConstruction = (agent.transform.position - targetConstruction.transform.position).magnitude;
+
+                if (distanceToConstruction <= _minInteractionDistance)
+                {
+                    if (!targetConstruction.Deconstruct(Time.deltaTime))
+                    {
+                        agent.state = AgentState.WAITING;
+                    }
+                }
+                else
+                {
+                    agent.SetMovingTowards(targetConstruction.transform.position, _minInteractionDistance);
+                }
             }
             else if (agent.state == AgentState.PICK_UP)
             {
@@ -261,7 +325,10 @@ public class ConstructionGuild : Guild
         }
         #endregion
         if (targetConstruction == null)
+        {
             Debug.Log("Target construction not assigned while in " + agent.state + " state.");
+            agent.state = AgentState.WAITING;
+        }
 
         return targetConstruction;
     }
