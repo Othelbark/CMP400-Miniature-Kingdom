@@ -52,6 +52,7 @@ public class GatherersGuild : Guild
                 if (agent.GetInventorySpace() > 0)
                 {
                     agent.state = AgentState.COLLECTING;
+                    agent.SetTargetResource(resourceType);
                 }
                 else
                 {
