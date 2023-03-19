@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class MultiDimensionalSprite
+{
+    public Sprite[] spriteArray;
+}
+
 public class Construction : Building
 {
     public ConstructionState state = ConstructionState.WAITING_FOR_RESOURCES;
@@ -30,6 +36,16 @@ public class Construction : Building
     protected int _maxBuilders = 1;
 
 
+    [SerializeField]
+    protected MultiDimensionalSprite[] _noConstructionSprites;
+    [SerializeField]
+    protected ResourceType _resourceDimension0;
+    [SerializeField]
+    protected ResourceType _resourceDimension1;
+    [SerializeField]
+    protected Sprite[] _constructionSprites;
+    protected SpriteRenderer _spriteRenderer;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -44,14 +60,21 @@ public class Construction : Building
                 _currentResorces.Add(item.Key, 0);
             }
         }
+
+        try
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
+        catch
+        {
+            Debug.LogError("No sprite renderer on construction.");
+        }
     }
 
     // Update is called once per frame
     new void Update()
     {
         base.Update();
-
-        
 
         switch (state)
         {
@@ -73,6 +96,7 @@ public class Construction : Building
                         agent.ClearTargetBuilding();
                     }
                     Destroy(gameObject);
+                    return;
                 }
 
                 _buildCallsSinceLastUpdate = 0;
@@ -95,6 +119,52 @@ public class Construction : Building
                 }
                 break;
         }
+
+        UpdateVisual();
+    }
+
+
+    protected void UpdateVisual()
+    {
+        if (!_resourceRequirements.ContainsKey(_resourceDimension0) || !_resourceRequirements.ContainsKey(_resourceDimension1))
+        {
+            Debug.LogWarning("Invalid resorceDimension Key");
+            return;
+        }
+
+        if (state == ConstructionState.BUILDING || state == ConstructionState.DECONSTRUCTING)
+        {
+            float fractionDone = _buildWork / _buildTime;
+
+            int constructionIndex = Mathf.FloorToInt(fractionDone * _constructionSprites.Length);
+
+            _spriteRenderer.sprite = _constructionSprites[constructionIndex];
+        }
+        else
+        {
+            int dimension0 = 0;
+            int dimension1 = 0;
+
+            if (_currentResorces[_resourceDimension0] >= _resourceRequirements[_resourceDimension0])
+            {
+                dimension0 = 2;
+            }
+            else if (_currentResorces[_resourceDimension0] > 0)
+            {
+                dimension0 = 1;
+            }
+
+            if (_currentResorces[_resourceDimension1] >= _resourceRequirements[_resourceDimension1])
+            {
+                dimension1 = 2;
+            }
+            else if (_currentResorces[_resourceDimension1] > 0)
+            {
+                dimension1 = 1;
+            }
+
+            _spriteRenderer.sprite = _noConstructionSprites[dimension0].spriteArray[dimension1];
+        }
     }
     
     
@@ -102,23 +172,23 @@ public class Construction : Building
     {
         if (state == ConstructionState.BUILDING)
         {
-            return _maxBuilders;
+            return Mathf.Max(_maxBuilders, 1);
         }
         else if (state == ConstructionState.WAITING_FOR_RESOURCES)
         {
             float fMaxAgents = (float)GetTotalFillableNeeds() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
-            return iMaxAgents;
+            return Mathf.Max(iMaxAgents, 1);
         }
         else if (state == ConstructionState.DECONSTRUCTING)
         {
-            return _maxBuilders;
+            return Mathf.Max(_maxBuilders, 1);
         }
         else // if (state == ConstructionState.WAITING_FOR_EMPTY)
         {
             float fMaxAgents = (float)GetTotalStoreableResources() / (float)Constants.AgentInventorySpace;
             int iMaxAgents = Mathf.CeilToInt(fMaxAgents);
-            return iMaxAgents;
+            return Mathf.Max(iMaxAgents, 1);
         }
     }
 
@@ -172,7 +242,7 @@ public class Construction : Building
         {
             if (excludeHeldResources)
             {
-                if (resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key) > 0.0f)
+                if (resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key) > 0)
                 {
                     int potentialNeed = resource.Value - _currentResorces[resource.Key] - GetTotalResourcesInAssignedAgents(resource.Key);
                     needs.Add(resource.Key, Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key)));
@@ -180,7 +250,7 @@ public class Construction : Building
             }
             else
             {
-                if (resource.Value - _currentResorces[resource.Key] > 0.0f)
+                if (resource.Value - _currentResorces[resource.Key] > 0)
                 {
                     int potentialNeed = resource.Value - _currentResorces[resource.Key];
                     needs.Add(resource.Key, Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key) + GetTotalResourcesInAssignedAgents(resource.Key)));
@@ -197,7 +267,7 @@ public class Construction : Building
 
         foreach (KeyValuePair<ResourceType, int> resource in _resourceRequirements)
         {
-            if (resource.Value - _currentResorces[resource.Key] > 0.0f)
+            if (resource.Value - _currentResorces[resource.Key] > 0)
             {
                 int potentialNeed = resource.Value - _currentResorces[resource.Key];
                 totalNeeds += Mathf.Min(potentialNeed, _kingdomManager.GetTotalResources(resource.Key) + GetTotalResourcesInAssignedAgents(resource.Key));
