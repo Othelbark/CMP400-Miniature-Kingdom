@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4395111746342573043}
   - component: {fileID: 3515566473892230670}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 7822135869695204226}
   - component: {fileID: 2230433565945745184}
   - component: {fileID: 5457208191120780561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fort Construction
   m_TagString: Untagged
   m_Icon: {fileID: 0}

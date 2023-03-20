@@ -1553,7 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 1
-  targetAgentCount: 1
+  targetAgentCount: 2
   _agents: []
   _minStoreDistance: 0
   _minInteractionDistance: 0.2
@@ -8349,21 +8349,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 871654240}
     m_Modifications:
-    - target: {fileID: 1147701812204048037, guid: bc010411d0ab3f74b91c3d6093177313, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 1835704910260272585, guid: bc010411d0ab3f74b91c3d6093177313, type: 3}
       propertyPath: m_Name
       value: Fort Construction
-      objectReference: {fileID: 0}
-    - target: {fileID: 1835704910260272585, guid: bc010411d0ab3f74b91c3d6093177313, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2230433565945745184, guid: bc010411d0ab3f74b91c3d6093177313, type: 3}
-      propertyPath: _buildTime
-      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 7822135869695204226, guid: bc010411d0ab3f74b91c3d6093177313, type: 3}
       propertyPath: m_RootOrder

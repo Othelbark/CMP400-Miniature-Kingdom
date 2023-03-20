@@ -101,7 +101,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,7 +113,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -125,7 +125,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -143,7 +143,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 200
         width: 200
         height: 200
       alignment: 0
@@ -164,7 +164,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 200
-        y: 0
+        y: 200
         width: 200
         height: 200
       alignment: 0
@@ -185,7 +185,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 400
-        y: 0
+        y: 200
         width: 200
         height: 200
       alignment: 0
@@ -206,7 +206,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 600
-        y: 0
+        y: 200
         width: 200
         height: 200
       alignment: 0
@@ -227,7 +227,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 800
-        y: 0
+        y: 200
         width: 200
         height: 200
       alignment: 0
@@ -248,7 +248,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1000
-        y: 0
+        y: 199
         width: 200
         height: 200
       alignment: 0
@@ -268,7 +268,7 @@ TextureImporter:
       name: Fort_6
       rect:
         serializedVersion: 2
-        x: 1200
+        x: 0
         y: 0
         width: 200
         height: 200
@@ -289,7 +289,7 @@ TextureImporter:
       name: Fort_7
       rect:
         serializedVersion: 2
-        x: 1400
+        x: 200
         y: 0
         width: 200
         height: 200
@@ -310,7 +310,7 @@ TextureImporter:
       name: Fort_8
       rect:
         serializedVersion: 2
-        x: 1600
+        x: 400
         y: 0
         width: 200
         height: 200
@@ -331,7 +331,7 @@ TextureImporter:
       name: Fort_9
       rect:
         serializedVersion: 2
-        x: 1800
+        x: 600
         y: 0
         width: 200
         height: 200
@@ -352,7 +352,7 @@ TextureImporter:
       name: Fort_10
       rect:
         serializedVersion: 2
-        x: 2000
+        x: 800
         y: 0
         width: 200
         height: 200
@@ -373,7 +373,7 @@ TextureImporter:
       name: Fort_11
       rect:
         serializedVersion: 2
-        x: 2200
+        x: 1000
         y: 0
         width: 200
         height: 200
