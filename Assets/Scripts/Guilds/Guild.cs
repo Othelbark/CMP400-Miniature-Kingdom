@@ -24,6 +24,8 @@ public class Guild : MonoBehaviour
     [SerializeField]
     protected float _minInteractionDistance = 0.2f;
 
+    protected string _priorityName;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -63,6 +65,8 @@ public class Guild : MonoBehaviour
         }
 
         InitaliseGuildTaskValidity();
+
+        SetPriorityName();
     }
 
     // Update is called once per frame
@@ -101,6 +105,10 @@ public class Guild : MonoBehaviour
         //Set it up so HasActivity always returns true when this and CheckTasks are not overriden
         _guildTaskValidity = new Dictionary<AgentState, bool>();
         _guildTaskValidity.Add(AgentState.WAITING, true);
+    }
+    protected virtual void SetPriorityName()
+    {
+        _priorityName = gameObject.name + Random.Range(10000, 99999);
     }
 
 
@@ -146,7 +154,9 @@ public class Guild : MonoBehaviour
 
     protected virtual void UpdateTargetAgentCount()
     {
+        float priorityFactor = _kingdomManager.GetPriority(_priorityName) / _kingdomManager.GetTotalPriority();
 
+        targetAgentCount = Mathf.CeilToInt((float)_kingdomManager.GetAgentCount() * priorityFactor);
     }
     protected virtual void ActiveUpdate()
     {

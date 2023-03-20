@@ -58,6 +58,10 @@ public class ConstructionGuild : Guild
         //Store resources taken from canceled constructions
         //Not assigned from WAITING
     }
+    protected override void SetPriorityName()
+    {
+        _priorityName = "construct";
+    }
 
 
     protected override void CheckTasks()
@@ -128,7 +132,7 @@ public class ConstructionGuild : Guild
 
     protected override void UpdateTargetAgentCount()
     {
-
+        base.UpdateTargetAgentCount();
     }
     protected override void ActiveUpdate()
     {

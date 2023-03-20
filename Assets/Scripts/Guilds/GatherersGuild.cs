@@ -15,16 +15,12 @@ public class GatherersGuild : Guild
     [SerializeField]
     protected bool _onlyGatherFromReadyGatherables = false;
 
-    protected string _priorityName;
-
     // Start is called before the first frame update
     new void Start()
     {
         base.Start();
 
         gameObject.tag = resourceType + "GatherersGuild";
-
-        _priorityName = "gather" + resourceType;
     }
 
     // Update is called once per frame
@@ -33,13 +29,17 @@ public class GatherersGuild : Guild
         base.Update();
     }
 
-    protected override void UpdateTargetAgentCount()
-    {
-        float priorityFactor = _kingdomManager.GetPriority(_priorityName) / _kingdomManager.GetTotalPriority();
 
-        targetAgentCount = Mathf.CeilToInt((float)_kingdomManager.GetAgentCount() * priorityFactor);
+    protected override void SetPriorityName()
+    {
+        _priorityName = "gather" + resourceType;
     }
 
+
+    protected override void UpdateTargetAgentCount()
+    {
+        base.UpdateTargetAgentCount();
+    }
     protected override void ActiveUpdate()
     {
 
@@ -166,7 +166,6 @@ public class GatherersGuild : Guild
 
         }
     }
-
     protected override void InactiveUpdate()
     {
 

@@ -7,6 +7,13 @@ public class ProcessorGuild : Guild
     public void ProcessorGuildConstructor(ResourceProcessor processor)
     {
         _processor = processor;
+
+        _priorityName = "procces";
+
+        foreach (ResourceType type in processor.GetOutputTypes())
+        {
+            _priorityName += type;
+        }
     }
 
     [SerializeField]
@@ -49,11 +56,17 @@ public class ProcessorGuild : Guild
         base.Update();
     }
 
-    protected override void UpdateTargetAgentCount()
-    {
 
+    protected override void SetPriorityName()
+    {
+        _priorityName = "process" + "NONE";
     }
 
+
+    protected override void UpdateTargetAgentCount()
+    {
+        base.UpdateTargetAgentCount();
+    }
     protected override void ActiveUpdate()
     {
         if (_agents.Count > 0)
@@ -269,7 +282,6 @@ public class ProcessorGuild : Guild
 
         }
     }
-
     protected override void InactiveUpdate()
     {
         if (!_processor.HasNeeds())
