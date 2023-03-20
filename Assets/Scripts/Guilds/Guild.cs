@@ -185,7 +185,6 @@ public class Guild : MonoBehaviour
         }
 
         agent.state = AgentState.WAITING;
-        Debug.Log("Waiting assigned to waiting in guild: " + gameObject.name);
     }
     protected void CollectFromStore(Agent agent, ResourceStore store, ResourceType type, int amount)
     {

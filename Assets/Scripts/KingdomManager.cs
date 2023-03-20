@@ -116,7 +116,7 @@ public class KingdomManager : MonoBehaviour
         {
             foreach (Guild guild in _guilds)
             {
-                if (guild.state == GuildState.ACTIVE && guild.GetCurrentAgentCount() < guild.targetAgentCount)
+                if (guild.GetCurrentAgentCount() < guild.targetAgentCount)
                 {
                     guildlessAgents[0].GetComponent<Agent>().SetGuild(guild);
                     break;
