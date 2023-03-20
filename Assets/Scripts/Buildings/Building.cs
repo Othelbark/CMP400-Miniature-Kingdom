@@ -71,6 +71,14 @@ public class Building : TooltipedObject
         }
         return false;
     }
+    public bool HasTooManyAgents()
+    {
+        if (_assignedAgents.Count > GetMaxAssignedAgents())
+        {
+            return true;
+        }
+        return false;
+    }
     public int GetAssignedAgentCount()
     {
         return _assignedAgents.Count;
