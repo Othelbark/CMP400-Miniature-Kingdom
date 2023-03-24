@@ -58,6 +58,7 @@ public class ConstructionGuild : Guild
         //Store resources taken from canceled constructions
         //Not assigned from WAITING
     }
+
     protected override void SetPriorityName()
     {
         _priorityName = "construct";

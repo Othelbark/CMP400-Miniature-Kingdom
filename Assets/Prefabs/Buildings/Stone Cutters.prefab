@@ -98,7 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipName: Stone Mason
   _tooltipText: Makes blocks from stone
+  _assignedAgents: []
   guild: {fileID: 0}
+  _processorType: StoneMason
   _processInput:
     m_keys: 02000000
     m_values: 28000000

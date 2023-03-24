@@ -8,6 +8,9 @@ public class ResourceProcessor : Building
     public ProcessorGuild guild;
 
     [SerializeField]
+    protected string _processorType;
+
+    [SerializeField]
     protected InventoryDictionary _processInput;
 
     [SerializeField]
@@ -30,12 +33,23 @@ public class ResourceProcessor : Building
     {
         base.Start();
 
-        GameObject guildObject = new GameObject();
-        guildObject.name = gameObject.name + "Guild";
-        guildObject.transform.SetParent(_kingdomManager.transform);
+        string tag = _processorType + "Guild";
+        GameObject guildObject = GameObject.FindWithTag(tag);
 
-        guild = guildObject.AddComponent<ProcessorGuild>();
-        guild.ProcessorGuildConstructor(this);
+        if (guildObject == null)
+        {
+            guildObject = new GameObject();
+            guildObject.name = tag;
+            guildObject.transform.SetParent(_kingdomManager.transform);
+
+            guild = guildObject.AddComponent<ProcessorGuild>();
+            guild.ProcessorGuildConstructor(this, tag);
+        }
+        else
+        {
+            guild = guildObject.GetComponent<ProcessorGuild>();
+            guild.AddProcessor(this);
+        }
 
         //initalise current resource inventory and tooltip text
 

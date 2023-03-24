@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class ProcessorGuild : Guild
 {
-    public void ProcessorGuildConstructor(ResourceProcessor processor)
+    public void ProcessorGuildConstructor(ResourceProcessor processor, string tag)
     {
-        _processor = processor;
+        gameObject.tag = tag;
+
+        _processors = new List<ResourceProcessor>();
+        _processors.Add(processor);
     }
 
-    [SerializeField]
-    protected ResourceProcessor _processor;
+    protected List<ResourceProcessor> _processors;
 
     //[SerializeField] // Temp serialised
     protected InventoryDictionary _currentProcessorNeeds;
@@ -27,24 +29,18 @@ public class ProcessorGuild : Guild
     new void Start()
     {
         base.Start();
-
-        targetAgentCount = 1;
     }
 
     // Update is called once per frame
     new void Update()
     {
-        if (_agents.Count > 1)
-        {
-            Debug.LogError("More than one agent assigned to a processor Guild");
-        }
-        if (!_processor)
+        if (_processors.Count <= 0)
         {
             state = GuildState.INACTIVE;
             Debug.LogError("No processor assigned to processor Guild");
         }
 
-        _currentProcessorNeeds = _processor.GetNeeds();
+        _currentProcessorNeeds = _processors[0].GetNeeds();
 
         base.Update();
     }
@@ -55,7 +51,7 @@ public class ProcessorGuild : Guild
 
         _priorityName = "process";
 
-        foreach (ResourceType type in _processor.GetOutputTypes())
+        foreach (ResourceType type in _processors[0].GetOutputTypes())
         {
             _priorityName += type;
         }
@@ -65,81 +61,85 @@ public class ProcessorGuild : Guild
     protected override void UpdateTargetAgentCount()
     {
         base.UpdateTargetAgentCount();
-        targetAgentCount = Mathf.Min(targetAgentCount, 1);
     }
     protected override void ActiveUpdate()
     {
-        if (_agents.Count > 0)
+        int agentNumber = -1;
+        foreach (Agent agent in _agents)
         {
-            if (_agents[0].state == AgentState.WAITING)
+            agentNumber++;
+            if (agentNumber >= _processors.Count)
+                break;
+
+            if (agent.state == AgentState.WAITING)
             {
 
                 if (_currentProcessorNeeds.Count == 0)
                 {
-                    _agents[0].state = AgentState.WORKING;
+                    agent.state = AgentState.WORKING;
                     //WORKING -> WAITING
                 }
-                else if (_processor.HasFinishedGoods())
+                else if (_processors[agentNumber].HasFinishedGoods())
                 {
-                    _agents[0].state = AgentState.PICK_UP;
+                    agent.state = AgentState.PICK_UP;
                     //PICK_UP -> STORING -> WAITING
                 }
-                else if (_agents[0].GetInventorySpace() > 0)
+                else if (agent.GetInventorySpace() > 0)
                 {
-                    _agents[0].state = AgentState.COLLECTING;
+                    agent.state = AgentState.COLLECTING;
                     //COLLECTING -> DROP_OFF -> WAITING
                 }
                 else
                 {
-                    _agents[0].state = AgentState.CLEAR_INVENTORY;
+                    agent.state = AgentState.CLEAR_INVENTORY;
                 }
             }
 
-            if (_agents[0].state == AgentState.WORKING)
+            if (agent.state == AgentState.WORKING)
             {
-                float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
+                float distanceToProcessor = (agent.transform.position - _processors[agentNumber].transform.position).magnitude;
 
                 if (distanceToProcessor <= _minInteractionDistance)
                 {
-                    if (!_processor.Process(Time.deltaTime))
+                    if (!_processors[agentNumber].Process(Time.deltaTime))
                     {
-                        _agents[0].state = AgentState.WAITING;
+                        agent.state = AgentState.WAITING;
                     }
                 }
                 else
                 {
-                    _agents[0].SetMovingTowards(_processor.transform.position, _minInteractionDistance);
+                    agent.SetMovingTowards(_processors[agentNumber].transform.position, _minInteractionDistance);
                 }
             }
-            else if (_agents[0].state == AgentState.PICK_UP)
+            else if (agent.state == AgentState.PICK_UP)
             {
-                float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
+                float distanceToProcessor = (agent.transform.position - _processors[agentNumber].transform.position).magnitude;
 
                 if (distanceToProcessor <= _minInteractionDistance)
                 {
-                    foreach (ResourceType type in _processor.GetOutputTypes())
+                    foreach (ResourceType type in _processors[agentNumber].GetOutputTypes())
                     {
-                        int maxToTake = _agents[0].GetInventorySpace();
+                        int maxToTake = agent.GetInventorySpace();
 
-                        int amountTaken = _processor.TakeResources(type, maxToTake);
+                        int amountTaken = _processors[agentNumber].TakeResources(type, maxToTake);
 
-                        _agents[0].AddToInventory(type, amountTaken);
+                        agent.AddToInventory(type, amountTaken);
                     }
 
-                    _agents[0].state = AgentState.STORING;
+                    agent.state = AgentState.STORING;
                 }
                 else
                 {
-                    _agents[0].SetMovingTowards(_processor.transform.position, _minInteractionDistance);
+                    agent.SetMovingTowards(_processors[agentNumber].transform.position, _minInteractionDistance);
                 }
             }
-            else if (_agents[0].state == AgentState.STORING)
+            else if (agent.state == AgentState.STORING)
             {
                 ResourceType typeToStore = ResourceType.NONE;
 
-                foreach (ResourceType type in _processor.GetOutputTypes())
+                foreach (ResourceType type in _processors[agentNumber].GetOutputTypes())
                 {
-                    if (_agents[0].CheckInventoryFor(type) > 0)
+                    if (agent.CheckInventoryFor(type) > 0)
                     {
                         typeToStore = type;
                         break;
@@ -150,7 +150,7 @@ public class ProcessorGuild : Guild
                 if (typeToStore != ResourceType.NONE)
                 {
                     float distanceToNearestStore;
-                    ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(typeToStore, _agents[0].transform.position, out distanceToNearestStore);
+                    ResourceStore nearestStore = _kingdomManager.NearestResourceStoreOfType(typeToStore, agent.transform.position, out distanceToNearestStore);
 
                     if (nearestStore == null)
                     {
@@ -160,26 +160,26 @@ public class ProcessorGuild : Guild
                     }
                     else if (distanceToNearestStore <= _minStoreDistance)
                     {
-                        int fromInventory = _agents[0].RemoveFromInventory(typeToStore);
+                        int fromInventory = agent.RemoveFromInventory(typeToStore);
 
                         int leftover = nearestStore.AddResources(typeToStore, fromInventory);
 
                         if (leftover > 0)
                         {
-                            _agents[0].AddToInventory(typeToStore, leftover);
+                            agent.AddToInventory(typeToStore, leftover);
                         }
                     }
                     else
                     {
-                        _agents[0].SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
+                        agent.SetMovingTowards(nearestStore.transform.position, _minStoreDistance);
                     }
                 }
                 else
                 {
-                    _agents[0].state = AgentState.WAITING;
+                    agent.state = AgentState.WAITING;
                 }
             }
-            else if (_agents[0].state == AgentState.COLLECTING)
+            else if (agent.state == AgentState.COLLECTING)
             {
                 ResourceStore nearestStore = null;
                 bool needSelected = false;
@@ -188,13 +188,13 @@ public class ProcessorGuild : Guild
 
                 foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
                 {
-                    if (_agents[0].CheckInventoryFor(need.Key) < need.Value)
+                    if (agent.CheckInventoryFor(need.Key) < need.Value)
                     {
                         needSelected = true;
                         pickupType = need.Key;
-                        pickupAmount = need.Value - _agents[0].CheckInventoryFor(need.Key);
+                        pickupAmount = need.Value - agent.CheckInventoryFor(need.Key);
 
-                        nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, true);
+                        nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, agent.transform.position, true);
                         break;
                     }
                 }
@@ -204,19 +204,19 @@ public class ProcessorGuild : Guild
                 #region If _fillInventory collect additional input sets till inventory is full
                 if (!needSelected && _fillInventory)
                 {
-                    InventoryDictionary processorInputs = _processor.GetInputs();
+                    InventoryDictionary processorInputs = _processors[agentNumber].GetInputs();
                     int multiplier = 2;
                     while (!needSelected)
                     {
                         foreach (KeyValuePair<ResourceType, int> need in processorInputs)
                         {
-                            if (_agents[0].CheckInventoryFor(need.Key) < (need.Value * multiplier))
+                            if (agent.CheckInventoryFor(need.Key) < (need.Value * multiplier))
                             {
                                 needSelected = true;
                                 pickupType = need.Key;
-                                pickupAmount = (need.Value * multiplier) - _agents[0].CheckInventoryFor(need.Key);
+                                pickupAmount = (need.Value * multiplier) - agent.CheckInventoryFor(need.Key);
 
-                                nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, _agents[0].transform.position, true);
+                                nearestStore = _kingdomManager.NearestResourceStoreOfType(need.Key, agent.transform.position, true);
                                 break;
                             }
                         }
@@ -233,62 +233,67 @@ public class ProcessorGuild : Guild
                         if (!processorNeedsAlreadyMeetable)
                             state = GuildState.INACTIVE;
                         else
-                            _agents[0].state = AgentState.DROP_OFF;
+                            agent.state = AgentState.DROP_OFF;
                     }
                     else
                     {
-                        CollectFromStore(_agents[0], nearestStore, pickupType, pickupAmount);
+                        CollectFromStore(agent, nearestStore, pickupType, pickupAmount);
                     }
                 }
 
-                if (_agents[0].GetInventorySpace() <= 0 || !needSelected)
+                if (agent.GetInventorySpace() <= 0 || !needSelected)
                 {
-                    _agents[0].state = AgentState.DROP_OFF;
+                    agent.state = AgentState.DROP_OFF;
                 }
             }
-            else if (_agents[0].state == AgentState.DROP_OFF)
+            else if (agent.state == AgentState.DROP_OFF)
             {
-                float distanceToProcessor = (_agents[0].transform.position - _processor.transform.position).magnitude;
+                float distanceToProcessor = (agent.transform.position - _processors[agentNumber].transform.position).magnitude;
 
                 if (distanceToProcessor <= _minInteractionDistance)
                 {
                     foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
                     {
-                        int fromInventory = _agents[0].RemoveFromInventory(need.Key);
+                        int fromInventory = agent.RemoveFromInventory(need.Key);
 
-                        int leftover = _processor.AddResources(need.Key, fromInventory);
+                        int leftover = _processors[agentNumber].AddResources(need.Key, fromInventory);
 
                         if (leftover > 0)
                         {
-                            _agents[0].AddToInventory(need.Key, leftover);
+                            agent.AddToInventory(need.Key, leftover);
                         }
                     }
 
-                    if (_agents[0].GetCurrentTotalInventory() > 0)
+                    if (agent.GetCurrentTotalInventory() > 0)
                     {
                         //Inventory has other items in it
-                        _agents[0].state = AgentState.CLEAR_INVENTORY;
+                        agent.state = AgentState.CLEAR_INVENTORY;
                     }
                     else
                     {
-                        _agents[0].state = AgentState.WAITING;
+                        agent.state = AgentState.WAITING;
                     }
                 }
                 else
                 {
-                    _agents[0].SetMovingTowards(_processor.transform.position, _minInteractionDistance);
+                    agent.SetMovingTowards(_processors[agentNumber].transform.position, _minInteractionDistance);
                 }
             }
+
 
         }
     }
     protected override void InactiveUpdate()
     {
-        if (!_processor.HasNeeds())
+        foreach (ResourceProcessor processor in _processors)
         {
-            state = GuildState.ACTIVE;
+            if (!processor.HasNeeds())
+            {
+                state = GuildState.ACTIVE;
+                return;
+            }
         }
-        else if (_inactiveForSpace)
+        if (_inactiveForSpace)
         {
             if (_kingdomManager.FirstResourceStoreOfType(_spaceNeededFor) != null)
             {
@@ -313,5 +318,17 @@ public class ProcessorGuild : Guild
                 state = GuildState.ACTIVE;
             }
         }
+    }
+
+
+    public void AddProcessor(ResourceProcessor processor)
+    {
+        if (!_processors.Contains(processor))
+            _processors.Add(processor);
+    }
+    public void RemoveProcessor(ResourceProcessor processor)
+    {
+        if (_processors.Contains(processor))
+            _processors.Remove(processor);
     }
 }

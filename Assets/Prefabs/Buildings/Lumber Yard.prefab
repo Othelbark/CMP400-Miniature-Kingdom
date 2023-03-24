@@ -98,7 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipName: Lumber Yard
   _tooltipText: Makes planks from wood
+  _assignedAgents: []
   guild: {fileID: 0}
+  _processorType: LumberYard
   _processInput:
     m_keys: 01000000
     m_values: 14000000
