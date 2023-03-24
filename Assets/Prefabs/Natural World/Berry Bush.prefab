@@ -102,13 +102,18 @@ MonoBehaviour:
   resourceType: 5
   _currentResources: 0
   _infiniteResorces: 0
-  gatherers: []
+  _gatherers: []
   _maxGatherers: 1
   _growthRate: 3
   _maxGrowth: 150
   _infiniteGrowth: 1
   _minGrowth: 50
   _stopGrowthOnHarvest: 0
+  _harvestedSprite: {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
+  _growthSprites:
+  - {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
+  - {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
+  - {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
 --- !u!58 &5610470418357727218
 CircleCollider2D:
   m_ObjectHideFlags: 0

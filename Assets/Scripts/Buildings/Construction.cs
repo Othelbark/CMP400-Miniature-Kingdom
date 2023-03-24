@@ -95,6 +95,7 @@ public class Construction : Building
                     {
                         agent.ClearTargetBuilding();
                     }
+
                     Destroy(gameObject);
                     return;
                 }
