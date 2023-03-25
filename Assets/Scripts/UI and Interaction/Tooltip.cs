@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Tooltip : MonoBehaviour
 {
@@ -24,24 +25,56 @@ public class Tooltip : MonoBehaviour
 
 
     public ContactFilter2D tooltipableFilter;
+    public ContactFilter2D tooltipableFilterUI;
+
+    GraphicRaycaster _Raycaster;
+    PointerEventData _PointerEventData;
+    EventSystem _EventSystem;
 
     // Start is called before the first frame update
     void Start()
     {
         _text.gameObject.SetActive(false);
         _image.gameObject.SetActive(false);
+
+        
+        _Raycaster = GetComponentInParent<GraphicRaycaster>();
+        _EventSystem = GetComponent<EventSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        TooltipedObject tooltipedObject = null;
+
         List<RaycastHit2D> hits = new List<RaycastHit2D>();
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
-        if (Physics2D.Raycast(mousePos2D, Vector2.zero, tooltipableFilter, hits) > 0)
+        //Set up the new Pointer Event
+        _PointerEventData = new PointerEventData(_EventSystem);
+        _PointerEventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        _Raycaster.Raycast(_PointerEventData, results);
+
+        if (results.Count > 0)
         {
-            TooltipedObject tooltipedObject;
+            tooltipedObject = results[0].gameObject.GetComponentInParent<TooltipedObject>();
+        }
+
+
+        if (tooltipedObject != null)
+        {
+            SetText(tooltipedObject.GetText());
+            if (!_active)
+            {
+                _active = true;
+                _text.gameObject.SetActive(true);
+                _image.gameObject.SetActive(true);
+            }
+        }
+        else if (Physics2D.Raycast(mousePos2D, Vector2.zero, tooltipableFilter, hits) > 0)
+        {
             if (tooltipedObject = hits[0].transform.gameObject.GetComponent<TooltipedObject>())
             {
                 SetText(tooltipedObject.GetText());
@@ -71,6 +104,16 @@ public class Tooltip : MonoBehaviour
         if (_active)
         {
             transform.position = (Vector2)Input.mousePosition + _offset;
+
+            if (transform.position.y - _image.rectTransform.sizeDelta.y < 0)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + _image.rectTransform.sizeDelta.y - (_offset.y * 2), transform.position.z);
+            }
+
+            if (transform.position.x + _image.rectTransform.sizeDelta.x > Screen.width)
+            {
+                transform.position = new Vector3(transform.position.x - _image.rectTransform.sizeDelta.x - (_offset.x * 2), transform.position.y, transform.position.z);
+            }
         }
     }
 

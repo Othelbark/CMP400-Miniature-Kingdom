@@ -717,7 +717,7 @@ GameObject:
   - component: {fileID: 125164667}
   - component: {fileID: 125164669}
   - component: {fileID: 125164668}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -977,10 +977,10 @@ RectTransform:
   m_Father: {fileID: 450071874}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &222140281
 PrefabInstance:
@@ -1086,6 +1086,7 @@ GameObject:
   - component: {fileID: 272604582}
   - component: {fileID: 272604583}
   - component: {fileID: 272604584}
+  - component: {fileID: 272604585}
   m_Layer: 5
   m_Name: Time Speed Controls
   m_TagString: Untagged
@@ -1115,10 +1116,10 @@ RectTransform:
   m_Father: {fileID: 450071874}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -960, y: 540}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &272604583
 CanvasRenderer:
@@ -1141,6 +1142,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &272604585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272604581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Game Speed Controls
+  _tooltipText: Adjust the game speed
 --- !u!1 &275406008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1959,7 +1974,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2721,8 +2736,8 @@ RectTransform:
   m_Father: {fileID: 1332635528}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3145,8 +3160,8 @@ RectTransform:
   m_Father: {fileID: 1031741739}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3703,6 +3718,7 @@ GameObject:
   - component: {fileID: 856084525}
   - component: {fileID: 856084526}
   - component: {fileID: 856084527}
+  - component: {fileID: 856084528}
   m_Layer: 5
   m_Name: Slider (2)
   m_TagString: Untagged
@@ -3730,7 +3746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -490, y: -470}
+  m_AnchoredPosition: {x: 425, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &856084526
@@ -3809,6 +3825,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priorityName: gatherSTONE
+--- !u!114 &856084528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856084524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Stone Miners Focus
+  _tooltipText: How much focus is on gathering stone
 --- !u!1 &866781401
 GameObject:
   m_ObjectHideFlags: 0
@@ -3896,7 +3926,7 @@ GameObject:
   - component: {fileID: 882876146}
   - component: {fileID: 882876148}
   - component: {fileID: 882876147}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4203,6 +4233,7 @@ GameObject:
   - component: {fileID: 907547198}
   - component: {fileID: 907547200}
   - component: {fileID: 907547199}
+  - component: {fileID: 907547201}
   m_Layer: 5
   m_Name: Slider (5)
   m_TagString: Untagged
@@ -4230,7 +4261,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -290, y: -470}
+  m_AnchoredPosition: {x: 625, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &907547199
@@ -4309,6 +4340,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &907547201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 907547197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Builders Focus
+  _tooltipText: How much focus is on construction
 --- !u!1 &908627032
 GameObject:
   m_ObjectHideFlags: 0
@@ -4502,7 +4547,7 @@ GameObject:
   - component: {fileID: 943483351}
   - component: {fileID: 943483353}
   - component: {fileID: 943483352}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4638,6 +4683,7 @@ GameObject:
   - component: {fileID: 977257565}
   - component: {fileID: 977257567}
   - component: {fileID: 977257566}
+  - component: {fileID: 977257568}
   m_Layer: 5
   m_Name: Slider (4)
   m_TagString: Untagged
@@ -4665,7 +4711,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 110, y: -470}
+  m_AnchoredPosition: {x: 1025, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &977257566
@@ -4744,6 +4790,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &977257568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 977257564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Stone Cutters Focus
+  _tooltipText: How much focus is on making stone blocks
 --- !u!1001 &1004550636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4769,11 +4829,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5561669530525149655, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.7
+      value: 10.158
       objectReference: {fileID: 0}
     - target: {fileID: 5561669530525149655, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.12
+      value: -0.524
       objectReference: {fileID: 0}
     - target: {fileID: 5561669530525149655, guid: 49833873b886aed4db07667023544c78, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4997,6 +5057,7 @@ GameObject:
   - component: {fileID: 1083258900}
   - component: {fileID: 1083258901}
   - component: {fileID: 1083258902}
+  - component: {fileID: 1083258903}
   m_Layer: 5
   m_Name: Slider (1)
   m_TagString: Untagged
@@ -5024,7 +5085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -690, y: -470}
+  m_AnchoredPosition: {x: 225, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1083258901
@@ -5103,6 +5164,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priorityName: gatherFOOD
+--- !u!114 &1083258903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083258899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Fruit Pickers Focus
+  _tooltipText: How much focus is on gathering food
 --- !u!1001 &1083654538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5986,7 +6061,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7100,8 +7175,8 @@ RectTransform:
   m_Father: {fileID: 1920374170}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7349,6 +7424,7 @@ GameObject:
   - component: {fileID: 1640806312}
   - component: {fileID: 1640806313}
   - component: {fileID: 1640806314}
+  - component: {fileID: 1640806315}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -7376,7 +7452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -890, y: -470}
+  m_AnchoredPosition: {x: 25, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1640806313
@@ -7455,6 +7531,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priorityName: gatherWOOD
+--- !u!114 &1640806315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640806311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Foresters Focus
+  _tooltipText: How much focus is on gathering wood
 --- !u!1 &1648235292
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,7 +7556,7 @@ GameObject:
   - component: {fileID: 1648235293}
   - component: {fileID: 1648235295}
   - component: {fileID: 1648235294}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7939,7 +8029,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -7992,7 +8082,7 @@ GameObject:
   - component: {fileID: 1730728212}
   - component: {fileID: 1730728214}
   - component: {fileID: 1730728213}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8633,8 +8723,8 @@ RectTransform:
   m_Father: {fileID: 1128477646}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8840,7 +8930,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8893,6 +8983,7 @@ GameObject:
   - component: {fileID: 1997976851}
   - component: {fileID: 1997976852}
   - component: {fileID: 1997976853}
+  - component: {fileID: 1997976854}
   m_Layer: 5
   m_Name: Slider (3)
   m_TagString: Untagged
@@ -8920,7 +9011,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -90, y: -470}
+  m_AnchoredPosition: {x: 825, y: 15}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1997976852
@@ -8999,6 +9090,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priorityName: processPLANKS
+--- !u!114 &1997976854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997976850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Carpenters Focus
+  _tooltipText: How much focus is on making planks
 --- !u!1 &2014949671
 GameObject:
   m_ObjectHideFlags: 0
@@ -9153,7 +9258,7 @@ GameObject:
   - component: {fileID: 2052789481}
   - component: {fileID: 2052789483}
   - component: {fileID: 2052789482}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9487,8 +9592,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1947, y: -1094}
-  m_SizeDelta: {x: 200, y: 80}
+  m_AnchoredPosition: {x: 2450, y: -466}
+  m_SizeDelta: {x: 200, y: 84.0465}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2123099075
 MonoBehaviour:
@@ -9517,7 +9622,21 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 448
+      m_Bits: 1472
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  tooltipableFilterUI:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0

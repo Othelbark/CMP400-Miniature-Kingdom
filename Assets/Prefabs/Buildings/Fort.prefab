@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7742054266361794164}
   - component: {fileID: 1436783234290018987}
-  - component: {fileID: 8285642203045774024}
+  - component: {fileID: -2580271062153935047}
   m_Layer: 7
   m_Name: Fort
   m_TagString: Untagged
@@ -59,7 +59,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6024787, y: 1.7840738}
   m_EdgeRadius: 0
---- !u!114 &8285642203045774024
+--- !u!114 &-2580271062153935047
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,12 +68,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 7742054266361794165}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f399f53b98a1f54d919d154196cad93, type: 3}
+  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Castle
-  _tooltipText: With this we are sure to survive the coming attack!
+  _tooltipText: With this we are sure to withstand the coming attack!
   _assignedAgents: []
+  _currentResorces:
+    m_keys: 05000000
+    m_values: 00000000
+  _currentResourcesTotal: 0
+  _capacity: 5000
 --- !u!1 &7909796295155007946
 GameObject:
   m_ObjectHideFlags: 0
