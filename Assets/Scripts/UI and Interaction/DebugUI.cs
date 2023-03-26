@@ -73,7 +73,7 @@ public class DebugUI : MonoBehaviour
             }
         }
 
-        textOutput += "\n\n\n\n";
+        textOutput += "\n\n\n";
 
         textOutput += "Interaction System: " + _interactionSystemController.GetControlType() + "\n";
 

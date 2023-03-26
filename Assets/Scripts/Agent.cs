@@ -32,6 +32,18 @@ public class Agent : TooltipedObject
     public Gatherable targetGatherable { get; protected set; } = null;
     public ResourceType targetResource { get; protected set; } = ResourceType.NONE;
 
+    [SerializeField]
+    protected Sprite[] _sprites;
+
+    void Awake()
+    {
+        //Randomise sprites
+        if (_sprites.Length > 0)
+        {
+            GetComponentInChildren<SpriteRenderer>().sprite = _sprites[Random.Range(0, _sprites.Length)];
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
