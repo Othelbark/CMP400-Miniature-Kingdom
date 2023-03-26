@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1673732733077124514, guid: c56394ab3a7c2ba4994c4ba489a9e163, type: 3}
+  m_Sprite: {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,11 +125,11 @@ MonoBehaviour:
   _infiniteGrowth: 0
   _minGrowth: 85
   _stopGrowthOnHarvest: 1
-  _harvestedSprite: {fileID: -1673732733077124514, guid: c56394ab3a7c2ba4994c4ba489a9e163, type: 3}
+  _harvestedSprite: {fileID: 7206596762985347369, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
   _growthSprites:
-  - {fileID: -1673732733077124514, guid: c56394ab3a7c2ba4994c4ba489a9e163, type: 3}
-  - {fileID: -1673732733077124514, guid: c56394ab3a7c2ba4994c4ba489a9e163, type: 3}
-  - {fileID: -1673732733077124514, guid: c56394ab3a7c2ba4994c4ba489a9e163, type: 3}
+  - {fileID: -326103253223400227, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  - {fileID: -8445164391672973102, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  - {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
   _minSpawnTime: 15
   _maxSpwanTime: 45
   _minSpawnDistance: 1
