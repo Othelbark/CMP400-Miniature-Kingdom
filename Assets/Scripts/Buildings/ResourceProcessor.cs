@@ -117,10 +117,10 @@ public class ResourceProcessor : Building
             }
 
             _processing = false;
-        }    
+        }
     }
 
-    
+
     //Returns false when needs are not met
     public bool Process(float dt)
     {
@@ -163,6 +163,17 @@ public class ResourceProcessor : Building
         }
 
         return needs;
+    }
+    public int GetNeedFor(ResourceType type)
+    {
+        if (!_processInput.ContainsKey(type))
+        {
+            //can't take resources of this type
+            Debug.LogWarning("Trying to check current need on a processor that never needs that type.");
+            return 0;
+        }
+
+        return Mathf.Max(_processInput[type] - _currentResorces[type], 0);
     }
 
     public InventoryDictionary GetInputs()
@@ -221,7 +232,6 @@ public class ResourceProcessor : Building
         _currentResorces[type] += amount;
         return 0;
     }
-
     //Returns amount actually taken
     public int TakeResources(ResourceType type, int amount)
     {
@@ -256,6 +266,17 @@ public class ResourceProcessor : Building
 
             return leftoverResources;
         }
+    }
+    public int GetCurrentResources(ResourceType type)
+    {
+        if (!_currentResorces.ContainsKey(type))
+        {
+            //can't take resources of this type
+            Debug.LogWarning("Trying to check current resources on a processor that never holds that type.");
+            return 0;
+        }
+
+        return _currentResorces[type];
     }
 
     public override string GetText(string additionalText = "")

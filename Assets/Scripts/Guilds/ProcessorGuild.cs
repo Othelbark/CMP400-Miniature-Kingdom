@@ -14,9 +14,6 @@ public class ProcessorGuild : Guild
 
     protected List<ResourceProcessor> _processors;
 
-    //[SerializeField] // Temp serialised
-    protected InventoryDictionary _currentProcessorNeeds;
-
     [SerializeField]
     [Tooltip("If true agents will always try to fill their invetory when collecting even if total needs are less than the agents capacity.")]
     protected bool _fillInventory = true;
@@ -39,8 +36,6 @@ public class ProcessorGuild : Guild
             state = GuildState.INACTIVE;
             Debug.LogError("No processor assigned to processor Guild");
         }
-
-        _currentProcessorNeeds = _processors[0].GetNeeds();
 
         base.Update();
     }
@@ -74,7 +69,7 @@ public class ProcessorGuild : Guild
             if (agent.state == AgentState.WAITING)
             {
 
-                if (_currentProcessorNeeds.Count == 0)
+                if (_processors[agentNumber].GetNeeds().Count == 0)
                 {
                     agent.state = AgentState.WORKING;
                     //WORKING -> WAITING
@@ -186,7 +181,7 @@ public class ProcessorGuild : Guild
                 ResourceType pickupType = ResourceType.NONE;
                 int pickupAmount = 0;
 
-                foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
+                foreach (KeyValuePair<ResourceType, int> need in _processors[agentNumber].GetNeeds())
                 {
                     if (agent.CheckInventoryFor(need.Key) < need.Value)
                     {
@@ -252,7 +247,7 @@ public class ProcessorGuild : Guild
 
                 if (distanceToProcessor <= _minInteractionDistance)
                 {
-                    foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
+                    foreach (KeyValuePair<ResourceType, int> need in _processors[agentNumber].GetNeeds())
                     {
                         int fromInventory = agent.RemoveFromInventory(need.Key);
 
@@ -305,9 +300,15 @@ public class ProcessorGuild : Guild
         {
             //determine when there are enough resources to reactivate
             bool enough = true;
-            foreach (KeyValuePair<ResourceType, int> need in _currentProcessorNeeds)
+            foreach (KeyValuePair<ResourceType, int> input in _processors[0].GetInputs())
             {
-                if (need.Value > _kingdomManager.GetTotalResources(need.Key))
+                int totalCurrentNeeds = 0;
+                foreach (ResourceProcessor processor in _processors)
+                {
+                    totalCurrentNeeds += processor.GetNeedFor(input.Key);
+                }
+
+                if (totalCurrentNeeds > _kingdomManager.GetTotalResources(input.Key))
                 {
                     enough = false;
                     break;
