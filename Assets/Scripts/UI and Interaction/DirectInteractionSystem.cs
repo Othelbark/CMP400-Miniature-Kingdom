@@ -76,8 +76,8 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                     if (processor = clicked[0].transform.gameObject.GetComponent<ResourceProcessor>())
                     {
                         Guild processorGuild = processor.guild;
-                        processorGuild.ClearAgents();
                         _selectedAgent.SetGuild(processor.guild);
+                        _selectedAgent.SetTargetBuilding(processor, true);
                         _selectedAgent.state = AgentState.WAITING;
                     }
 
