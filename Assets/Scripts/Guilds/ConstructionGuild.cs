@@ -195,7 +195,7 @@ public class ConstructionGuild : Guild
             }
             else if (agent.state == AgentState.DROP_OFF)
             {
-                Construction targetConstruction = agent.targetBuilding as Construction;
+                Construction targetConstruction = CheckAndUpdateAssignedBuilding(agent, ConstructionState.WAITING_FOR_RESOURCES, _waitingForResourcesConstructions);
                 if (targetConstruction == null)
                     continue;
 
