@@ -36,7 +36,7 @@ public class GrowableGatherable : Gatherable
     // Start is called before the first frame update
     new public void Start()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _renderer = GetComponentInChildren<SpriteRenderer>();
 
         base.Start();
 

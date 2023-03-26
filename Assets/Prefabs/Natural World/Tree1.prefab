@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8210296431267599414}
-  - component: {fileID: 5781655899463990783}
   - component: {fileID: 2577790087765673376}
   - component: {fileID: 7372256845369157351}
   m_Layer: 8
@@ -29,17 +28,101 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6713955940996044537}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5781655899463990783
-SpriteRenderer:
+--- !u!70 &2577790087765673376
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2174137302262737080}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.43}
+  m_Size: {x: 0.7, y: 0.85}
+  m_Direction: 0
+--- !u!114 &7372256845369157351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174137302262737080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb2007b11a79b3d46b125308c4fa6e21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Tree
+  _tooltipText: Source of wood
+  state: 2
+  resourceType: 1
+  _currentResources: 0
+  _infiniteResorces: 0
+  _gatherers: []
+  _maxGatherers: 1
+  _growthRate: 5
+  _maxGrowth: 300
+  _infiniteGrowth: 0
+  _minGrowth: 85
+  _stopGrowthOnHarvest: 1
+  _harvestedSprite: {fileID: 7206596762985347369, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  _growthSprites:
+  - {fileID: -326103253223400227, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  - {fileID: -8445164391672973102, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  - {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  _minSpawnTime: 15
+  _maxSpwanTime: 45
+  _minSpawnDistance: 1
+  _maxSpawnDistance: 1.5
+  _prefabToSpawnReference: {fileID: 11400000, guid: 5f15ee435eb9623479e42a307895ccac, type: 2}
+  _spawnOnlyWhenFullyGrown: 1
+--- !u!1 &3481336632798426864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6713955940996044537}
+  - component: {fileID: 6524677992469583425}
+  m_Layer: 8
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6713955940996044537
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481336632798426864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.37, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8210296431267599414}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6524677992469583425
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3481336632798426864}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -84,55 +167,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &2577790087765673376
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2174137302262737080}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.06}
-  m_Size: {x: 0.7, y: 0.85}
-  m_Direction: 0
---- !u!114 &7372256845369157351
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2174137302262737080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb2007b11a79b3d46b125308c4fa6e21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tooltipName: Tree
-  _tooltipText: Source of wood
-  state: 2
-  resourceType: 1
-  _currentResources: 0
-  _infiniteResorces: 0
-  _gatherers: []
-  _maxGatherers: 1
-  _growthRate: 5
-  _maxGrowth: 300
-  _infiniteGrowth: 0
-  _minGrowth: 85
-  _stopGrowthOnHarvest: 1
-  _harvestedSprite: {fileID: 7206596762985347369, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  _growthSprites:
-  - {fileID: -326103253223400227, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  - {fileID: -8445164391672973102, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  - {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  _minSpawnTime: 15
-  _maxSpwanTime: 45
-  _minSpawnDistance: 1
-  _maxSpawnDistance: 1.5
-  _prefabToSpawnReference: {fileID: 11400000, guid: 5f15ee435eb9623479e42a307895ccac, type: 2}
-  _spawnOnlyWhenFullyGrown: 1
