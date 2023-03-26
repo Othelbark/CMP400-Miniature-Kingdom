@@ -261,6 +261,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
     - target: {fileID: 7372256845369157351, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _prefabToSpawn
       value: 
@@ -2965,6 +2969,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5561669530525149655, guid: 49833873b886aed4db07667023544c78, type: 3}
   m_PrefabInstance: {fileID: 1004550636}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &659907825
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 871654240}
+    m_Modifications:
+    - target: {fileID: 8386973925896131286, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_Name
+      value: LumberYard (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
 --- !u!4 &675826189 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8093261565812110508, guid: a1001f75daf03ca489dc2131b839b674, type: 3}
@@ -3305,6 +3366,10 @@ PrefabInstance:
       propertyPath: _infiniteResorces
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
     - target: {fileID: 7372256845369157351, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _prefabToSpawn
       value: 
@@ -3912,6 +3977,7 @@ Transform:
   - {fileID: 1164071937}
   - {fileID: 8450082179441298643}
   - {fileID: 1537851951}
+  - {fileID: 973409111}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4622,6 +4688,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 7fe473763824ccc4eb1dba623a1142dc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1589812283646225251, guid: e88c59ea37a4fce498f0e135f299b579, type: 3}
     - target: {fileID: 7372256845369157351, guid: 7fe473763824ccc4eb1dba623a1142dc, type: 3}
       propertyPath: _currentResources
       value: 300
@@ -4672,6 +4742,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7fe473763824ccc4eb1dba623a1142dc, type: 3}
+--- !u!4 &973409111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8386973925896131287, guid: b78c42b69ed5ae545ab5a951bff2a6c6, type: 3}
+  m_PrefabInstance: {fileID: 659907825}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &977257564
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,6 +5066,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 2acb3f2bb8e1f9147985f0d5babd5a58, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 66971975631187390, guid: d040603872f30ba40a7e5fc6a55eaafc, type: 3}
     - target: {fileID: 7372256845369157351, guid: 2acb3f2bb8e1f9147985f0d5babd5a58, type: 3}
       propertyPath: _currentResources
       value: 300
@@ -5358,6 +5437,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
     - target: {fileID: 7372256845369157351, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _prefabToSpawn
       value: 
@@ -5899,6 +5982,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree3
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 2acb3f2bb8e1f9147985f0d5babd5a58, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 66971975631187390, guid: d040603872f30ba40a7e5fc6a55eaafc, type: 3}
     - target: {fileID: 7372256845369157351, guid: 2acb3f2bb8e1f9147985f0d5babd5a58, type: 3}
       propertyPath: _currentResources
       value: 300
@@ -6577,6 +6664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree2
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 7fe473763824ccc4eb1dba623a1142dc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1589812283646225251, guid: e88c59ea37a4fce498f0e135f299b579, type: 3}
     - target: {fileID: 7372256845369157351, guid: 7fe473763824ccc4eb1dba623a1142dc, type: 3}
       propertyPath: _currentResources
       value: 300
@@ -9739,6 +9830,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 5781655899463990783, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
     - target: {fileID: 7372256845369157351, guid: 86d82a998a599484da77cf82326f6acc, type: 3}
       propertyPath: _prefabToSpawn
       value: 
