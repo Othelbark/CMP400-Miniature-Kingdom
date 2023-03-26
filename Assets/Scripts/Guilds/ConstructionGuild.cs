@@ -197,7 +197,7 @@ public class ConstructionGuild : Guild
             {
                 Construction targetConstruction = agent.targetBuilding as Construction;
                 if (targetConstruction == null)
-                    Debug.LogError("Can't find targetConstruction for " + agent.name + " in " + agent.state + " state.");
+                    continue;
 
 
                 float distanceToConstruction = (agent.transform.position - targetConstruction.transform.position).magnitude;
@@ -365,7 +365,7 @@ public class ConstructionGuild : Guild
         #endregion
         if (targetConstruction == null)
         {
-            Debug.Log("Target construction not assigned while in " + agent.state + " state.");
+            //Debug.Log("Target construction not assigned while in " + agent.state + " state.");
             agent.state = AgentState.WAITING;
         }
 
