@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
+  m_Sprite: {fileID: -8924567018060274921, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,11 +109,11 @@ MonoBehaviour:
   _infiniteGrowth: 1
   _minGrowth: 50
   _stopGrowthOnHarvest: 0
-  _harvestedSprite: {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
+  _harvestedSprite: {fileID: 8692591382276977252, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
   _growthSprites:
-  - {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
-  - {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
-  - {fileID: 2343583747901788169, guid: 2d9f31e0864693f4c9cb6fb75f64f924, type: 3}
+  - {fileID: 8692591382276977252, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
+  - {fileID: 2291224180799952591, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
+  - {fileID: -8924567018060274921, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
 --- !u!58 &5610470418357727218
 CircleCollider2D:
   m_ObjectHideFlags: 0
