@@ -12,8 +12,7 @@ public class Construction : Building
 {
     public ConstructionState state = ConstructionState.WAITING_FOR_RESOURCES;
 
-    [SerializeField]
-    protected GameObject _buildingPrefab;
+    public GameObject buildingPrefab;
 
     [SerializeField]
     protected InventoryDictionary _resourceRequirements;
@@ -87,7 +86,7 @@ public class Construction : Building
             case ConstructionState.BUILDING:
                 if (_buildWork >= _buildTime)
                 {
-                    GameObject finishedBuilding = Instantiate(_buildingPrefab, _kingdomManager.transform);
+                    GameObject finishedBuilding = Instantiate(buildingPrefab, _kingdomManager.transform);
                     finishedBuilding.transform.position = transform.position;
 
                     _kingdomManager.RemoveConstruction(this);

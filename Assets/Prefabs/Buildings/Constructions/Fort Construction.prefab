@@ -131,7 +131,7 @@ MonoBehaviour:
   _tooltipText: It will be magnificant!
   _assignedAgents: []
   state: 0
-  _buildingPrefab: {fileID: 7742054266361794165, guid: ef1ef14ea1612c148a9b1cad862ab837, type: 3}
+  buildingPrefab: {fileID: 7742054266361794165, guid: ef1ef14ea1612c148a9b1cad862ab837, type: 3}
   _resourceRequirements:
     m_keys: 0400000003000000
     m_values: f4010000f4010000

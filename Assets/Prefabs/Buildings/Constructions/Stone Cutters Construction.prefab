@@ -49,7 +49,7 @@ MonoBehaviour:
   _tooltipText: With this we will be able to make stone blocks
   _assignedAgents: []
   state: 0
-  _buildingPrefab: {fileID: 6811097110775101050, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
+  buildingPrefab: {fileID: 6811097110775101050, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
   _resourceRequirements:
     m_keys: 0100000002000000
     m_values: e1000000af000000

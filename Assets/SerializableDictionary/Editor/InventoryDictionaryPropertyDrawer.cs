@@ -5,3 +5,7 @@ using UnityEditor;
 
 [CustomPropertyDrawer(typeof(InventoryDictionary))]
 public class InventoryDictionaryPropertyDrawer : SerializableDictionaryPropertyDrawer { }
+
+
+[CustomPropertyDrawer(typeof(PrefabsByString))]
+public class PrefabsByStringPropertyDrawer : SerializableDictionaryPropertyDrawer { }

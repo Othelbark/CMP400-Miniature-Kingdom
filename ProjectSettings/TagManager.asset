@@ -55,3 +55,6 @@ TagManager:
   - name: Agents
     uniqueID: 954448533
     locked: 0
+  - name: TransparentOverlay
+    uniqueID: 2193799471
+    locked: 0
