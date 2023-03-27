@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 16104367}
   - component: {fileID: 16104369}
   - component: {fileID: 16104368}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2193,7 +2193,7 @@ GameObject:
   - component: {fileID: 474575583}
   - component: {fileID: 474575585}
   - component: {fileID: 474575584}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2343,7 +2343,7 @@ GameObject:
   - component: {fileID: 510870954}
   - component: {fileID: 510870956}
   - component: {fileID: 510870955}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3456,7 +3456,8 @@ GameObject:
   - component: {fileID: 714326837}
   - component: {fileID: 714326836}
   - component: {fileID: 714326838}
-  m_Layer: 5
+  - component: {fileID: 714326839}
+  m_Layer: 10
   m_Name: Wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3569,6 +3570,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &714326839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714326834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Wood Drop-Off
+  _tooltipText: Cost
 --- !u!1 &726121275
 GameObject:
   m_ObjectHideFlags: 0
@@ -3882,7 +3897,8 @@ GameObject:
   - component: {fileID: 759128810}
   - component: {fileID: 759128809}
   - component: {fileID: 759128811}
-  m_Layer: 5
+  - component: {fileID: 759128812}
+  m_Layer: 10
   m_Name: Castle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3993,8 +4009,34 @@ MonoBehaviour:
   m_Group: {fileID: 1838747284}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1838747280}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &759128812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759128807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Castle
+  _tooltipText: Cost
 --- !u!1 &769665811
 GameObject:
   m_ObjectHideFlags: 0
@@ -5314,7 +5356,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 32
-    m_FontStyle: 0
+    m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 43
@@ -5653,7 +5695,8 @@ GameObject:
   - component: {fileID: 1049246721}
   - component: {fileID: 1049246720}
   - component: {fileID: 1049246722}
-  m_Layer: 5
+  - component: {fileID: 1049246723}
+  m_Layer: 10
   m_Name: Stockpile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5766,6 +5809,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1049246723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049246718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Stockpile
+  _tooltipText: Cost
 --- !u!1001 &1075607866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6116,7 +6173,7 @@ GameObject:
   - component: {fileID: 1113198087}
   - component: {fileID: 1113198089}
   - component: {fileID: 1113198088}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6386,7 +6443,8 @@ GameObject:
   - component: {fileID: 1169433966}
   - component: {fileID: 1169433965}
   - component: {fileID: 1169433967}
-  m_Layer: 5
+  - component: {fileID: 1169433968}
+  m_Layer: 10
   m_Name: Food
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6499,6 +6557,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1169433968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1169433963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Food Drop-Off
+  _tooltipText: Cost
 --- !u!1 &1169644460
 GameObject:
   m_ObjectHideFlags: 0
@@ -6688,7 +6760,7 @@ GameObject:
   - component: {fileID: 1196766090}
   - component: {fileID: 1196766092}
   - component: {fileID: 1196766091}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7499,7 +7571,7 @@ GameObject:
   - component: {fileID: 1382762139}
   - component: {fileID: 1382762141}
   - component: {fileID: 1382762140}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7944,7 +8016,7 @@ GameObject:
   - component: {fileID: 1446181080}
   - component: {fileID: 1446181082}
   - component: {fileID: 1446181081}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Selected
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8632,7 +8704,8 @@ GameObject:
   - component: {fileID: 1587774606}
   - component: {fileID: 1587774605}
   - component: {fileID: 1587774607}
-  m_Layer: 5
+  - component: {fileID: 1587774608}
+  m_Layer: 10
   m_Name: Stone Mason
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8745,6 +8818,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1587774608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587774603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Stone Mason
+  _tooltipText: Cost
 --- !u!1 &1588791880
 GameObject:
   m_ObjectHideFlags: 0
@@ -8757,7 +8844,8 @@ GameObject:
   - component: {fileID: 1588791883}
   - component: {fileID: 1588791882}
   - component: {fileID: 1588791884}
-  m_Layer: 5
+  - component: {fileID: 1588791885}
+  m_Layer: 10
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8870,6 +8958,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &1588791885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588791880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Stone Drop-Off
+  _tooltipText: Cost
 --- !u!1 &1595521494
 GameObject:
   m_ObjectHideFlags: 0
@@ -9870,6 +9972,7 @@ GameObject:
   - component: {fileID: 1838747283}
   - component: {fileID: 1838747282}
   - component: {fileID: 1838747284}
+  - component: {fileID: 1838747285}
   m_Layer: 5
   m_Name: Build Menu
   m_TagString: Untagged
@@ -9955,6 +10058,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 1
+--- !u!114 &1838747285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838747280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ac0190e96ab35d48b5b9f8401dd50b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1860255234
 GameObject:
   m_ObjectHideFlags: 0
@@ -11026,7 +11141,8 @@ GameObject:
   - component: {fileID: 2086137886}
   - component: {fileID: 2086137885}
   - component: {fileID: 2086137887}
-  m_Layer: 5
+  - component: {fileID: 2086137888}
+  m_Layer: 10
   m_Name: Lumber Yard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11139,6 +11255,20 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &2086137888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086137883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc3a4b3eb88dd1459825c001644615c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Lumber Yard
+  _tooltipText: Cost
 --- !u!1 &2112462016
 GameObject:
   m_ObjectHideFlags: 0
@@ -11274,6 +11404,7 @@ MonoBehaviour:
   _image: {fileID: 1522586356}
   _text: {fileID: 163717777}
   _offset: {x: 20, y: 0}
+  _tooltipLag: 0.4
   _verticalSpacing: 20
   _horizontalSpacing: 20
   _maxHorizontalSize: 500

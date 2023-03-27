@@ -15,6 +15,12 @@ public class Tooltip : MonoBehaviour
     protected Vector2 _offset;
 
     [SerializeField]
+    protected float _tooltipLag = 0.5f;
+    protected float _hoverTime = 0;
+    protected TooltipedObject _hoveredObject;
+    protected Vector3 _hoverPos;
+
+    [SerializeField]
     protected float _verticalSpacing = 20.0f;
     [SerializeField]
     protected float _horizontalSpacing = 20.0f;
@@ -65,39 +71,23 @@ public class Tooltip : MonoBehaviour
 
         if (tooltipedObject != null)
         {
-            SetText(tooltipedObject.GetText());
-            if (!_active)
-            {
-                _active = true;
-                _text.gameObject.SetActive(true);
-                _image.gameObject.SetActive(true);
-            }
+            TooltipHoverCheck(tooltipedObject);
         }
         else if (Physics2D.Raycast(mousePos2D, Vector2.zero, tooltipableFilter, hits) > 0)
         {
             if (tooltipedObject = hits[0].transform.gameObject.GetComponent<TooltipedObject>())
             {
-                SetText(tooltipedObject.GetText());
-                if (!_active)
-                {
-                    _active = true;
-                    _text.gameObject.SetActive(true);
-                    _image.gameObject.SetActive(true);
-                }
+                TooltipHoverCheck(tooltipedObject);
             }
             else
             {
+                DeactivateTooltip();
                 Debug.LogWarning("No tooltip on object in Tooltipable filter");
             }
         }
         else
         {
-            if (_active)
-            {
-                _active = false;
-                _text.gameObject.SetActive(false);
-                _image.gameObject.SetActive(false);
-            }
+            DeactivateTooltip();
         }
 
 
@@ -114,6 +104,55 @@ public class Tooltip : MonoBehaviour
             {
                 transform.position = new Vector3(transform.position.x - _image.rectTransform.sizeDelta.x - (_offset.x * 2), transform.position.y, transform.position.z);
             }
+        }
+    }
+
+    protected void TooltipHoverCheck(TooltipedObject tooltipedObject)
+    {
+        // Instantly tooltip agents
+        if (tooltipedObject is Agent)
+        {
+            ActivateTooltip(tooltipedObject.GetText());
+        }
+
+        if (tooltipedObject == _hoveredObject && _hoverPos == Input.mousePosition)
+        {
+            _hoverTime += Time.deltaTime;
+            if (_hoverTime >= _tooltipLag)
+            {
+                ActivateTooltip(tooltipedObject.GetText());
+            }
+        }
+        else
+        {
+            if (tooltipedObject != _hoveredObject)
+                DeactivateTooltip();
+
+            _hoverTime = 0;
+            _hoveredObject = tooltipedObject;
+            _hoverPos = Input.mousePosition;
+        }
+    }
+    protected void ActivateTooltip(string text)
+    {
+        SetText(text);
+        if (!_active)
+        {
+            _active = true;
+            _text.gameObject.SetActive(true);
+            _image.gameObject.SetActive(true);
+        }
+    }
+    protected void DeactivateTooltip()
+    {
+        if (_active)
+        {
+            _hoverTime = 0;
+            _hoveredObject = null;
+
+            _active = false;
+            _text.gameObject.SetActive(false);
+            _image.gameObject.SetActive(false);
         }
     }
 
