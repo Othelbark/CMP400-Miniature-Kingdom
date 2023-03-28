@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class InteractionSystemController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class InteractionSystemController : MonoBehaviour
 
         _timeRemaining = _timeLimit;
         _playerInteractionSystems[_activeIS].SetActive(true);
+
+        Time.timeScale = _activeTimeScale;
     }
 
     // Update is called once per frame
@@ -91,6 +94,14 @@ public class InteractionSystemController : MonoBehaviour
 
             _timerDisplay.text = "Time Remaining: " + niceTime;
 
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                int scene = SceneManager.GetActiveScene().buildIndex;
+                SceneManager.LoadScene(scene, LoadSceneMode.Single);
+            }
         }
     }
 

@@ -9698,7 +9698,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: R to Restart
 --- !u!222 &1699330393
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10113,7 +10113,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: R to Restart
 --- !u!222 &1766714799
 CanvasRenderer:
   m_ObjectHideFlags: 0
