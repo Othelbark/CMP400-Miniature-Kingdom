@@ -82,7 +82,6 @@ public class Tooltip : MonoBehaviour
             else
             {
                 DeactivateTooltip();
-                Debug.LogWarning("No tooltip on object in Tooltipable filter");
             }
         }
         else

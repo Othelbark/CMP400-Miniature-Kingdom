@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7822135869695204226}
   - component: {fileID: 2230433565945745184}
-  - component: {fileID: 5457208191120780561}
+  - component: {fileID: 407136366773553706}
   m_Layer: 7
   m_Name: Fort Construction
   m_TagString: Untagged
@@ -168,8 +168,8 @@ MonoBehaviour:
   - {fileID: -5212088112211034128, guid: 9f8099bdd00154d4598e873a91a8bc10, type: 3}
   - {fileID: -5086218367942438942, guid: 9f8099bdd00154d4598e873a91a8bc10, type: 3}
   - {fileID: -9153825285907572806, guid: 9f8099bdd00154d4598e873a91a8bc10, type: 3}
---- !u!61 &5457208191120780561
-BoxCollider2D:
+--- !u!60 &407136366773553706
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -181,16 +181,25 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0037384033, y: 0.85}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2, y: 2}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.6, y: 1.7372935}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4279538, y: 1.7865102}
+      - {x: -0.6477631, y: 1.3152176}
+      - {x: -0.6561154, y: 0.7485372}
+      - {x: -0.74971384, y: 0.74087006}
+      - {x: -0.8290889, y: -0.022506952}
+      - {x: 0.8422444, y: -0.028290272}
+      - {x: 0.7675463, y: 0.73258376}
+      - {x: 0.65645987, y: 0.73075294}
+      - {x: 0.65225905, y: 1.3464117}
+      - {x: 0.40743935, y: 1.7895062}

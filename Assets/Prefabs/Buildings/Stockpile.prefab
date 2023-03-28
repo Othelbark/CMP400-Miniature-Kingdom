@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7742054266361794164}
   - component: {fileID: 7742054266361794167}
-  - component: {fileID: 1436783234290018987}
+  - component: {fileID: 1416984637131589366}
   m_Layer: 7
   m_Name: Stockpile
   m_TagString: Untagged
@@ -135,8 +135,8 @@ MonoBehaviour:
     m_values: f4010000c8000000000000002c0100002c010000
   _currentResourcesTotal: 0
   _capacity: 10000
---- !u!61 &1436783234290018987
-BoxCollider2D:
+--- !u!60 &1416984637131589366
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,16 +148,33 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.43}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.5}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.2}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.19921145, y: 1.0522293}
+      - {x: -0.19841054, y: 0.71618646}
+      - {x: -0.118518695, y: 0.7050105}
+      - {x: -0.12370989, y: 0.6385565}
+      - {x: -0.69995654, y: 0.6531169}
+      - {x: -0.71178514, y: -0.2014172}
+      - {x: -0.12157361, y: -0.20117661}
+      - {x: -0.07507485, y: -0.03372495}
+      - {x: 0.2808646, y: -0.020223923}
+      - {x: 0.29757944, y: -0.20178494}
+      - {x: 0.6153274, y: -0.19636698}
+      - {x: 0.6111334, y: -0.14193282}
+      - {x: 0.72982305, y: -0.119576894}
+      - {x: 0.7196334, y: 0.16863522}
+      - {x: 0.5688932, y: 0.1748351}
+      - {x: 0.5788812, y: 0.66423637}
+      - {x: 0.660539, y: 0.7159181}
+      - {x: 0.6426796, y: 1.0491216}

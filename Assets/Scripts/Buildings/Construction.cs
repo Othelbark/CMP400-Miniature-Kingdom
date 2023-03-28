@@ -87,6 +87,7 @@ public class Construction : Building
                 if (_buildWork >= _buildTime)
                 {
                     GameObject finishedBuilding = Instantiate(buildingPrefab, _kingdomManager.transform);
+                    finishedBuilding.transform.SetParent(GameObject.FindGameObjectWithTag("BuildingParent").transform);
                     finishedBuilding.transform.position = transform.position;
 
                     _kingdomManager.RemoveConstruction(this);

@@ -7,7 +7,7 @@ public class KingdomManager : MonoBehaviour
     protected List<string> _firstNames = new List<string>() { "Adalhard", "Fabia", "Domitianus", "Dagfinnr", "Romaeus", "Valerius", "Ælfgar", "Thais", "Eudokimos", "Ragnhildr",
                                                                 "Lucius", "Rahul", "Berahthram", "Fachtna", "Pippin", "Nonna", "Raimund", "Dubgall", "Hardwin", "Æðelmær",
                                                                 "Tressach", "Maximianus", "Felinus", "Dubthach", "Maximilianus", "Lysandros", "Ásgeirr", "Constantia", "Benignus", "Mærwine",
-                                                                "Amalia", "Arsaces", "Manegold", "Theoderich", " Walahelin", "Eutychia", "Yseut", "Hallvarðr", "Alfarr", "Airmanagild",
+                                                                "Amalia", "Arsaces", "Manegold", "Theoderich", "Walahelin", "Eutychia", "Yseut", "Hallvarðr", "Alfarr", "Airmanagild",
                                                                 "Godfrey", "Blanch", "Primula", "Valeria", "Harmon", "Marva", "Clinton", "Gabby", "Totty", "Justin",
                                                                 "Torin", "Tasha", "Newt", "Gaby", "Ed", "Collins", "Bertram", "Gorden", "Tarah", "Barney"};
     protected List<string> _lastNames = new List<string>() { "Ecclestone", "Gardener", "Winston", "Kingsley", "Pound", "Walsh", "Norwood", "Dyer", "Ó Cnáimhín", "Montague",

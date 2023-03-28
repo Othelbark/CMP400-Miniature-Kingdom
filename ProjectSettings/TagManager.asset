@@ -15,6 +15,7 @@ TagManager:
   - ConstructionGuild
   - LumberYardGuild
   - StoneMasonGuild
+  - BuildingParent
   layers:
   - Default
   - TransparentFX
