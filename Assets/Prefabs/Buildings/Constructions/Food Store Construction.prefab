@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -217492279416537315, guid: a893a02894613a54f867215bec3b38d6, type: 3}
+  m_Sprite: {fileID: 799651160621298694, guid: f5dd68f7b1968b64a843273324566e69, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,10 +91,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8259614469996706630}
-  - component: {fileID: 5267919178185397818}
   - component: {fileID: 7594826889052809969}
+  - component: {fileID: 8938420809632710222}
   m_Layer: 7
-  m_Name: Food Store
+  m_Name: Food Store Construction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,26 +115,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5267919178185397818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8259614469996706649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tooltipName: Food Drop-Off
-  _tooltipText: Stores food
-  _assignedAgents: []
-  _currentResorces:
-    m_keys: 05000000
-    m_values: 00000000
-  _currentResourcesTotal: 0
-  _capacity: 1000
 --- !u!60 &7594826889052809969
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -166,3 +146,41 @@ PolygonCollider2D:
       - {x: -0.16234374, y: 0.0016885698}
       - {x: 0.16575614, y: 0.00087989867}
       - {x: 0.16351637, y: 0.2977943}
+--- !u!114 &8938420809632710222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8259614469996706649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb11e9cc5746b384c8e98540551375ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Food Drop-Off
+  _tooltipText: Will store food
+  _assignedAgents: []
+  state: 0
+  buildingPrefab: {fileID: 8259614469996706649, guid: 58fc0e34cdef76f4286b6f6d18a1178a, type: 3}
+  _resourceRequirements:
+    m_keys: 01000000
+    m_values: 32000000
+  _currentResorces:
+    m_keys: 
+    m_values: 
+  _buildTime: 5
+  _deconstructBuildWorkMultiplier: 2
+  _additionalBuildersScaler: 0.7
+  _maxBuilders: 1
+  _noConstructionSprites:
+  - spriteArray:
+    - {fileID: 799651160621298694, guid: f5dd68f7b1968b64a843273324566e69, type: 3}
+  - spriteArray:
+    - {fileID: -3572279179357052706, guid: f5dd68f7b1968b64a843273324566e69, type: 3}
+  _resourceDimension0: 1
+  _resourceDimension1: 0
+  _constructionSprites:
+  - {fileID: -4798004104557398357, guid: a893a02894613a54f867215bec3b38d6, type: 3}
+  - {fileID: -4951655122464439672, guid: a893a02894613a54f867215bec3b38d6, type: 3}
+  - {fileID: -7993274892034578372, guid: a893a02894613a54f867215bec3b38d6, type: 3}

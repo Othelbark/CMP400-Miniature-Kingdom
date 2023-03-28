@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tooltipName: Wood Store
+  _tooltipName: Wood Drop-Off
   _tooltipText: Stores wood
   _assignedAgents: []
   _currentResorces:

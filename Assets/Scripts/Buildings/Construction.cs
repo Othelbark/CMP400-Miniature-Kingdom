@@ -127,11 +127,6 @@ public class Construction : Building
 
     protected void UpdateVisual()
     {
-        if (!_resourceRequirements.ContainsKey(_resourceDimension0) || !_resourceRequirements.ContainsKey(_resourceDimension1))
-        {
-            Debug.LogWarning("Invalid resorceDimension Key");
-            return;
-        }
 
         if (state == ConstructionState.BUILDING || state == ConstructionState.DECONSTRUCTING)
         {
@@ -143,23 +138,38 @@ public class Construction : Building
         }
         else
         {
-            int dimension0 = 0;
-            int dimension1 = 0;
+            if (_resourceDimension0 == ResourceType.NONE)
+            {
+                //no resourceDimensions
+                _spriteRenderer.sprite = _noConstructionSprites[0].spriteArray[0];
 
-            if (_currentResorces[_resourceDimension0] >= _resourceRequirements[_resourceDimension0])
+                return;
+            }
+
+            int dimension0 = 0;
+            if (_currentResorces[_resourceDimension0] >= _resourceRequirements[_resourceDimension0] && _noConstructionSprites.Length > 2)
             {
                 dimension0 = 2;
             }
-            else if (_currentResorces[_resourceDimension0] > 0)
+            else if (_currentResorces[_resourceDimension0] > 0 && _noConstructionSprites.Length > 1)
             {
                 dimension0 = 1;
             }
 
-            if (_currentResorces[_resourceDimension1] >= _resourceRequirements[_resourceDimension1])
+            if (_resourceDimension1 == ResourceType.NONE)
+            {
+                // only one resourceDimension
+                _spriteRenderer.sprite = _noConstructionSprites[dimension0].spriteArray[0];
+
+                return;
+            }
+
+            int dimension1 = 0;
+            if (_currentResorces[_resourceDimension1] >= _resourceRequirements[_resourceDimension1] && _noConstructionSprites[dimension0].spriteArray.Length > 2)
             {
                 dimension1 = 2;
             }
-            else if (_currentResorces[_resourceDimension1] > 0)
+            else if (_currentResorces[_resourceDimension1] > 0 && _noConstructionSprites[dimension0].spriteArray.Length > 1)
             {
                 dimension1 = 1;
             }

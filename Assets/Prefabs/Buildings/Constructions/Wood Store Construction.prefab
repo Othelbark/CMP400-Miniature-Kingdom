@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4365087580106326157
+--- !u!1 &4304142780662148467
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,58 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4365087580106326162}
-  - component: {fileID: 515815038730382830}
-  - component: {fileID: 4423658017618410426}
+  - component: {fileID: 4304142780662148460}
+  - component: {fileID: 4482218007907005542}
+  - component: {fileID: 6745335053477867591}
   m_Layer: 7
-  m_Name: Stone Store
+  m_Name: Wood Store Construction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4365087580106326162
+--- !u!4 &4304142780662148460
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4365087580106326157}
+  m_GameObject: {fileID: 4304142780662148467}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8379111521000243516}
+  - {fileID: 8816045010556811635}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &515815038730382830
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4365087580106326157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7520c0dd9037e9641b4b0d10a5b4d025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tooltipName: Stone Drop-Off
-  _tooltipText: Stores stone
-  _assignedAgents: []
-  _currentResorces:
-    m_keys: 02000000
-    m_values: 00000000
-  _currentResourcesTotal: 0
-  _capacity: 1000
---- !u!60 &4423658017618410426
+--- !u!60 &4482218007907005542
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4365087580106326157}
+  m_GameObject: {fileID: 4304142780662148467}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -78,25 +58,50 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.13545984, y: 0.28106788}
-      - {x: -0.13186589, y: 0.13257688}
-      - {x: -0.16236918, y: 0.13108686}
-      - {x: -0.16455486, y: 0.07089187}
-      - {x: -0.23604389, y: 0.077400394}
-      - {x: -0.31772742, y: 0.011286318}
-      - {x: -0.31393793, y: -0.064677015}
-      - {x: -0.19153407, y: -0.07223339}
-      - {x: -0.14258134, y: -0.04482853}
-      - {x: -0.14119309, y: -0.003843762}
-      - {x: -0.065644205, y: 0.003730584}
-      - {x: -0.01755771, y: -0.0682491}
-      - {x: 0.0646459, y: -0.06448271}
-      - {x: 0.069888435, y: 0.0024752468}
-      - {x: 0.18265615, y: 0.009880662}
-      - {x: 0.18336341, y: 0.13534486}
-      - {x: 0.13545275, y: 0.13530038}
-      - {x: 0.13464785, y: 0.28501433}
---- !u!1 &5636157609718129234
+    - - {x: 0.006423086, y: 0.348058}
+      - {x: -0.16958141, y: 0.31776735}
+      - {x: -0.16977257, y: -0.0006400198}
+      - {x: 0.18787828, y: -0.0015241653}
+      - {x: 0.18596447, y: 0.31632444}
+--- !u!114 &6745335053477867591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4304142780662148467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb11e9cc5746b384c8e98540551375ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipName: Wood Drop-Off
+  _tooltipText: Will store wood
+  _assignedAgents: []
+  state: 0
+  buildingPrefab: {fileID: 4304142780662148467, guid: 90313485cb160f449b0a55fb69c05593, type: 3}
+  _resourceRequirements:
+    m_keys: 01000000
+    m_values: 32000000
+  _currentResorces:
+    m_keys: 
+    m_values: 
+  _buildTime: 5
+  _deconstructBuildWorkMultiplier: 2
+  _additionalBuildersScaler: 0.7
+  _maxBuilders: 1
+  _noConstructionSprites:
+  - spriteArray:
+    - {fileID: 6192723598013938928, guid: 0e20d5f41d075a44c83dfdc528562a20, type: 3}
+  - spriteArray:
+    - {fileID: -5797662443945912403, guid: 0e20d5f41d075a44c83dfdc528562a20, type: 3}
+  _resourceDimension0: 1
+  _resourceDimension1: 0
+  _constructionSprites:
+  - {fileID: -6479456904568273131, guid: 47dce1373f4827c44a8a6c837037bbe4, type: 3}
+  - {fileID: -6193234756985101007, guid: 47dce1373f4827c44a8a6c837037bbe4, type: 3}
+  - {fileID: -4749145637937744373, guid: 47dce1373f4827c44a8a6c837037bbe4, type: 3}
+--- !u!1 &8325771764806525289
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -104,8 +109,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8379111521000243516}
-  - component: {fileID: 5493884957489181555}
+  - component: {fileID: 8816045010556811635}
+  - component: {fileID: 3481317422357693983}
   m_Layer: 7
   m_Name: Image
   m_TagString: Untagged
@@ -113,27 +118,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8379111521000243516
+--- !u!4 &8816045010556811635
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636157609718129234}
+  m_GameObject: {fileID: 8325771764806525289}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4365087580106326162}
+  m_Father: {fileID: 4304142780662148460}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5493884957489181555
+--- !u!212 &3481317422357693983
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5636157609718129234}
+  m_GameObject: {fileID: 8325771764806525289}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -167,7 +172,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 5444857153223597502, guid: 0a067c2a61316e5409d593b3de675423, type: 3}
+  m_Sprite: {fileID: 6192723598013938928, guid: 0e20d5f41d075a44c83dfdc528562a20, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
