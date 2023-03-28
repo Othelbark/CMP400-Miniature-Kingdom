@@ -16,6 +16,12 @@ public class ResourceStore : Building
     protected int _capacity = 100;
 
 
+    [SerializeField]
+    protected Sprite[] _fullnessSprites;
+    protected Sprite _emptySprite;
+    protected SpriteRenderer _renderer;
+
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -29,13 +35,40 @@ public class ResourceStore : Building
         {
             _currentResourcesTotal += item.Value;
         }
+
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+        _emptySprite = _renderer.sprite;
     }
 
     // Update is called once per frame
     new void Update()
     {
         base.Update();
+
+        UpdateVisual();
     }
+
+
+    protected void UpdateVisual()
+    {
+        if (_fullnessSprites.Length > 1 && _currentResourcesTotal > 0)
+        {
+            float fractionFull = (float)_currentResourcesTotal / (float)_capacity;
+
+            int fullnessIndex = Mathf.FloorToInt(fractionFull * (_fullnessSprites.Length - 1));
+
+            _renderer.sprite = _fullnessSprites[fullnessIndex];
+        }
+        else
+        {
+            if (_fullnessSprites.Length == 1 && _currentResourcesTotal > 0)
+            {
+                _renderer.sprite = _fullnessSprites[0];
+            }
+            _renderer.sprite = _emptySprite;
+        }
+    }
+
 
     public int GetSpace()
     {

@@ -135,6 +135,12 @@ MonoBehaviour:
     m_values: 00000000
   _currentResourcesTotal: 0
   _capacity: 1000
+  _fullnessSprites:
+  - {fileID: -254707292145422966, guid: 371a4cd52e29a184784a6ae8309dd2e4, type: 3}
+  - {fileID: -8784569369227017933, guid: 371a4cd52e29a184784a6ae8309dd2e4, type: 3}
+  - {fileID: -8863525326903807107, guid: 371a4cd52e29a184784a6ae8309dd2e4, type: 3}
+  - {fileID: 2472782753995014126, guid: 371a4cd52e29a184784a6ae8309dd2e4, type: 3}
+  - {fileID: -6411259095910757735, guid: 371a4cd52e29a184784a6ae8309dd2e4, type: 3}
 --- !u!60 &7594826889052809969
 PolygonCollider2D:
   m_ObjectHideFlags: 0

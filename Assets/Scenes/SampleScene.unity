@@ -11599,7 +11599,7 @@ MonoBehaviour:
   _image: {fileID: 1522586356}
   _text: {fileID: 163717777}
   _offset: {x: 20, y: 0}
-  _tooltipLag: 0.4
+  _tooltipLag: 0.25
   _verticalSpacing: 20
   _horizontalSpacing: 20
   _maxHorizontalSize: 500
