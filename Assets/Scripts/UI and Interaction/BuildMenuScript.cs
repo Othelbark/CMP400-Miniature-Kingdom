@@ -75,8 +75,6 @@ public class BuildMenuScript : MonoBehaviour
         {
             if (_selectedPrefab != _lastSelectedPrefab)
             {
-                _constructionDisplay.gameObject.SetActive(true);
-
                 _constructionDisplaySR.sprite = _selectedPrefab.GetComponent<Construction>().buildingPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
                 _constructionDisplaySR.transform.localPosition = _selectedPrefab.GetComponentInChildren<SpriteRenderer>().transform.localPosition;
 
@@ -86,6 +84,7 @@ public class BuildMenuScript : MonoBehaviour
                 _lastSelectedPrefab = _selectedPrefab;
             }
 
+            _constructionDisplay.gameObject.SetActive(true);
             Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _constructionDisplay.transform.position = new Vector3(mouseWorldPos.x, mouseWorldPos.y, 0);
 

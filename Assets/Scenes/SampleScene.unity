@@ -12282,6 +12282,14 @@ PrefabInstance:
       value: Stockpile
       objectReference: {fileID: 0}
     - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[0]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
+      propertyPath: _currentResorces.m_values.Array.data[1]
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742054266361794167, guid: d3374df173f447d438ba28aa95e75540, type: 3}
       propertyPath: _currentResorces.m_values.Array.data[3]
       value: 500
       objectReference: {fileID: 0}
