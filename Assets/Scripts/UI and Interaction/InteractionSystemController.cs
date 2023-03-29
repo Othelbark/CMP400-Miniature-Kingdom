@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class BuildingConstructedEvent : UnityEvent<string> { }
+public class BuildingConstructedEvent : UnityEvent<string, Building> { }
 
 public class InteractionSystemController : MonoBehaviour
 {
@@ -27,6 +27,8 @@ public class InteractionSystemController : MonoBehaviour
     [SerializeField]
     protected float _timeLimit = 300;
     protected float _timeRemaining;
+    [SerializeField]
+    protected int _foodInCastleToWin = 5000;
 
     protected bool _paused = false;
     protected float _activeTimeScale = 1.0f;
@@ -35,6 +37,7 @@ public class InteractionSystemController : MonoBehaviour
 
     [HideInInspector]
     public BuildingConstructedEvent buildingConstructedEvent;
+    protected ResourceStore _castle = null;
 
     void Awake()
     {
@@ -110,6 +113,15 @@ public class InteractionSystemController : MonoBehaviour
 
             _timerDisplay.text = "Time Remaining: " + niceTime;
 
+
+            if (_castle != null)
+            {
+                if (_castle.GetAmount(ResourceType.FOOD) >= _foodInCastleToWin)
+                {
+                    WinGame();
+                }
+            }
+
         }
         else
         {
@@ -133,11 +145,28 @@ public class InteractionSystemController : MonoBehaviour
         }
     }
 
-    void BuildingConstructed(string name)
+    void BuildingConstructed(string name, Building building)
     {
         if (name == "Castle")
         {
-            WinGame();
+            if ((_castle = building as ResourceStore) != null)
+            {
+                if (!_castle.HasType(ResourceType.FOOD))
+                {
+                    Debug.LogError("Castle cannot store food");
+                }
+                else
+                {
+                    if (_castle.GetSpace() < _foodInCastleToWin)
+                    {
+                        Debug.LogError("Castle cannot store enough food");
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("Castle is not a ResourceStore");
+            }
         }
     }
 

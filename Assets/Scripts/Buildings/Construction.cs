@@ -108,7 +108,7 @@ public class Construction : Building
                         agent.ClearTargetBuilding();
                     }
 
-                    _interactionSystemController.buildingConstructedEvent.Invoke(_tooltipName);
+                    _interactionSystemController.buildingConstructedEvent.Invoke(_tooltipName, finishedBuilding.GetComponent<Building>());
 
                     Destroy(gameObject);
                     return;

@@ -2245,6 +2245,7 @@ MonoBehaviour:
   _pauseMenu: {fileID: 885375851}
   _timerDisplay: {fileID: 1303968942}
   _timeLimit: 300
+  _foodInCastleToWin: 2000
 --- !u!4 &457137983
 Transform:
   m_ObjectHideFlags: 0
