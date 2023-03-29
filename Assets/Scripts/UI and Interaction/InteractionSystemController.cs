@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
+public class BuildingConstructedEvent : UnityEvent<string> { }
+
 public class InteractionSystemController : MonoBehaviour
 {
     [SerializeField]
@@ -30,6 +32,20 @@ public class InteractionSystemController : MonoBehaviour
     protected float _activeTimeScale = 1.0f;
 
     protected bool _gameOver;
+
+    [HideInInspector]
+    public BuildingConstructedEvent buildingConstructedEvent;
+
+    void Awake()
+    {
+
+        if (buildingConstructedEvent == null)
+        {
+            buildingConstructedEvent = new BuildingConstructedEvent();
+        }
+
+        buildingConstructedEvent.AddListener(BuildingConstructed);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -114,6 +130,14 @@ public class InteractionSystemController : MonoBehaviour
             _activeTimeScale = ts;
             if (!_paused)
                 Time.timeScale = _activeTimeScale;
+        }
+    }
+
+    void BuildingConstructed(string name)
+    {
+        if (name == "Castle")
+        {
+            WinGame();
         }
     }
 

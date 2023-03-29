@@ -45,6 +45,9 @@ public class Construction : Building
     protected Sprite[] _constructionSprites;
     protected SpriteRenderer _spriteRenderer;
 
+
+    protected InteractionSystemController _interactionSystemController;
+
     // Start is called before the first frame update
     new void Start()
     {
@@ -67,6 +70,15 @@ public class Construction : Building
         catch
         {
             Debug.LogError("No sprite renderer on construction.");
+        }
+
+        try
+        {
+            _interactionSystemController = GameObject.FindGameObjectWithTag("InteractionSystemController").GetComponent<InteractionSystemController>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find interaction system controller.");
         }
     }
 
@@ -95,6 +107,8 @@ public class Construction : Building
                     {
                         agent.ClearTargetBuilding();
                     }
+
+                    _interactionSystemController.buildingConstructedEvent.Invoke(_tooltipName);
 
                     Destroy(gameObject);
                     return;
