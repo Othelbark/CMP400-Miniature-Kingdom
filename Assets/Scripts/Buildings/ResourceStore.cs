@@ -21,6 +21,8 @@ public class ResourceStore : Building
     protected Sprite _emptySprite;
     protected SpriteRenderer _renderer;
 
+    public int priority = 0;
+
 
     // Start is called before the first frame update
     new void Start()

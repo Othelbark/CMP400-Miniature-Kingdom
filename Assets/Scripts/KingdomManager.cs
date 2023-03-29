@@ -215,7 +215,7 @@ public class KingdomManager : MonoBehaviour
     }
 
 
-    public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position, bool pickupSearch = false)
+    public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position, bool pickupSearch = false, int priorityFilter = -1)
     {
         float shortestDistance = float.MaxValue;
         ResourceStore nearestStore = null;
@@ -223,7 +223,7 @@ public class KingdomManager : MonoBehaviour
         //TODO: optimise
         foreach (ResourceStore s in _resourceStores)
         {
-            if (s.HasType(type) && ( (s.GetSpace() > 0.0f && !pickupSearch) || (pickupSearch && s.GetAmount(type) > 0) ) )
+            if (s.HasType(type) && ( (s.GetSpace() > 0.0f && !pickupSearch) || (pickupSearch && s.GetAmount(type) > 0) ) && (priorityFilter == -1 || priorityFilter == s.priority) )
             {
                 float distance = (s.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -236,7 +236,7 @@ public class KingdomManager : MonoBehaviour
 
         return nearestStore;
     }
-    public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position, out float shortestDistance, bool pickupSearch = false)
+    public ResourceStore NearestResourceStoreOfType(ResourceType type, Vector3 position, out float shortestDistance, bool pickupSearch = false, int priorityFilter = -1)
     {
         shortestDistance = float.MaxValue;
         ResourceStore nearestStore = null;
@@ -244,7 +244,7 @@ public class KingdomManager : MonoBehaviour
         //TODO: optimise
         foreach (ResourceStore s in _resourceStores)
         {
-            if (s.HasType(type) && ( (s.GetSpace() > 0.0f && !pickupSearch) || (pickupSearch && s.GetAmount(type) > 0) ) )
+            if (s.HasType(type) && ( (s.GetSpace() > 0.0f && !pickupSearch) || (pickupSearch && s.GetAmount(type) > 0) ) && (priorityFilter == -1 || priorityFilter == s.priority) )
             {
                 float distance = (s.gameObject.transform.position - position).magnitude;
                 if (distance < shortestDistance)
@@ -257,11 +257,11 @@ public class KingdomManager : MonoBehaviour
 
         return nearestStore;
     }
-    public ResourceStore FirstResourceStoreOfType(ResourceType type)
+    public ResourceStore FirstResourceStoreOfType(ResourceType type, bool pickupSearch = false, int priorityFilter = -1)
     {
         foreach (ResourceStore s in _resourceStores)
         {
-            if (s.HasType(type) && s.GetSpace() > 0.0f)
+            if (s.HasType(type) && ((s.GetSpace() > 0.0f && !pickupSearch) || (pickupSearch && s.GetAmount(type) > 0)) && (priorityFilter == -1 || priorityFilter == s.priority))
             {
                 return s;
             }

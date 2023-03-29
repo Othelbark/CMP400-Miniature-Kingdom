@@ -92,16 +92,16 @@ public class Tooltip : MonoBehaviour
 
         if (_active)
         {
-            transform.position = (Vector2)Input.mousePosition + _offset;
+            transform.position = (Vector2)Input.mousePosition + (_offset);
 
-            if (transform.position.y - _image.rectTransform.sizeDelta.y < 0)
+            if (transform.position.y - (_image.rectTransform.sizeDelta.y * (Screen.height / 1080.0f)) < 0)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y + _image.rectTransform.sizeDelta.y - (_offset.y * 2), transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y + (_image.rectTransform.sizeDelta.y * (Screen.height / 1080.0f)) - (_offset.y * 2), transform.position.z);
             }
 
-            if (transform.position.x + _image.rectTransform.sizeDelta.x > Screen.width)
+            if (transform.position.x + (_image.rectTransform.sizeDelta.x * (Screen.width / 1920.0f)) > Screen.width)
             {
-                transform.position = new Vector3(transform.position.x - _image.rectTransform.sizeDelta.x - (_offset.x * 2), transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x - (_image.rectTransform.sizeDelta.x * (Screen.width / 1920.0f)) - (_offset.x * 2), transform.position.y, transform.position.z);
             }
         }
     }

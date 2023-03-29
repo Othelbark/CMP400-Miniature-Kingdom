@@ -135,6 +135,8 @@ MonoBehaviour:
     m_values: 0000000000000000000000000000000000000000
   _currentResourcesTotal: 0
   _capacity: 10000
+  _fullnessSprites: []
+  priority: 1
 --- !u!60 &1416984637131589366
 PolygonCollider2D:
   m_ObjectHideFlags: 0
