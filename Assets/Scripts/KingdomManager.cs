@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class KingdomManager : MonoBehaviour
 {
@@ -363,10 +364,18 @@ public class KingdomManager : MonoBehaviour
     }
     public string GenerateDescription()
     {
+        List<string> discriptions = new List<string>();
+        while (discriptions.Count < 3)
+        {
+            discriptions.Add(_discriptors[Random.Range(0, _discriptors.Count)]);
+            discriptions = discriptions.Distinct().ToList();
+        }
+
+
         string description = "";
-        description += _discriptors[Random.Range(0, _lastNames.Count)] + ", ";
-        description += _discriptors[Random.Range(0, _lastNames.Count)] + ", and ";
-        description += _discriptors[Random.Range(0, _lastNames.Count)];
+        description += discriptions[0] + ", ";
+        description += discriptions[1] + ", and ";
+        description += discriptions[2];
 
         char[] chars = description.ToCharArray();
         chars[0] = char.ToUpper(chars[0]);
