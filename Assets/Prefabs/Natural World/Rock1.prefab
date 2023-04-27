@@ -131,10 +131,17 @@ MonoBehaviour:
   _tooltipText: Source of stone
   state: 2
   resourceType: 2
-  _currentResources: 0
-  _infiniteResorces: 1
+  _currentResources: 1000
+  _infiniteResorces: 0
   _gatherers: []
   _maxGatherers: 1
+  _gatheredSprites:
+  - {fileID: 1887494081247492234, guid: 528ad1deb92c58743b22c0b60a0a5ed1, type: 3}
+  - {fileID: -4424527623278021704, guid: 9944d5e7812c92348a6b6ce6210ad1ab, type: 3}
+  - {fileID: -6906984222715761314, guid: 9944d5e7812c92348a6b6ce6210ad1ab, type: 3}
+  - {fileID: -3054366700922682912, guid: 9944d5e7812c92348a6b6ce6210ad1ab, type: 3}
+  - {fileID: -5070765594236210191, guid: 9944d5e7812c92348a6b6ce6210ad1ab, type: 3}
+  - {fileID: -5329769783725449993, guid: 9944d5e7812c92348a6b6ce6210ad1ab, type: 3}
 --- !u!60 &5539130499704322422
 PolygonCollider2D:
   m_ObjectHideFlags: 0

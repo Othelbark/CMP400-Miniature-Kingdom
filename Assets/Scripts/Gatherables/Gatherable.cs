@@ -25,9 +25,18 @@ public class Gatherable : TooltipedObject
 
     protected bool _spent = false;
 
+
+    protected SpriteRenderer _renderer;
+
+    [SerializeField]
+    protected Sprite[] _gatheredSprites = new Sprite[3];
+    protected int _startingResources;
+
     // Start is called before the first frame update
     public void Start()
     {
+        _renderer = GetComponentInChildren<SpriteRenderer>();
+
         try
         {
             _naturalWorldManager = GameObject.FindGameObjectWithTag("NaturalWorldManager").GetComponent<NaturalWorldManager>();
@@ -42,6 +51,8 @@ public class Gatherable : TooltipedObject
         _naturalWorldManager.AddGatherable(this);
 
         state = GatherableState.GATHERABLE_READY;
+
+        _startingResources = _currentResources;
     }
 
     // Update is called once per frame
@@ -51,8 +62,21 @@ public class Gatherable : TooltipedObject
         {
             Spent();
         }
+        
+        UpdateVisual();
     }
 
+    protected virtual void UpdateVisual()
+    {
+        if (_gatheredSprites.Length > 0)
+        {
+            float remainingRatio = 1.0f - ((float)_currentResources / (float)_startingResources);
+            int index = Mathf.Min(Mathf.FloorToInt(remainingRatio * _gatheredSprites.Length), _gatheredSprites.Length - 1);
+
+
+            _renderer.sprite = _gatheredSprites[index];
+        }
+    }
 
     //Only call from Agent
     public bool AddGatherer(Agent gatherer, bool forceAdd = false)

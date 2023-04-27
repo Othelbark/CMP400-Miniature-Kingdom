@@ -25,19 +25,13 @@ public class GrowableGatherable : Gatherable
     protected int _totalGrowth = 0;
     protected float _residualGrowth = 0.0f;
 
-    protected SpriteRenderer _renderer;
-
     [SerializeField]
     [Tooltip("Only used if InfinteGrowth = false and StopGrowthOnHarvest = true")]
     protected Sprite _harvestedSprite;
-    [SerializeField]
-    protected Sprite[] _growthSprites = new Sprite[3];
 
     // Start is called before the first frame update
     new public void Start()
     {
-        _renderer = GetComponentInChildren<SpriteRenderer>();
-
         base.Start();
 
         _totalGrowth = _currentResources;
@@ -108,25 +102,24 @@ public class GrowableGatherable : Gatherable
             }
         }
 
-        UpdateVisual();
     }
 
 
-    protected void UpdateVisual()
+    protected override void UpdateVisual()
     {
         if (!_harvestStarted)
         {
             if (_currentResources < _minGrowth)
             {
-                _renderer.sprite = _growthSprites[0];
+                _renderer.sprite = _gatheredSprites[0];
             }
             else if (_currentResources < _maxGrowth)
             {
-                _renderer.sprite = _growthSprites[1];
+                _renderer.sprite = _gatheredSprites[1];
             }
             else
             {
-                _renderer.sprite = _growthSprites[2];
+                _renderer.sprite = _gatheredSprites[2];
             }
 
         }

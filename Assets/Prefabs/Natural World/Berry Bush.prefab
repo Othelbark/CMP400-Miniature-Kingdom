@@ -135,16 +135,16 @@ MonoBehaviour:
   _infiniteResorces: 0
   _gatherers: []
   _maxGatherers: 1
+  _gatheredSprites:
+  - {fileID: 8692591382276977252, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
+  - {fileID: 2291224180799952591, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
+  - {fileID: -8924567018060274921, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
   _growthRate: 3
   _maxGrowth: 150
   _infiniteGrowth: 1
   _minGrowth: 50
   _stopGrowthOnHarvest: 0
   _harvestedSprite: {fileID: 8692591382276977252, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
-  _growthSprites:
-  - {fileID: 8692591382276977252, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
-  - {fileID: 2291224180799952591, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
-  - {fileID: -8924567018060274921, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
 --- !u!58 &5610470418357727218
 CircleCollider2D:
   m_ObjectHideFlags: 0

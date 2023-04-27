@@ -69,16 +69,16 @@ MonoBehaviour:
   _infiniteResorces: 0
   _gatherers: []
   _maxGatherers: 1
+  _gatheredSprites:
+  - {fileID: -326103253223400227, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  - {fileID: -8445164391672973102, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
+  - {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
   _growthRate: 5
   _maxGrowth: 300
   _infiniteGrowth: 0
   _minGrowth: 85
   _stopGrowthOnHarvest: 1
   _harvestedSprite: {fileID: 7206596762985347369, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  _growthSprites:
-  - {fileID: -326103253223400227, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  - {fileID: -8445164391672973102, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
-  - {fileID: -7233586218127740098, guid: c135b400f028ba04ba687d36fa2abd2d, type: 3}
   _minSpawnTime: 15
   _maxSpwanTime: 45
   _minSpawnDistance: 1
