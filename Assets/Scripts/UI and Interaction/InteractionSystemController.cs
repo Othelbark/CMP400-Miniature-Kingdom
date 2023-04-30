@@ -14,6 +14,8 @@ public class InteractionSystemController : MonoBehaviour
     [SerializeField]
     protected int _activeIS = 0;
 
+    protected KingdomManager _kingdomManager;
+
     [SerializeField]
     protected GameObject _loseMenu;
     [SerializeField]
@@ -23,6 +25,9 @@ public class InteractionSystemController : MonoBehaviour
 
     [SerializeField]
     protected Text _timerDisplay;
+    [SerializeField]
+    protected GameObject _resourceDisplay;
+    protected Text[] _resourceDisplays;
 
     [SerializeField]
     protected float _timeLimit = 300;
@@ -41,6 +46,14 @@ public class InteractionSystemController : MonoBehaviour
 
     void Awake()
     {
+        try
+        {
+            _kingdomManager = GameObject.FindGameObjectWithTag("KingdomManager").GetComponent<KingdomManager>();
+        }
+        catch
+        {
+            Debug.LogError("Can't find kingdom manager.");
+        }
 
         if (buildingConstructedEvent == null)
         {
@@ -60,6 +73,8 @@ public class InteractionSystemController : MonoBehaviour
         _playerInteractionSystems[_activeIS].SetActive(true);
 
         Time.timeScale = _activeTimeScale;
+
+        _resourceDisplays = _resourceDisplay.GetComponentsInChildren<Text>();
     }
 
     // Update is called once per frame
@@ -96,6 +111,7 @@ public class InteractionSystemController : MonoBehaviour
 
         if (!_gameOver)
         {
+            #region Timer Display
             _timeRemaining -= Time.deltaTime;
 
             if (_timeRemaining <= 0)
@@ -111,7 +127,16 @@ public class InteractionSystemController : MonoBehaviour
             int secondsRemaining = Mathf.FloorToInt(_timeRemaining - minutesRemaining * 60);
             string niceTime = string.Format("{0:0}:{1:00}", minutesRemaining, secondsRemaining);
 
-            _timerDisplay.text = "Time Remaining: " + niceTime;
+            _timerDisplay.text = niceTime;
+            #endregion
+
+
+            #region Resource Display
+            foreach (Text display in _resourceDisplays)
+            {
+                display.text = _kingdomManager.GetTotalResources((ResourceType)System.Enum.Parse(typeof(ResourceType), display.name)).ToString();
+            }
+            #endregion
 
 
             if (_castle != null)
