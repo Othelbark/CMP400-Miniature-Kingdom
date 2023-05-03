@@ -24,7 +24,7 @@ public class Guild : MonoBehaviour
     [SerializeField]
     protected float _minInteractionDistance = 0.2f;
 
-    protected string _priorityName;
+    public string _priorityName { get; protected set; }
 
     // Start is called before the first frame update
     public void Start()

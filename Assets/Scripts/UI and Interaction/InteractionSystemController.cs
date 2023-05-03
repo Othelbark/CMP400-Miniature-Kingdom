@@ -24,6 +24,9 @@ public class InteractionSystemController : MonoBehaviour
     protected GameObject _pauseMenu;
 
     [SerializeField]
+    protected string _menuSceneName;
+
+    [SerializeField]
     protected Text _timerDisplay;
     [SerializeField]
     protected GameObject _resourceDisplay;
@@ -209,5 +212,10 @@ public class InteractionSystemController : MonoBehaviour
     public float GetTimeRemaining()
     {
         return _timeRemaining;
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene(_menuSceneName, LoadSceneMode.Single);
     }
 }
