@@ -22730,6 +22730,7 @@ RectTransform:
   - {fileID: 907717811}
   - {fileID: 388498280}
   - {fileID: 1970583119}
+  - {fileID: 1839479997}
   m_Father: {fileID: 186705291}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22750,8 +22751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ce724f1eba09946b693978208e40b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tooltipName: Foresters Focus
-  _tooltipText: How much focus is on gathering wood
+  _tooltipName: Haulers Focus
+  _tooltipText: How much focus is on hauling materials to stockpiles and castles
 --- !u!114 &1817207408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22812,7 +22813,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.51
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -23040,7 +23041,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0.9002075, y: 50}
+  m_AnchoredPosition: {x: 0.9001465, y: 50}
   m_SizeDelta: {x: 413, y: 260}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1838747282
@@ -23124,6 +23125,59 @@ MonoBehaviour:
     - {fileID: 4365087580106326157, guid: f8b339ad35ba34347b51630fa270b4a2, type: 3}
     - {fileID: 8259614469996706649, guid: 4569da42a05c1b447bb4327360f5b061, type: 3}
   _constructionDisplay: {fileID: 1388563926}
+--- !u!1 &1839479996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1839479997}
+  - component: {fileID: 1839479998}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1839479997
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839479996}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1817207406}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1839479998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839479996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 5
+  activeUnitCount: 3
+  maxUnitCount: 6
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
 --- !u!1 &1848540846
 GameObject:
   m_ObjectHideFlags: 0
