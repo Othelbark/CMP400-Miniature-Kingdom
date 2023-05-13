@@ -115,9 +115,9 @@ public class KingdomManager : MonoBehaviour
 
         GameObject[] guildlessAgents = GameObject.FindGameObjectsWithTag("Guildless");
 
-        while (guildlessAgents.Length > 0)
+        if (guildlessAgents.Length > 0)
         {
-            float largestDeficet = float.MinValue;
+            float largestDeficet = 0.0f;
             Guild guildWithLargestDeficet = null;
 
             foreach (Guild guild in _guilds)
@@ -136,13 +136,12 @@ public class KingdomManager : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No guild found for guildless agent");
-                break;
+                //Debug.Log("No guild found for guildless agent");
             }
         }
 
         //compute largest remaining deficet
-        largestCurrentAgentDeficet = float.MinValue;
+        largestCurrentAgentDeficet = 0.0f;
 
         foreach (Guild guild in _guilds)
         {
@@ -201,6 +200,29 @@ public class KingdomManager : MonoBehaviour
     {
         List<Guild> guilds = _guilds;
         return guilds;
+    }
+
+    public Guild GetGuildByPriorityName(string name)
+    {
+        foreach (Guild guild in _guilds)
+        {
+            if (guild._priorityName == name)
+            {
+                return guild;
+            }
+        }
+
+        return null;
+    }
+    public int GetMaxAgentCountInGuilds()
+    {
+        int maxAgentCount = int.MinValue;
+        foreach (Guild guild in _guilds)
+        {
+            maxAgentCount = Mathf.Max(maxAgentCount, guild.GetCurrentAgentCount());
+        }
+
+        return maxAgentCount;
     }
 
     public void AddAgent(Agent agent)

@@ -7,14 +7,52 @@ public class PrioritySlider : MonoBehaviour
 {
     public string priorityName;
 
+    protected KingdomManager _kingdomManager;
+
+    protected Guild _guild;
+
     protected Slider _slider;
+
+    protected GuildUnitDisplayScript _unitDisplay = null;
 
     public void Start()
     {
         _slider = GetComponent<Slider>();
-        KingdomManager km = GameObject.FindGameObjectWithTag("KingdomManager").GetComponent<KingdomManager>();
+        _kingdomManager = GameObject.FindGameObjectWithTag("KingdomManager").GetComponent<KingdomManager>();
 
-        km.SetPriority(priorityName, _slider.value);
+        _kingdomManager.SetPriority(priorityName, _slider.value);
+
+        _guild = _kingdomManager.GetGuildByPriorityName(priorityName);
+
+        _unitDisplay = GetComponentInChildren<GuildUnitDisplayScript>();
+    }
+
+    public void Update()
+    {
+        if (_guild == null)
+        {
+            _guild = _kingdomManager.GetGuildByPriorityName(priorityName);
+        }
+
+        if (_unitDisplay != null && _guild != null)
+        {
+            _unitDisplay.unitCount = _guild.GetCurrentAgentCount();
+
+            int agentCountAtFull = Mathf.Max(Mathf.FloorToInt(_kingdomManager.GetAgentCount() * (1.0f / _kingdomManager.GetTotalPriority())), _kingdomManager.GetMaxAgentCountInGuilds());
+
+            _unitDisplay.maxUnitCount = agentCountAtFull;
+
+            if (_guild.state == GuildState.INACTIVE)
+            {
+                _unitDisplay.activeUnitCount = 0;
+            }
+            else
+            {
+                //TODO: more granular
+
+                _unitDisplay.activeUnitCount = _unitDisplay.unitCount;
+            }
+        }
     }
 
     public void SetPriority(float p)

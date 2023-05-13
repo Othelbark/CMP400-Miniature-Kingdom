@@ -2363,6 +2363,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 125164666}
   m_CullTransparentMesh: 1
+--- !u!1 &136396927
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 136396928}
+  - component: {fileID: 136396929}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &136396928
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136396927}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1083258900}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &136396929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136396927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 2
+  activeUnitCount: 0
+  maxUnitCount: 4
+  buffer: 5
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!1001 &152868148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3981,6 +4037,62 @@ Transform:
   m_Father: {fileID: 1919731003}
   m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 93.44}
+--- !u!1 &277494196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 277494197}
+  - component: {fileID: 277494198}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &277494197
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277494196}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 907547198}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &277494198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277494196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 2
+  activeUnitCount: 0
+  maxUnitCount: 4
+  buffer: 5
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!4 &280928351 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 141221133800370307, guid: 999ce207275afcb45869c3a8141a7875, type: 3}
@@ -4293,6 +4405,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311210079}
   m_CullTransparentMesh: 1
+--- !u!1 &312556259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 312556260}
+  - component: {fileID: 312556261}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &312556260
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312556259}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 856084525}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &312556261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312556259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 2
+  activeUnitCount: 0
+  maxUnitCount: 4
+  buffer: 5
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!1 &320070134
 GameObject:
   m_ObjectHideFlags: 0
@@ -10146,6 +10314,7 @@ RectTransform:
   - {fileID: 907445859}
   - {fileID: 1031741739}
   - {fileID: 72256165}
+  - {fileID: 312556260}
   m_Father: {fileID: 186705291}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10977,6 +11146,7 @@ RectTransform:
   - {fileID: 866781402}
   - {fileID: 1332635528}
   - {fileID: 2112462017}
+  - {fileID: 277494197}
   m_Father: {fileID: 186705291}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11658,6 +11828,7 @@ RectTransform:
   - {fileID: 1595521495}
   - {fileID: 320070135}
   - {fileID: 1577308781}
+  - {fileID: 1105051369}
   m_Father: {fileID: 186705291}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12685,6 +12856,7 @@ RectTransform:
   - {fileID: 1762525029}
   - {fileID: 1920374170}
   - {fileID: 1667725479}
+  - {fileID: 136396928}
   m_Father: {fileID: 186705291}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13182,6 +13354,62 @@ Transform:
   m_Father: {fileID: 1919731003}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 93.44}
+--- !u!1 &1105051368
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1105051369}
+  - component: {fileID: 1105051370}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1105051369
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105051368}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 977257565}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1105051370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105051368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 2
+  activeUnitCount: 0
+  maxUnitCount: 4
+  buffer: 5
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!1001 &1105352887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16087,6 +16315,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359283255}
   m_CullTransparentMesh: 1
+--- !u!1 &1360482081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360482082}
+  - component: {fileID: 1360482083}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1360482082
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360482081}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1817207406}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1360482083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360482081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 2
+  activeUnitCount: 0
+  maxUnitCount: 4
+  buffer: 5
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!1 &1367680997
 GameObject:
   m_ObjectHideFlags: 0
@@ -18011,6 +18295,62 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49833873b886aed4db07667023544c78, type: 3}
+--- !u!1 &1457578090
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1457578091}
+  - component: {fileID: 1457578092}
+  m_Layer: 5
+  m_Name: Guild Unit Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1457578091
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457578090}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1997976851}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 22}
+  m_SizeDelta: {x: 158, y: 18}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1457578092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457578090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCount: 2
+  activeUnitCount: 0
+  maxUnitCount: 4
+  buffer: 5
+  _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
+  _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!1 &1464423418
 GameObject:
   m_ObjectHideFlags: 0
@@ -20162,6 +20502,7 @@ RectTransform:
   - {fileID: 906327192}
   - {fileID: 1128477646}
   - {fileID: 1953648381}
+  - {fileID: 1839479997}
   m_Father: {fileID: 186705291}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -22730,7 +23071,7 @@ RectTransform:
   - {fileID: 907717811}
   - {fileID: 388498280}
   - {fileID: 1970583119}
-  - {fileID: 1839479997}
+  - {fileID: 1360482082}
   m_Father: {fileID: 186705291}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23153,7 +23494,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1817207406}
+  m_Father: {fileID: 1640806312}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -23174,7 +23515,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unitCount: 2
-  activeUnitCount: 1
+  activeUnitCount: 0
   maxUnitCount: 4
   buffer: 5
   _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
@@ -25250,6 +25591,7 @@ RectTransform:
   - {fileID: 243789992}
   - {fileID: 117244156}
   - {fileID: 769665812}
+  - {fileID: 1457578091}
   m_Father: {fileID: 186705291}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
