@@ -47,6 +47,8 @@ public class KingdomManager : MonoBehaviour
 
     protected Dictionary<string, float> _priorities = new Dictionary<string, float> { { "gatherWOOD", 0.5f }, { "gatherFOOD", 0.5f }, { "gatherSTONE", 0.5f } };
 
+    public float largestCurrentAgentDeficet { get; protected set; } = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -110,18 +112,43 @@ public class KingdomManager : MonoBehaviour
     protected void AgentDistribution()
     {
         //Assign guildless agents to guilds that want agents
-        //TODO: optimise- and allow more than one agent to be reasinged per frame?
+
         GameObject[] guildlessAgents = GameObject.FindGameObjectsWithTag("Guildless");
 
-        if (guildlessAgents.Length > 0)
+        while (guildlessAgents.Length > 0)
         {
+            float largestDeficet = float.MinValue;
+            Guild guildWithLargestDeficet = null;
+
             foreach (Guild guild in _guilds)
             {
-                if (guild.GetCurrentAgentCount() < guild.targetAgentCount)
+                if (largestDeficet < guild.targetAgentCount - guild.GetCurrentAgentCount())
                 {
-                    guildlessAgents[0].GetComponent<Agent>().SetGuild(guild);
-                    break;
+                    largestDeficet = guild.targetAgentCount - guild.GetCurrentAgentCount();
+                    guildWithLargestDeficet = guild;
                 }
+            }
+
+            if (guildWithLargestDeficet != null)
+            {
+                guildlessAgents[guildlessAgents.Length - 1].GetComponent<Agent>().SetGuild(guildWithLargestDeficet);
+                guildlessAgents = guildlessAgents.Skip<GameObject>(1).ToArray();
+            }
+            else
+            {
+                Debug.LogWarning("No guild found for guildless agent");
+                break;
+            }
+        }
+
+        //compute largest remaining deficet
+        largestCurrentAgentDeficet = float.MinValue;
+
+        foreach (Guild guild in _guilds)
+        {
+            if (largestCurrentAgentDeficet < guild.targetAgentCount - guild.GetCurrentAgentCount())
+            {
+                largestCurrentAgentDeficet = guild.targetAgentCount - guild.GetCurrentAgentCount();
             }
         }
     }

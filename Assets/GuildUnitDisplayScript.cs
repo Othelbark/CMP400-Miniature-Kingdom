@@ -9,6 +9,8 @@ public class GuildUnitDisplayScript : MonoBehaviour
     public int activeUnitCount;
     public int maxUnitCount;
 
+    public float buffer = 5;
+
     protected int _lastUnityCount;
     protected int _lastActiveUnitCount;
     protected int _lastMaxUnitCount;
@@ -17,6 +19,8 @@ public class GuildUnitDisplayScript : MonoBehaviour
     protected GameObject _activeUnitPrefab;
     [SerializeField]
     protected GameObject _inactiveUnitPrefab;
+    [SerializeField]
+    protected GameObject _emptyUnitPrefab;
 
     [SerializeField]
     protected List<GameObject> _display;
@@ -66,27 +70,43 @@ public class GuildUnitDisplayScript : MonoBehaviour
         }
         _display.Clear();
 
-        float unitSize = _transform.rect.width / maxUnitCount;
+        float unitSize = (_transform.rect.width - (buffer * (maxUnitCount - 1) ) ) / maxUnitCount;
 
-        for (int i = 0; i < unitCount; i++)
+        if (unitSize <= 0)
+        {
+            Debug.LogWarning("Buffer to large of Guild Unit display");
+            buffer = 0;
+            unitSize = _transform.rect.width / maxUnitCount;
+        }
+
+        for (int i = 0; i < maxUnitCount; i++)
         {
             if (i < activeUnitCount)
             {
                 GameObject activeUnit = Instantiate(_activeUnitPrefab, _transform);
                 RectTransform activeUnitTransform = activeUnit.GetComponent<RectTransform>();
-                activeUnitTransform.anchoredPosition = new Vector2(unitSize * i, 0);
+                activeUnitTransform.anchoredPosition = new Vector2((unitSize + buffer) * i, 0);
                 activeUnitTransform.sizeDelta = new Vector2(unitSize / activeUnitTransform.localScale.x, activeUnitTransform.rect.height);
 
                 _display.Add(activeUnit);
             }
-            else
+            else if (i < unitCount)
             {
                 GameObject inactiveUnit = Instantiate(_inactiveUnitPrefab, _transform);
                 RectTransform inactiveUnitTransform = inactiveUnit.GetComponent<RectTransform>();
-                inactiveUnitTransform.anchoredPosition = new Vector2(unitSize * i, 0);
+                inactiveUnitTransform.anchoredPosition = new Vector2((unitSize + buffer) * i, 0);
                 inactiveUnitTransform.sizeDelta = new Vector2(unitSize / inactiveUnitTransform.localScale.x, inactiveUnitTransform.rect.height);
 
                 _display.Add(inactiveUnit);
+            }
+            else
+            {
+                GameObject emptyUnit = Instantiate(_emptyUnitPrefab, _transform);
+                RectTransform emptyUnitTransform = emptyUnit.GetComponent<RectTransform>();
+                emptyUnitTransform.anchoredPosition = new Vector2((unitSize + buffer) * i, 0);
+                emptyUnitTransform.sizeDelta = new Vector2(unitSize / emptyUnitTransform.localScale.x, emptyUnitTransform.rect.height);
+
+                _display.Add(emptyUnit);
             }
         }
     }

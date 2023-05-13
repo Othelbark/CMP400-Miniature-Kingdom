@@ -16701,7 +16701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1404482870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22813,7 +22813,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.51
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -23173,11 +23173,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97d9b2b62e626c4e875638bff227d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitCount: 5
-  activeUnitCount: 3
-  maxUnitCount: 6
+  unitCount: 2
+  activeUnitCount: 1
+  maxUnitCount: 4
+  buffer: 5
   _activeUnitPrefab: {fileID: 7169157382551651323, guid: 4a5cac2a6eb055b49bdfbd9fb3e5b1ab, type: 3}
   _inactiveUnitPrefab: {fileID: 602104998704957837, guid: 3db7d4389907a5847af6314a310de5f9, type: 3}
+  _emptyUnitPrefab: {fileID: 7169157382551651323, guid: dd242773f88f6bc4d89b63091689ff00, type: 3}
+  _display: []
 --- !u!1 &1848540846
 GameObject:
   m_ObjectHideFlags: 0

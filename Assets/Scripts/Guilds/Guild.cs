@@ -6,7 +6,7 @@ public class Guild : MonoBehaviour
 {
     public GuildState state = GuildState.ACTIVE;
 
-    public int targetAgentCount = 1;
+    public float targetAgentCount = 1;
 
 
     [SerializeField] //Temporalily Serialized for testing
@@ -76,10 +76,23 @@ public class Guild : MonoBehaviour
         {
             UpdateTargetAgentCount();
 
-            while (_agents.Count > targetAgentCount)
+            //remove any agents assigned over the integer threshold
+            while (_agents.Count > Mathf.CeilToInt(targetAgentCount))
             {
                 _agents[0].RemoveFromGuild();
             }
+
+            //check fractional overassingment against max deficet
+            if (_agents.Count > targetAgentCount)
+            {
+                float deficetIfOneLess = targetAgentCount - (_agents.Count - 1);
+
+                if (deficetIfOneLess < _kingdomManager.largestCurrentAgentDeficet)
+                {
+                    _agents[0].RemoveFromGuild();
+                }
+            }
+        
         }
 
         CheckActivity();
@@ -156,7 +169,7 @@ public class Guild : MonoBehaviour
     {
         float priorityFactor = _kingdomManager.GetPriority(_priorityName) / _kingdomManager.GetTotalPriority();
 
-        targetAgentCount = Mathf.CeilToInt((float)_kingdomManager.GetAgentCount() * priorityFactor);
+        targetAgentCount = (float)_kingdomManager.GetAgentCount() * priorityFactor;
     }
     protected virtual void ActiveUpdate()
     {
