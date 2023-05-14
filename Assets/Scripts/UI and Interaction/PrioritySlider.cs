@@ -34,23 +34,33 @@ public class PrioritySlider : MonoBehaviour
             _guild = _kingdomManager.GetGuildByPriorityName(priorityName);
         }
 
-        if (_unitDisplay != null && _guild != null)
+        if (_unitDisplay != null)
         {
-            _unitDisplay.unitCount = _guild.GetCurrentAgentCount();
 
             int agentCountAtFull = Mathf.Max(Mathf.FloorToInt(_kingdomManager.GetAgentCount() * (1.0f / _kingdomManager.GetTotalPriority())), _kingdomManager.GetMaxAgentCountInGuilds());
 
             _unitDisplay.maxUnitCount = agentCountAtFull;
 
-            if (_guild.state == GuildState.INACTIVE)
+
+            if (_guild != null)
             {
-                _unitDisplay.activeUnitCount = 0;
+                _unitDisplay.unitCount = _guild.GetCurrentAgentCount();
+
+                if (_guild.state == GuildState.INACTIVE)
+                {
+                    _unitDisplay.activeUnitCount = 0;
+                }
+                else
+                {
+                    //TODO: more granular
+
+                    _unitDisplay.activeUnitCount = _unitDisplay.unitCount;
+                }
             }
             else
             {
-                //TODO: more granular
-
-                _unitDisplay.activeUnitCount = _unitDisplay.unitCount;
+                _unitDisplay.unitCount = 0;
+                _unitDisplay.activeUnitCount = 0;
             }
         }
     }
