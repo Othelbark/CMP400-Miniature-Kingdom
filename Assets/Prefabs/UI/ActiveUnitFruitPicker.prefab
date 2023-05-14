@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1322406015012858728}
   - component: {fileID: 8768085828618991019}
   m_Layer: 5
-  m_Name: EmptyUnit
+  m_Name: ActiveUnitFruitPicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fad587c09aae27d4a9a3cc5460bc77e4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 37d1839d0fe1602489d970fb89b3cb53, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
