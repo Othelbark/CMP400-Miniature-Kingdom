@@ -116,7 +116,15 @@ public class Tooltip : MonoBehaviour
 
         if (tooltipedObject == _hoveredObject && _hoverPos == Input.mousePosition)
         {
-            _hoverTime += Time.deltaTime;
+            if (Time.timeScale > 0)
+            {
+                _hoverTime += Time.deltaTime / Time.timeScale;
+            }
+            else
+            {
+                _hoverTime = _tooltipLag;
+            }
+
             if (_hoverTime >= _tooltipLag)
             {
                 ActivateTooltip(tooltipedObject.GetText());
