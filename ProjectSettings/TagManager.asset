@@ -16,6 +16,7 @@ TagManager:
   - LumberYardGuild
   - StoneMasonGuild
   - BuildingParent
+  - HaulersGuild
   layers:
   - Default
   - TransparentFX

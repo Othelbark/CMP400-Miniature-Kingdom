@@ -392,15 +392,30 @@ public class KingdomManager : MonoBehaviour
             return 0;
         }
     }
-    public int GetTotalSpaceFor(ResourceType type)
+    public int GetTotalSpaceFor(ResourceType type, bool getLive = false, int priorityFilter = -1)
     {
 
-        if (_totalSpacePerType.ContainsKey(type))
+        if (getLive)
         {
-            return _totalSpacePerType[type];
+            int total = 0;
+            foreach (ResourceStore store in _resourceStores)
+            {
+                if (store.HasType(type) && (priorityFilter == -1 || priorityFilter == store.priority))
+                {
+                    total += store.GetSpace();
+                }
+            }
+            return total;
         }
+        else
+        {
+            if (_totalSpacePerType.ContainsKey(type))
+            {
+                return _totalSpacePerType[type];
+            }
 
-        return 0;
+            return 0;
+        }
     }
 
 
