@@ -84,9 +84,31 @@ public class DirectInteractionSystem : PlayerInteractionSystem
                     ResourceStore store;
                     if (store = clicked[0].transform.gameObject.GetComponent<ResourceStore>())
                     {
-                        _selectedAgent.RemoveFromGuild();
-                        _selectedAgent.SetTargetBuilding(store, true);
-                        _selectedAgent.state = AgentState.CLEAR_INVENTORY;
+                        Guild haulersGuild = GameObject.FindGameObjectWithTag("HaulersGuild").GetComponent<Guild>();
+                        if (store.priority > 0)
+                        {
+                            _selectedAgent.SetGuild(haulersGuild);
+                            if (store.priority == 1)
+                            {
+                                _selectedAgent.state = AgentState.COLLECTING;
+                            }
+                            else if (store.priority == 2)
+                            {
+                                _selectedAgent.state = AgentState.PICK_UP;
+                            }
+                            else
+                            {
+                                Debug.LogError("invalid store priority");
+                            }
+
+                            _selectedAgent.SetMovingTowards(store.transform.position, 0.0f);
+                        }
+                        else
+                        {
+                            _selectedAgent.RemoveFromGuild();
+                            _selectedAgent.SetTargetBuilding(store, true);
+                            _selectedAgent.state = AgentState.CLEAR_INVENTORY;
+                        }
                     }
 
                     Construction construction;
