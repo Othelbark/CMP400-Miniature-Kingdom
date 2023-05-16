@@ -52,7 +52,7 @@ MonoBehaviour:
     m_keys: 05000000
     m_values: 00000000
   _currentResourcesTotal: 0
-  _capacity: 2000
+  _capacity: 3000
   _fullnessSprites: []
   priority: 2
 --- !u!60 &4724598868336128539

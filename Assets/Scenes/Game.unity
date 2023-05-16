@@ -5797,7 +5797,7 @@ MonoBehaviour:
   _timerDisplay: {fileID: 1303968942}
   _resourceDisplay: {fileID: 113765974}
   _timeLimit: 480
-  _foodInCastleToWin: 2000
+  _foodInCastleToWin: 3000
 --- !u!4 &457137983
 Transform:
   m_ObjectHideFlags: 0
@@ -9459,7 +9459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Wood Drop-Off
-  _tooltipText: Cost
+  _tooltipText: Requires 200 Wood
 --- !u!1 &723868717
 GameObject:
   m_ObjectHideFlags: 0
@@ -9837,7 +9837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Castle
-  _tooltipText: Cost
+  _tooltipText: Requires 1500 Planks, and 1500 Stone Blocks
 --- !u!1 &759428059
 GameObject:
   m_ObjectHideFlags: 0
@@ -12594,7 +12594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Stockpile
-  _tooltipText: Cost
+  _tooltipText: Requires 300 Wood, and 100 Stone
 --- !u!1 &1064659763
 GameObject:
   m_ObjectHideFlags: 0
@@ -14243,7 +14243,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Food Drop-Off
-  _tooltipText: Cost
+  _tooltipText: Requires 200 Wood
 --- !u!1 &1169644460
 GameObject:
   m_ObjectHideFlags: 0
@@ -20054,7 +20054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Stone Mason
-  _tooltipText: Cost
+  _tooltipText: Requires 350 Wood, and 250 Stone
 --- !u!1 &1588791880
 GameObject:
   m_ObjectHideFlags: 0
@@ -20194,7 +20194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Stone Drop-Off
-  _tooltipText: Cost
+  _tooltipText: Requires 200 Wood
 --- !u!1 &1605126616
 GameObject:
   m_ObjectHideFlags: 0
@@ -26376,7 +26376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipName: Lumber Yard
-  _tooltipText: Cost
+  _tooltipText: Requires 450 Wood, and 150 Stone
 --- !u!1 &2097708188
 GameObject:
   m_ObjectHideFlags: 0

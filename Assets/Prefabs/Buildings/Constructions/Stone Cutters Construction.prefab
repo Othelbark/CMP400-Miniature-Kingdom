@@ -52,14 +52,14 @@ MonoBehaviour:
   buildingPrefab: {fileID: 6811097110775101050, guid: 63f04078a6cac014fb25f94023d306a9, type: 3}
   _resourceRequirements:
     m_keys: 0100000002000000
-    m_values: e1000000af000000
+    m_values: 5e010000fa000000
   _currentResorces:
     m_keys: 
     m_values: 
   _buildTime: 22.5
   _deconstructBuildWorkMultiplier: 3
   _additionalBuildersScaler: 0.7
-  _maxBuilders: 1
+  _maxBuilders: 2
   _noConstructionSprites:
   - spriteArray:
     - {fileID: 6946157018292822177, guid: 6fab84da2acbdba419be4ed00deb4085, type: 3}

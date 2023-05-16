@@ -52,13 +52,14 @@ MonoBehaviour:
     m_keys: 02000000
     m_values: 00000000
   _currentResourcesTotal: 0
-  _capacity: 1000
+  _capacity: 600
   _fullnessSprites:
   - {fileID: 6076797189358019183, guid: 1cc81ad59a809f1439017f6cc388efb5, type: 3}
   - {fileID: 7674553967056298960, guid: 1cc81ad59a809f1439017f6cc388efb5, type: 3}
   - {fileID: -3147112273613130082, guid: 1cc81ad59a809f1439017f6cc388efb5, type: 3}
   - {fileID: 6689586703558670747, guid: 1cc81ad59a809f1439017f6cc388efb5, type: 3}
   - {fileID: -995871168072085787, guid: 1cc81ad59a809f1439017f6cc388efb5, type: 3}
+  priority: 0
 --- !u!60 &4423658017618410426
 PolygonCollider2D:
   m_ObjectHideFlags: 0

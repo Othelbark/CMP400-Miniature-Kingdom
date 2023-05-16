@@ -139,7 +139,7 @@ MonoBehaviour:
   - {fileID: 8692591382276977252, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
   - {fileID: 2291224180799952591, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
   - {fileID: -8924567018060274921, guid: da19f1281efab3d4ea7891fb1ba420d8, type: 3}
-  _growthRate: 3
+  _growthRate: 2.5
   _maxGrowth: 150
   _infiniteGrowth: 1
   _minGrowth: 50

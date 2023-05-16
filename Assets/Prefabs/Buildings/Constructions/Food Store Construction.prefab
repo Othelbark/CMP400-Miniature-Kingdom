@@ -165,7 +165,7 @@ MonoBehaviour:
   buildingPrefab: {fileID: 8259614469996706649, guid: 58fc0e34cdef76f4286b6f6d18a1178a, type: 3}
   _resourceRequirements:
     m_keys: 01000000
-    m_values: 32000000
+    m_values: c8000000
   _currentResorces:
     m_keys: 
     m_values: 
