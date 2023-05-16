@@ -47,6 +47,11 @@ public class MainMenuManager : MonoBehaviour
         howToPlay.SetActive(true);
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void StartGame()
     {
         SceneManager.LoadScene(gameSceneName, LoadSceneMode.Single);

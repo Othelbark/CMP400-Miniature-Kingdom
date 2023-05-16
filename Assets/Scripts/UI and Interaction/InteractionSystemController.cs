@@ -14,6 +14,9 @@ public class InteractionSystemController : MonoBehaviour
     [SerializeField]
     protected int _activeIS = 0;
 
+    [SerializeField]
+    protected bool _canChangeInteractionSystem = false;
+
     protected KingdomManager _kingdomManager;
 
     [SerializeField]
@@ -83,7 +86,7 @@ public class InteractionSystemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _canChangeInteractionSystem)
         {
             _playerInteractionSystems[_activeIS].SetActive(false);
 
